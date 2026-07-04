@@ -5,111 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Development Studio</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ui-components.css">
     <!-- Google Identity Services -->
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-    <header>
-        <h1>John Development Studio</h1>
-        <p>Building apps that make your life easier</p>
+    <header class="hero">
+        <div class="hero__glow"></div>
+        <div class="hero__inner">
+            <div class="hero__logo">🚀</div>
+            <h1 class="hero__title">John Development Studio</h1>
+            <p class="hero__tagline">Building apps that make your life easier</p>
+        </div>
     </header>
 
-    <main>
-        <section class="apps-grid">
-            <!-- BrewMaster -->
-            <article class="app-card" data-app-id="brewmaster">
-                <div class="app-icon">☕</div>
-                <h2>BrewMaster</h2>
-                <p>Coffee brewing companion with step-by-step recipes for espresso, ristretto, lungo, and more.</p>
-                <div class="app-meta">
-                    <span class="badge closed">Closed Testing</span>
-                </div>
-                <button class="btn btn--primary join-testing-btn" data-test-app="brewmaster">
-                    <span class="btn-text">Join Testing</span>
-                </button>
-            </article>
+    <main class="container">
+        <section class="section">
+            <h2 class="section__title">Our Apps</h2>
+            
+            <div class="apps-grid">
+                <!-- BrewMaster -->
+                <article class="app-card" data-app-id="brewmaster">
+                    <div class="app-card__icon-wrap">
+                        <span class="app-card__icon">☕</span>
+                    </div>
+                    <div class="app-card__info">
+                        <h3 class="app-card__name">BrewMaster</h3>
+                        <p class="app-card__desc">Coffee brewing companion with step-by-step recipes for espresso, ristretto, lungo, and more.</p>
+                        <span class="app-card__pkg">com.johniriantosusanto.brewmasterapp</span>
+                    </div>
+                    <div class="app-card__right">
+                        <span class="status status--closed"><i>●</i> Closed Testing</span>
+                        <button class="btn btn--test join-testing-btn" data-test-app="brewmaster">
+                            <span class="btn-text">Join Testing</span>
+                        </button>
+                    </div>
+                </article>
 
-            <!-- LanChat -->
-            <article class="app-card" data-app-id="lanchat">
-                <div class="app-icon">💬</div>
-                <h2>LanChat</h2>
-                <p>WiFi LAN chat app for local network messaging. Share messages and files across devices without internet.</p>
-                <div class="app-meta">
-                    <span class="badge closed">Closed Testing</span>
-                </div>
-                <button class="btn btn--primary join-testing-btn" data-test-app="lanchat">
-                    <span class="btn-text">Join Testing</span>
-                </button>
-            </article>
+                <!-- LanChat -->
+                <article class="app-card" data-app-id="lanchat">
+                    <div class="app-card__icon-wrap">
+                        <span class="app-card__icon">💬</span>
+                    </div>
+                    <div class="app-card__info">
+                        <h3 class="app-card__name">LanChat</h3>
+                        <p class="app-card__desc">WiFi LAN chat app for local network messaging. Share messages and files across devices without internet.</p>
+                        <span class="app-card__pkg">com.johniriantosusanto.lanchat</span>
+                    </div>
+                    <div class="app-card__right">
+                        <span class="status status--closed"><i>●</i> Closed Testing</span>
+                        <button class="btn btn--test join-testing-btn" data-test-app="lanchat">
+                            <span class="btn-text">Join Testing</span>
+                        </button>
+                    </div>
+                </article>
 
-            <!-- Android File Server -->
-            <article class="app-card" data-app-id="file-server">
-                <div class="app-icon">📁</div>
-                <h2>Android File Server</h2>
-                <p>Turn your Android device into a local file server. Browse, share, and transfer files over WiFi.</p>
-                <div class="app-meta">
-                    <span class="badge closed">Closed Testing</span>
-                </div>
-                <button class="btn btn--primary join-testing-btn" data-test-app="file-server">
-                    <span class="btn-text">Join Testing</span>
-                </button>
-            </article>
+                <!-- Android File Server -->
+                <article class="app-card" data-app-id="file-server">
+                    <div class="app-card__icon-wrap">
+                        <span class="app-card__icon">📁</span>
+                    </div>
+                    <div class="app-card__info">
+                        <h3 class="app-card__name">Android File Server</h3>
+                        <p class="app-card__desc">Turn your Android device into a local file server. Browse, share, and transfer files over WiFi.</p>
+                        <span class="app-card__pkg">com.johniriantosusanto.androidfileserverapp</span>
+                    </div>
+                    <div class="app-card__right">
+                        <span class="status status--closed"><i>●</i> Closed Testing</span>
+                        <button class="btn btn--test join-testing-btn" data-test-app="file-server">
+                            <span class="btn-text">Join Testing</span>
+                        </button>
+                    </div>
+                </article>
 
-            <!-- NFC Card Manager -->
-            <article class="app-card" data-app-id="nfc-manager">
-                <div class="app-icon">💳</div>
-                <h2>NFC Card Manager</h2>
-                <p>Manage, read, and write NFC cards and tags with ease. Share NFC data instantly.</p>
-                <div class="app-meta">
-                    <span class="badge closed">Closed Testing</span>
-                </div>
-                <button class="btn btn--primary join-testing-btn" data-test-app="nfc-manager">
-                    <span class="btn-text">Join Testing</span>
-                </button>
-            </article>
+                <!-- NFC Card Manager -->
+                <article class="app-card" data-app-id="nfc-manager">
+                    <div class="app-card__icon-wrap">
+                        <span class="app-card__icon">💳</span>
+                    </div>
+                    <div class="app-card__info">
+                        <h3 class="app-card__name">NFC Card Manager</h3>
+                        <p class="app-card__desc">Manage, read, and write NFC cards and tags with ease. Share NFC data instantly.</p>
+                        <span class="app-card__pkg">com.johniriantosusanto.nfccardmanager</span>
+                    </div>
+                    <div class="app-card__right">
+                        <span class="status status--closed"><i>●</i> Closed Testing</span>
+                        <button class="btn btn--test join-testing-btn" data-test-app="nfc-manager">
+                            <span class="btn-text">Join Testing</span>
+                        </button>
+                    </div>
+                </article>
 
-            <!-- Battery Health Check & Alarm -->
-            <article class="app-card" data-app-id="battery-health">
-                <div class="app-icon">🔋</div>
-                <h2>Battery Health Check & Alarm</h2>
-                <p>Real-time battery monitoring with calibrated health estimator and smart charge alarm.</p>
-                <div class="app-meta">
-                    <span class="badge production">Production</span>
-                    <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.batteryhealthcheckapp" target="_blank" class="link">View on Play Store</a>
-                </div>
-            </article>
+                <!-- Battery Health Check & Alarm -->
+                <article class="app-card" data-app-id="battery-health">
+                    <div class="app-card__icon-wrap">
+                        <span class="app-card__icon">🔋</span>
+                    </div>
+                    <div class="app-card__info">
+                        <h3 class="app-card__name">Battery Health Check & Alarm</h3>
+                        <p class="app-card__desc">Real-time battery monitoring with calibrated health estimator and smart charge alarm.</p>
+                        <span class="app-card__pkg">com.johniriantosusanto.batteryhealthcheckapp</span>
+                    </div>
+                    <div class="app-card__right">
+                        <span class="status status--production"><i>●</i> Production</span>
+                        <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.batteryhealthcheckapp" target="_blank" class="btn btn--play">
+                            <span class="btn-text">View on Play Store</span>
+                        </a>
+                    </div>
+                </article>
 
-            <!-- Invoice App -->
-            <article class="app-card" data-app-id="invoice">
-                <div class="app-icon">🧾</div>
-                <h2>Invoice App</h2>
-                <p>Professional invoicing with PDF export, Bluetooth thermal printer support, and cloud sync.</p>
-                <div class="app-meta">
-                    <span class="badge dev">In Development</span>
-                </div>
-                <button class="btn btn--disabled" disabled>Coming Soon</button>
-            </article>
+                <!-- Invoice App -->
+                <article class="app-card" data-app-id="invoice">
+                    <div class="app-card__icon-wrap">
+                        <span class="app-card__icon">🧾</span>
+                    </div>
+                    <div class="app-card__info">
+                        <h3 class="app-card__name">Invoice App</h3>
+                        <p class="app-card__desc">Professional invoicing with PDF export, Bluetooth thermal printer support, and cloud sync.</p>
+                        <span class="app-card__pkg">com.johniriantosusanto.invoiceapp</span>
+                    </div>
+                    <div class="app-card__right">
+                        <span class="status status--dev"><i>●</i> In Development</span>
+                        <button class="btn btn--secondary" disabled>
+                            <span class="btn-text">Coming Soon</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <!-- Status Guide -->
-        <section class="status-guide">
-            <h3>Status Guide</h3>
+        <section class="section section--legend">
+            <h2 class="section__title">Status Guide</h2>
             <div class="legend">
                 <span><span class="dot production"></span> Production — Live on Google Play</span>
-                <span><span class="dot closed"></span> Closed Testing — Join via button</span>
+                <span><span class="dot closed"></span> Closed Testing — Join via button above</span>
                 <span><span class="dot dev"></span> In Development — Not yet released</span>
             </div>
         </section>
     </main>
 
-    <!-- Google Sign-In Button Container (hidden by default, shown in modal) -->
-    <div id="auth-modal" class="modal" style="display:none;">
-        <div class="modal-backdrop"></div>
-        <div class="modal-content">
+    <!-- Google Sign-In Modal -->
+    <div id="auth-modal" class="email-modal" style="display:none;">
+        <div class="email-modal-backdrop"></div>
+        <div class="email-modal-content">
             <h3>Join Testing Group</h3>
             <p>Sign in with your Google account to check your testing group membership.</p>
-            <div id="g_id_signin"></div>
-            <button class="btn btn--secondary modal-close">Cancel</button>
+            <div id="g_id_signin" style="display:flex;justify-content:center;margin:1rem 0;"></div>
+            <button class="btn btn--secondary modal-close" style="margin-top:0.5rem;">Cancel</button>
         </div>
     </div>
 
@@ -122,8 +165,10 @@
     <!-- Toast Notification Container -->
     <div id="toast-container"></div>
 
-    <footer>
-        <p>&copy; 2026 John Development Studio. All rights reserved.</p>
+    <footer class="footer">
+        <div class="footer__copy">
+            <p>&copy; 2026 John Development Studio. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="js/testing.js"></script>
