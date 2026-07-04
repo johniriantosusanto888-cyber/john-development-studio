@@ -107,12 +107,11 @@
             <span class="status status--closed">
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
-            <!-- UPDATE: replace href with your actual closed testing opt-in link from Play Console -->
-            <a href="https://play.google.com/apps/testing/com.johniriantosusanto.brewmasterapp"
-               target="_blank" rel="noopener noreferrer"
-               class="btn btn--test">
+            <button 
+              data-test-app="brewmaster"
+              class="btn btn--test">
               <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </a>
+            </button>
           </div>
         </article>
 
@@ -136,12 +135,11 @@
             <span class="status status--closed">
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
-            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
-            <a href="https://play.google.com/apps/testing/com.johniriantosusanto.lanchatapp"
-               target="_blank" rel="noopener noreferrer"
-               class="btn btn--test">
+            <button 
+              data-test-app="lanchat"
+              class="btn btn--test">
               <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </a>
+            </button>
           </div>
         </article>
 
@@ -165,12 +163,11 @@
             <span class="status status--closed">
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
-            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
-            <a href="https://play.google.com/apps/testing/com.johniriantosusanto.androidfileserverapp"
-               target="_blank" rel="noopener noreferrer"
-               class="btn btn--test">
+            <button 
+              data-test-app="file-server"
+              class="btn btn--test">
               <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </a>
+            </button>
           </div>
         </article>
 
@@ -194,12 +191,11 @@
             <span class="status status--closed">
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
-            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
-            <a href="https://play.google.com/apps/testing/com.johniriantosusanto.nfccardmanagerapp"
-               target="_blank" rel="noopener noreferrer"
-               class="btn btn--test">
+            <button 
+              data-test-app="nfc-manager"
+              class="btn btn--test">
               <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </a>
+            </button>
           </div>
         </article>
 
@@ -292,43 +288,36 @@
           </div>
           <p class="testing-banner__sub">
             Some of our apps are in closed testing and not yet publicly available on the Play Store.
-            To get early access, you need to join our Google Group first — then install the test version directly from Google Play.
+            To get early access, click <strong>"Join Testing"</strong> on any app card, enter your Gmail address, and you'll be automatically added to our testing group.
+            You'll then be redirected to Google Play to install the test version.
           </p>
 
           <div class="steps-grid">
             <div class="step-card">
-              <div class="step-card__num">Step 1 — Join the Group</div>
+              <div class="step-card__num">Step 1 — Click Join Testing</div>
               <div class="step-card__text">
-                Go to our Google Group using your Gmail account and request to join:
-                <br><br>
-                <!-- UPDATE: Replace with your actual Google Group link -->
-                <a href="https://groups.google.com/g/john-development-studio"
-                   target="_blank" rel="noopener noreferrer"
-                   class="step-link">
-                  <i class="ti ti-external-link" aria-hidden="true"></i>
-                  john-development-studio
-                </a>
+                Click the <strong>"Join Testing"</strong> button on the app you want to test.
               </div>
             </div>
 
             <div class="step-card">
-              <div class="step-card__num">Step 2 — Wait for Approval</div>
+              <div class="step-card__num">Step 2 — Enter Your Email</div>
               <div class="step-card__text">
-                Click <strong>Ask to join group</strong> on the Google Group page. We review requests and approve within <strong>24 hours</strong>.
+                A modal will appear asking for your Gmail address. Enter the email you use for Google Play.
               </div>
             </div>
 
             <div class="step-card">
-              <div class="step-card__num">Step 3 — Open the Test Link</div>
+              <div class="step-card__num">Step 3 — Auto-Added to Group</div>
               <div class="step-card__text">
-                Once approved, click the <strong>Join Testing</strong> button on the app you want. You'll be redirected to Google Play to opt in as a tester.
+                We'll automatically add you to the testing group. You'll see a success notification when it's complete.
               </div>
             </div>
 
             <div class="step-card">
-              <div class="step-card__num">Step 4 — Install &amp; Give Feedback</div>
+              <div class="step-card__num">Step 4 — Install &amp; Test</div>
               <div class="step-card__text">
-                After opting in on Google Play, the app will appear in your library. Install it and share your feedback — we read every review!
+                You'll be redirected to Google Play. Install the app and share your feedback — we read every review!
               </div>
             </div>
           </div>
@@ -336,7 +325,7 @@
           <div class="testing-note">
             <i class="ti ti-info-circle" aria-hidden="true"></i>
             <span>
-              Use the <strong>same Gmail account</strong> for the Google Group and Google Play.
+              Use the <strong>same Gmail account</strong> for testing and Google Play.
               It may take up to <strong>1 hour</strong> after joining before the test link becomes active on your device.
             </span>
           </div>
@@ -352,7 +341,7 @@
         <h2 class="section__title">Status Guide</h2>
         <div class="legend">
           <span class="status status--production"><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Production — Live on Google Play</span>
-          <span class="status status--closed"><i class="ti ti-lock" aria-hidden="true"></i> Closed Testing — Join group to access</span>
+          <span class="status status--closed"><i class="ti ti-lock" aria-hidden="true"></i> Closed Testing — Join via button above</span>
           <span class="status status--dev"><i class="ti ti-code" aria-hidden="true"></i> In Development — Not yet released</span>
         </div>
       </div>
@@ -374,7 +363,6 @@
            target="_blank" rel="noopener noreferrer">
           <i class="ti ti-brand-instagram" aria-hidden="true"></i> @ipoktala
         </a>
-        <!-- UPDATE: Replace with your actual email -->
         <a href="mailto:john.irianto.susanto.dev@gmail.com">
           <i class="ti ti-mail" aria-hidden="true"></i> Contact
         </a>
@@ -386,6 +374,7 @@
 
   <!-- JS -->
   <script src="js/main.js"></script>
+  <script src="js/testing.js"></script>
 
 </body>
 </html>
