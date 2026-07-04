@@ -1,60 +1,90 @@
 /**
- * Testing Group Auto-Join Handler
+ * John Development Studio — Testing Group Auto-Join Handler v2.0
  * 
- * SETUP:
- * 1. Deploy Google Apps Script and copy the deployment URL
- * 2. Paste URL in APPS_SCRIPT_URL variable below
- * 3. Update app configuration in APPS_CONFIG
+ * FLOW:
+ * 1. User clicks "Join Testing" → Show Google Sign-In modal
+ * 2. User signs in with Google → Get JWT credential (email auto-extracted)
+ * 3. Send email to Google Apps Script → Check if already member
+ * 4. If member → Redirect to Play Store Testing link
+ * 5. If not member → Auto-add to Google Group → Then redirect
  */
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// CONFIG - UPDATE WITH YOUR APPS SCRIPT DEPLOYMENT URL
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ═══════════════════════════════════════════════════════════════
+// CONFIG — SUDAH TERISI, JANGAN DIUBAH
+// ═══════════════════════════════════════════════════════════════
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/d/YOUR_SCRIPT_ID/userweb"; // Paste your deployment URL here
+const GOOGLE_CLIENT_ID = "378583719250-do9plu6j2od7et6delcc1ausdi1p4cil.apps.googleusercontent.com";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpkvNug-s5j2-DT1D56Bw1akT-C5ML8JkUPz0b1csLmSHm_OY_-X3iDVTBQCRUnnmIAw/exec";
 
 const APPS_CONFIG = {
-  "battery-health": {
-    name: "Battery Health Check & Alarm",
-    playStoreUrl: "https://play.google.com/store/apps/details?id=com.johniriantosusanto.batteryhealthcheckapp",
-    testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.batteryhealthcheckapp"
-  },
   "brewmaster": {
     name: "BrewMaster",
+    packageName: "com.johniriantosusanto.brewmasterapp",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.johniriantosusanto.brewmasterapp",
     testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.brewmasterapp"
   },
   "lanchat": {
     name: "LanChat",
+    packageName: "com.johniriantosusanto.lanchat",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.johniriantosusanto.lanchat",
-    testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.lanchatapp"
+    testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.lanchat"
   },
   "file-server": {
     name: "Android File Server",
+    packageName: "com.johniriantosusanto.androidfileserverapp",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.johniriantosusanto.androidfileserverapp",
     testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.androidfileserverapp"
   },
   "nfc-manager": {
     name: "NFC Card Manager",
+    packageName: "com.johniriantosusanto.nfccardmanager",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.johniriantosusanto.nfccardmanager",
-    testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.nfccardmanagerapp"
+    testUrl: "https://play.google.com/apps/testing/com.johniriantosusanto.nfccardmanager"
   }
 };
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// INITIALIZE ON PAGE LOAD
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+
+let currentAppId = null;
+let googleAccounts = null;
+
+// ═══════════════════════════════════════════════════════════════
+// INITIALIZE
+// ═══════════════════════════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', function() {
+  initGoogleSignIn();
   setupTestingButtons();
+  setupModalClose();
 });
+
+/**
+ * Initialize Google Identity Services
+ */
+function initGoogleSignIn() {
+  const checkGIS = setInterval(() => {
+    if (window.google && window.google.accounts && window.google.accounts.id) {
+      clearInterval(checkGIS);
+      googleAccounts = window.google.accounts.id;
+
+      googleAccounts.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleCredentialResponse,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+    }
+  }, 100);
+}
 
 /**
  * Setup click handlers for all "Join Testing" buttons
  */
 function setupTestingButtons() {
   const testButtons = document.querySelectorAll('[data-test-app]');
-  
+
   testButtons.forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
@@ -65,23 +95,69 @@ function setupTestingButtons() {
 }
 
 /**
+ * Setup modal close handlers
+ */
+function setupModalClose() {
+  const modal = document.getElementById('auth-modal');
+  if (!modal) return;
+  const backdrop = modal.querySelector('.modal-backdrop');
+  const closeBtn = modal.querySelector('.modal-close');
+
+  [backdrop, closeBtn].forEach(el => {
+    if (el) el.addEventListener('click', () => hideAuthModal());
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MAIN FLOW
+// ═══════════════════════════════════════════════════════════════
+
+/**
  * Main handler for Join Testing flow
  */
-async function handleJoinTesting(appId) {
-  // Get user email via modal
-  const email = await promptUserEmail();
-  
+function handleJoinTesting(appId) {
+  currentAppId = appId;
+
+  // Check if user already has a stored credential
+  const storedEmail = localStorage.getItem('jds_user_email');
+
+  if (storedEmail) {
+    processMembershipCheck(storedEmail, appId);
+  } else {
+    showAuthModal();
+  }
+}
+
+/**
+ * Handle Google Sign-In credential response (JWT)
+ */
+function handleCredentialResponse(response) {
+  const credential = response.credential;
+  const payload = parseJwt(credential);
+  const email = payload.email;
+
   if (!email) {
-    showNotification('Cancelled', 'You cancelled the join request.', 'info');
+    hideAuthModal();
+    showToast('Error', 'Could not get email from Google Sign-In.', 'error');
     return;
   }
 
-  // Show joining notification
-  const joinNotif = showNotification(
-    'Joining Testing Group...',
-    `Adding ${email} to the testing group. Please wait...`,
-    'loading'
-  );
+  localStorage.setItem('jds_user_email', email);
+  localStorage.setItem('jds_user_name', payload.name || '');
+  localStorage.setItem('jds_user_picture', payload.picture || '');
+
+  hideAuthModal();
+
+  if (currentAppId) {
+    processMembershipCheck(email, currentAppId);
+  }
+}
+
+/**
+ * Check membership and auto-join if needed
+ */
+async function processMembershipCheck(email, appId) {
+  showLoading('Checking your testing group membership...');
 
   try {
     // Step 1: Check if already member
@@ -92,31 +168,30 @@ async function handleJoinTesting(appId) {
     });
 
     if (!checkResult.success) {
-      showNotification(
-        'Error',
-        checkResult.message || 'An error occurred while checking membership.',
-        'error'
-      );
+      hideLoading();
+      showToast('Error', checkResult.message || 'Failed to check membership.', 'error');
       return;
     }
 
-    // If already member, skip to Play Store
+    // If already member, redirect immediately
     if (checkResult.isMember) {
-      joinNotif.remove();
-      showNotification(
+      hideLoading();
+      showToast(
         'Already a Member! 🎉',
-        'You are already part of the testing group. Redirecting to Google Play...',
+        `You are already in the testing group for ${APPS_CONFIG[appId]?.name || appId}. Redirecting...`,
         'success',
         3000
       );
-      
+
       setTimeout(() => {
         window.open(APPS_CONFIG[appId]?.testUrl, '_blank');
       }, 1500);
       return;
     }
 
-    // Step 2: Join user to group
+    // Step 2: Not a member — auto-add to group
+    showLoading('Adding you to the testing group...');
+
     const joinResult = await callAppsScript({
       email: email,
       app: appId,
@@ -124,37 +199,37 @@ async function handleJoinTesting(appId) {
       playStoreUrl: APPS_CONFIG[appId]?.testUrl
     });
 
-    joinNotif.remove();
+    hideLoading();
 
     if (joinResult.success) {
-      showNotification(
+      showToast(
         'Successfully Joined! 🎉',
-        'You have been added to the testing group. Redirecting to Google Play...',
+        `You have been added to the testing group. Redirecting to Google Play...`,
         'success',
         3000
       );
-      
-      // Redirect to Play Store after 2 seconds
+
       setTimeout(() => {
         window.open(APPS_CONFIG[appId]?.testUrl, '_blank');
       }, 2000);
     } else {
-      showNotification(
+      showToast(
         'Join Failed',
-        joinResult.message || 'Failed to join the testing group. Please try again.',
+        joinResult.message || 'Failed to join the testing group. Please try again or contact support.',
         'error'
       );
     }
 
   } catch (error) {
-    joinNotif.remove();
-    showNotification(
-      'Error',
-      'Network error: ' + error.message,
-      'error'
-    );
+    hideLoading();
+    console.error('Membership check error:', error);
+    showToast('Error', 'Network error: ' + error.message, 'error');
   }
 }
+
+// ═══════════════════════════════════════════════════════════════
+// API CALL
+// ═══════════════════════════════════════════════════════════════
 
 /**
  * Call Google Apps Script endpoint
@@ -167,10 +242,13 @@ async function callAppsScript(params) {
     const response = await fetch(url, {
       method: 'GET',
       mode: 'cors',
+      headers: {
+        'Accept': 'application/json'
+      }
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
     const data = await response.json();
@@ -182,162 +260,173 @@ async function callAppsScript(params) {
   }
 }
 
+// ═══════════════════════════════════════════════════════════════
+// UI HELPERS
+// ═══════════════════════════════════════════════════════════════
+
 /**
- * Prompt user to enter email
+ * Show Google Sign-In modal
  */
-function promptUserEmail() {
-  return new Promise((resolve) => {
-    const modal = createEmailModal();
-    const backdrop = document.createElement('div');
-    backdrop.className = 'email-modal-backdrop';
-    
-    document.body.appendChild(backdrop);
-    document.body.appendChild(modal);
+function showAuthModal() {
+  const modal = document.getElementById('auth-modal');
+  if (!modal) {
+    // Fallback: create modal dynamically if not in DOM
+    createAuthModal();
+    return;
+  }
+  modal.style.display = 'flex';
 
-    const emailInput = modal.querySelector('.email-input');
-    const submitBtn = modal.querySelector('.email-submit');
-    const cancelBtn = modal.querySelector('.email-cancel');
-
-    // Focus on input
-    setTimeout(() => emailInput.focus(), 100);
-
-    // Submit handler
-    const handleSubmit = () => {
-      const email = emailInput.value.trim();
-      
-      if (!isValidEmail(email)) {
-        showNotification('Invalid Email', 'Please enter a valid Gmail address.', 'error');
-        return;
+  if (googleAccounts) {
+    googleAccounts.renderButton(
+      document.getElementById('g_id_signin'),
+      { 
+        theme: 'outline', 
+        size: 'large',
+        width: 250,
+        text: 'signin_with'
       }
-      
-      cleanupModal(modal, backdrop);
-      resolve(email);
-    };
-
-    // Cancel handler
-    const handleCancel = () => {
-      cleanupModal(modal, backdrop);
-      resolve(null);
-    };
-
-    submitBtn.addEventListener('click', handleSubmit);
-    cancelBtn.addEventListener('click', handleCancel);
-    emailInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') handleSubmit();
-    });
-
-    backdrop.addEventListener('click', handleCancel);
-  });
+    );
+  }
 }
 
 /**
- * Create email modal HTML
+ * Create auth modal dynamically (fallback)
  */
-function createEmailModal() {
+function createAuthModal() {
+  const existing = document.getElementById('auth-modal');
+  if (existing) { existing.style.display = 'flex'; return; }
+
   const modal = document.createElement('div');
-  modal.className = 'email-modal';
+  modal.id = 'auth-modal';
+  modal.className = 'modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;';
   modal.innerHTML = `
-    <div class="email-modal-content">
-      <h3>Join Testing Group</h3>
-      <p>Enter your Gmail address to be added to the testing group:</p>
-      
-      <div class="email-input-group">
-        <input 
-          type="email" 
-          class="email-input" 
-          placeholder="your.email@gmail.com"
-          autocomplete="email"
-        />
-      </div>
-      
-      <div class="email-modal-actions">
-        <button class="email-submit btn btn--primary">
-          <i class="ti ti-check" aria-hidden="true"></i> Join Group
-        </button>
-        <button class="email-cancel btn btn--secondary">
-          <i class="ti ti-x" aria-hidden="true"></i> Cancel
-        </button>
-      </div>
-      
-      <p class="email-modal-info">
-        <i class="ti ti-info-circle" aria-hidden="true"></i>
-        Use the same Gmail for both the testing group and Google Play.
-      </p>
+    <div class="modal-backdrop" style="position:absolute;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);"></div>
+    <div class="modal-content" style="position:relative;background:#1e1e2e;border:1px solid #313244;border-radius:16px;padding:2rem;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+      <h3 style="color:#cdd6f4;margin-bottom:0.5rem;">Join Testing Group</h3>
+      <p style="color:#a6adc8;margin-bottom:1.5rem;font-size:0.95rem;">Sign in with your Google account to check your testing group membership.</p>
+      <div id="g_id_signin" style="margin:1rem 0;display:flex;justify-content:center;"></div>
+      <button class="modal-close" style="background:#313244;color:#cdd6f4;border:none;padding:0.6rem 1.2rem;border-radius:8px;margin-top:1rem;cursor:pointer;">Cancel</button>
     </div>
   `;
-  
-  return modal;
+  document.body.appendChild(modal);
+
+  modal.querySelector('.modal-backdrop').addEventListener('click', () => hideAuthModal());
+  modal.querySelector('.modal-close').addEventListener('click', () => hideAuthModal());
+
+  if (googleAccounts) {
+    setTimeout(() => {
+      googleAccounts.renderButton(
+        document.getElementById('g_id_signin'),
+        { theme: 'outline', size: 'large', width: 250, text: 'signin_with' }
+      );
+    }, 100);
+  }
 }
 
 /**
- * Clean up modal and backdrop
+ * Hide auth modal
  */
-function cleanupModal(modal, backdrop) {
-  modal.remove();
-  backdrop.remove();
+function hideAuthModal() {
+  const modal = document.getElementById('auth-modal');
+  if (modal) modal.style.display = 'none';
 }
 
 /**
- * Show notification toast
+ * Show loading overlay
  */
-function showNotification(title, message, type = 'info', duration = 4000) {
-  const notification = document.createElement('div');
-  notification.className = `notification notification--${type}`;
-  
-  const icon = getNotificationIcon(type);
-  
-  notification.innerHTML = `
-    <div class="notification-content">
-      <div class="notification-icon">${icon}</div>
-      <div class="notification-text">
-        <div class="notification-title">${title}</div>
-        <div class="notification-message">${message}</div>
-      </div>
-      <button class="notification-close" aria-label="Close notification">
-        <i class="ti ti-x" aria-hidden="true"></i>
-      </button>
+function showLoading(message) {
+  let overlay = document.getElementById('loading-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'loading-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;';
+    overlay.innerHTML = `
+      <div style="width:48px;height:48px;border:4px solid #313244;border-top-color:#89b4fa;border-radius:50%;animation:spin 1s linear infinite;"></div>
+      <p style="color:#cdd6f4;font-size:1rem;">${message}</p>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    `;
+    document.body.appendChild(overlay);
+  } else {
+    overlay.querySelector('p').textContent = message;
+    overlay.style.display = 'flex';
+  }
+}
+
+/**
+ * Hide loading overlay
+ */
+function hideLoading() {
+  const overlay = document.getElementById('loading-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+/**
+ * Show toast notification
+ */
+function showToast(title, message, type, duration) {
+  duration = duration || 4000;
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.style.cssText = 'position:fixed;top:1.5rem;right:1.5rem;z-index:10000;display:flex;flex-direction:column;gap:0.75rem;pointer-events:none;';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  const borderColors = { success: '#a6e3a1', error: '#f38ba8', info: '#89b4fa' };
+  const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+
+  toast.style.cssText = `display:flex;align-items:flex-start;gap:0.75rem;background:#1e1e2e;border:1px solid #313244;border-left:4px solid ${borderColors[type]||borderColors.info};border-radius:10px;padding:1rem 1.25rem;max-width:380px;box-shadow:0 8px 30px rgba(0,0,0,0.3);pointer-events:auto;opacity:0;transform:translateX(30px);transition:all 0.35s cubic-bezier(0.16,1,0.3,1);`;
+
+  toast.innerHTML = `
+    <div style="font-size:1.25rem;flex-shrink:0;margin-top:2px;">${icons[type]||icons.info}</div>
+    <div style="flex:1;min-width:0;">
+      <div style="color:#cdd6f4;font-weight:600;font-size:0.95rem;margin-bottom:0.25rem;">${title}</div>
+      <div style="color:#a6adc8;font-size:0.85rem;line-height:1.4;">${message}</div>
     </div>
+    <button style="background:none;border:none;color:#6c7086;font-size:1.25rem;cursor:pointer;padding:0;line-height:1;" onclick="this.parentElement.style.opacity='0';this.parentElement.style.transform='translateX(30px)';setTimeout(()=>this.parentElement.remove(),300)">&times;</button>
   `;
-  
-  document.body.appendChild(notification);
-  
-  // Trigger animation
-  setTimeout(() => notification.classList.add('show'), 10);
-  
-  // Close button
-  notification.querySelector('.notification-close').addEventListener('click', () => {
-    notification.classList.remove('show');
-    setTimeout(() => notification.remove(), 300);
-  });
-  
-  // Auto close
+
+  container.appendChild(toast);
+  requestAnimationFrame(() => { toast.style.opacity = '1'; toast.style.transform = 'translateX(0)'; });
+
   if (duration > 0 && type !== 'loading') {
     setTimeout(() => {
-      notification.classList.remove('show');
-      setTimeout(() => notification.remove(), 300);
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(30px)';
+      setTimeout(() => toast.remove(), 300);
     }, duration);
   }
-  
-  return notification;
+
+  return toast;
 }
 
-/**
- * Get icon for notification type
- */
-function getNotificationIcon(type) {
-  const icons = {
-    success: '<i class="ti ti-circle-check-filled"></i>',
-    error: '<i class="ti ti-alert-circle"></i>',
-    info: '<i class="ti ti-info-circle"></i>',
-    loading: '<i class="ti ti-loader-2"></i>'
-  };
-  return icons[type] || icons.info;
+// ═══════════════════════════════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════════════════════════════
+
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch (e) {
+    console.error('JWT parse error:', e);
+    return {};
+  }
 }
 
-/**
- * Validate email format
- */
-function isValidEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
+function clearUserSession() {
+  localStorage.removeItem('jds_user_email');
+  localStorage.removeItem('jds_user_name');
+  localStorage.removeItem('jds_user_picture');
+  showToast('Session Cleared', 'Your sign-in data has been cleared.', 'info');
 }
+
+window.clearUserSession = clearUserSession;
+window.JDS = { clearUserSession, APPS_CONFIG };
