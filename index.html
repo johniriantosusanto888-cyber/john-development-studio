@@ -1,380 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="John Development Studio — Smart utility Android apps built with Kotlin. Battery Health Check, BrewMaster, LanChat, and more.">
-  <meta name="keywords" content="Android apps, John Development Studio, Battery Health, BrewMaster, LanChat, NFC, Jakarta">
-  <meta name="author" content="John Development Studio">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="John Development Studio">
-  <meta property="og:description" content="Smart utility apps to protect, optimize, and simplify your digital life.">
-  <meta property="og:image" content="images/og-banner.png">
-  <meta property="og:type" content="website">
-
-  <title>John Development Studio</title>
-
-  <!-- Tabler Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Development Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
+    <header>
+        <h1>John Development Studio</h1>
+        <p>Building apps that make your life easier</p>
+    </header>
 
-  <!-- ═══════════════════════════════════════════
-       HERO
-  ═══════════════════════════════════════════ -->
-  <header class="hero">
-    <div class="hero__glow" aria-hidden="true"></div>
-    <div class="hero__inner">
-      <div class="hero__logo" aria-hidden="true">⚡</div>
-      <h1 class="hero__title">John Development Studio</h1>
-      <p class="hero__tagline">Smart utility apps to protect, optimize, and simplify your digital life. Built with Kotlin, designed for everyday use on Android.</p>
-      <div class="hero__badges">
-        <span class="badge"><i class="ti ti-device-mobile" aria-hidden="true"></i> Android</span>
-        <span class="badge"><i class="ti ti-map-pin" aria-hidden="true"></i> Jakarta, Indonesia</span>
-        <span class="badge"><i class="ti ti-brand-instagram" aria-hidden="true"></i> @ipoktala</span>
-      </div>
-      <a href="https://play.google.com/store/apps/dev?id=5074686766015940849"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="btn btn--primary hero__cta">
-        <i class="ti ti-brand-google-play" aria-hidden="true"></i>
-        View on Google Play
-      </a>
-    </div>
-  </header>
+    <main>
+        <section class="apps-grid">
+            <!-- BrewMaster -->
+            <article class="app-card" data-app-id="brewmaster">
+                <div class="app-icon">☕</div>
+                <h2>BrewMaster</h2>
+                <p>Coffee brewing companion with step-by-step recipes for espresso, ristretto, lungo, and more.</p>
+                <div class="app-meta">
+                    <span class="badge closed">Closed Testing</span>
+                </div>
+                <button class="btn btn--primary join-testing-btn" data-test-app="brewmaster">
+                    <span class="btn-text">Join Testing</span>
+                </button>
+            </article>
 
-  <main>
+            <!-- LanChat -->
+            <article class="app-card" data-app-id="lanchat">
+                <div class="app-icon">💬</div>
+                <h2>LanChat</h2>
+                <p>WiFi LAN chat app for local network messaging. Share messages and files across devices without internet.</p>
+                <div class="app-meta">
+                    <span class="badge closed">Closed Testing</span>
+                </div>
+                <button class="btn btn--primary join-testing-btn" data-test-app="lanchat">
+                    <span class="btn-text">Join Testing</span>
+                </button>
+            </article>
 
-    <!-- ═══════════════════════════════════════════
-         APPS LIST
-    ═══════════════════════════════════════════ -->
-    <section class="section" id="apps" aria-label="Our Apps">
-      <div class="container">
-        <h2 class="section__title">Our Apps</h2>
+            <!-- Android File Server -->
+            <article class="app-card" data-app-id="file-server">
+                <div class="app-icon">📁</div>
+                <h2>Android File Server</h2>
+                <p>Turn your Android device into a local file server. Browse, share, and transfer files over WiFi.</p>
+                <div class="app-meta">
+                    <span class="badge closed">Closed Testing</span>
+                </div>
+                <button class="btn btn--primary join-testing-btn" data-test-app="file-server">
+                    <span class="btn-text">Join Testing</span>
+                </button>
+            </article>
 
-        <!-- ── Battery Health Check — PRODUCTION ── -->
-        <article class="app-card" id="battery-health">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-battery-health.png"
-              alt="Battery Health Check app icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#1e3a5f,#2563eb);" aria-hidden="true">🔋</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">Battery Health Check &amp; Alarm</h3>
-            <p class="app-card__desc">Real-time battery monitoring with calibrated health estimator, smart charge alarm, charging history log, and auto popup on charger connect.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.batteryhealthcheckapp</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--production">
-              <i class="ti ti-circle-check-filled" aria-hidden="true"></i> Production
-            </span>
-            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.batteryhealthcheckapp"
-               target="_blank" rel="noopener noreferrer"
-               class="btn btn--play">
-              <i class="ti ti-brand-google-play" aria-hidden="true"></i> Google Play
-            </a>
-          </div>
-        </article>
+            <!-- NFC Card Manager -->
+            <article class="app-card" data-app-id="nfc-manager">
+                <div class="app-icon">💳</div>
+                <h2>NFC Card Manager</h2>
+                <p>Manage, read, and write NFC cards and tags with ease. Share NFC data instantly.</p>
+                <div class="app-meta">
+                    <span class="badge closed">Closed Testing</span>
+                </div>
+                <button class="btn btn--primary join-testing-btn" data-test-app="nfc-manager">
+                    <span class="btn-text">Join Testing</span>
+                </button>
+            </article>
 
-        <!-- ── BrewMaster — CLOSED TESTING ── -->
-        <article class="app-card" id="brewmaster">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-brewmaster.png"
-              alt="BrewMaster app icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#3b1f0a,#7c3f1e);" aria-hidden="true">☕</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">BrewMaster</h3>
-            <p class="app-card__desc">Coffee brewing companion with step-by-step recipes for espresso, ristretto, lungo, and more. Supports manual lever machines with custom brew profiles.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.brewmasterapp</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--closed">
-              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
-            </span>
-            <button 
-              data-test-app="brewmaster"
-              class="btn btn--test">
-              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </button>
-          </div>
-        </article>
+            <!-- Battery Health Check & Alarm -->
+            <article class="app-card" data-app-id="battery-health">
+                <div class="app-icon">🔋</div>
+                <h2>Battery Health Check & Alarm</h2>
+                <p>Real-time battery monitoring with calibrated health estimator and smart charge alarm.</p>
+                <div class="app-meta">
+                    <span class="badge production">Production</span>
+                    <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.batteryhealthcheckapp" target="_blank" class="link">View on Play Store</a>
+                </div>
+            </article>
 
-        <!-- ── LanChat — CLOSED TESTING ── -->
-        <article class="app-card" id="lanchat">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-lanchat.png"
-              alt="LanChat app icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0f2027,#1a6b5a);" aria-hidden="true">💬</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">LanChat</h3>
-            <p class="app-card__desc">WiFi LAN chat app for local network messaging. Share messages and files across devices without internet — perfect for office or home networks.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.lanchat</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--closed">
-              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
-            </span>
-            <button 
-              data-test-app="lanchat"
-              class="btn btn--test">
-              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </button>
-          </div>
-        </article>
+            <!-- Invoice App -->
+            <article class="app-card" data-app-id="invoice">
+                <div class="app-icon">🧾</div>
+                <h2>Invoice App</h2>
+                <p>Professional invoicing with PDF export, Bluetooth thermal printer support, and cloud sync.</p>
+                <div class="app-meta">
+                    <span class="badge dev">In Development</span>
+                </div>
+                <button class="btn btn--disabled" disabled>Coming Soon</button>
+            </article>
+        </section>
 
-        <!-- ── Android File Server — CLOSED TESTING ── -->
-        <article class="app-card" id="file-server">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-fileserver.png"
-              alt="Android File Server app icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#1a1a2e,#4a4e8c);" aria-hidden="true">📂</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">Android File Server</h3>
-            <p class="app-card__desc">Turn your Android device into a local file server. Browse, share, and transfer files over WiFi with a built-in file browser sorted by date.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.androidfileserverapp</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--closed">
-              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
-            </span>
-            <button 
-              data-test-app="file-server"
-              class="btn btn--test">
-              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </button>
-          </div>
-        </article>
-
-        <!-- ── NFC Card Manager — CLOSED TESTING ── -->
-        <article class="app-card" id="nfc-manager">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-nfc.png"
-              alt="NFC Card Manager app icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0d1b2a,#1a237e);" aria-hidden="true">📶</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">NFC Card Manager</h3>
-            <p class="app-card__desc">Manage, read, and write NFC cards and tags with ease. Share NFC data instantly with a clean, user-friendly interface built for everyday use.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.nfccardmanager</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--closed">
-              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
-            </span>
-            <button 
-              data-test-app="nfc-manager"
-              class="btn btn--test">
-              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
-            </button>
-          </div>
-        </article>
-
-        <!-- ── Invoice App — IN DEVELOPMENT ── -->
-        <article class="app-card" id="invoice">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-invoice.png"
-              alt="Invoice App icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0a2540,#1565C0);" aria-hidden="true">🧾</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">Invoice App</h3>
-            <p class="app-card__desc">Professional invoicing with PDF export, Bluetooth thermal printer support, client &amp; product management, and cloud sync via Firebase.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.invoiceapp</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--dev">
-              <i class="ti ti-code" aria-hidden="true"></i> In Development
-            </span>
-            <span class="coming-soon">Coming soon</span>
-          </div>
-        </article>
-
-        <!-- ── Hidden Camera Detector — IN DEVELOPMENT ── -->
-        <article class="app-card" id="camera-detector">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-camera-detector.png"
-              alt="Hidden Camera Detector icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#1a0a2e,#5b21b6);" aria-hidden="true">🔍</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">Hidden Camera Detector</h3>
-            <p class="app-card__desc">Detect hidden cameras and suspicious devices around you using infrared and network scanning. Stay protected in hotels, changing rooms, and public spaces.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.hiddencameradetector</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--dev">
-              <i class="ti ti-code" aria-hidden="true"></i> In Development
-            </span>
-            <span class="coming-soon">Coming soon</span>
-          </div>
-        </article>
-
-        <!-- ── Find My Car — IN DEVELOPMENT ── -->
-        <article class="app-card" id="find-my-car">
-          <div class="app-card__icon-wrap">
-            <img
-              class="app-card__icon"
-              src="images/icon-findmycar.png"
-              alt="Find My Car icon"
-              width="64" height="64"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0f2a1a,#14532d);" aria-hidden="true">🚗</div>
-          </div>
-          <div class="app-card__info">
-            <h3 class="app-card__name">Find My Car</h3>
-            <p class="app-card__desc">Save your parking location instantly and navigate back to your car with ease. Works offline with GPS — never forget where you parked again.</p>
-            <p class="app-card__pkg">com.johniriantosusanto.findmycar</p>
-          </div>
-          <div class="app-card__right">
-            <span class="status status--dev">
-              <i class="ti ti-code" aria-hidden="true"></i> In Development
-            </span>
-            <span class="coming-soon">Coming soon</span>
-          </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════
-         HOW TO JOIN CLOSED TESTING
-    ═══════════════════════════════════════════ -->
-    <section class="section" id="join-testing" aria-label="How to Join Closed Testing">
-      <div class="container">
-        <h2 class="section__title">How to Join Closed Testing</h2>
-
-        <div class="testing-banner">
-          <div class="testing-banner__header">
-            <i class="ti ti-flask" aria-hidden="true"></i>
-            <span>Become a Beta Tester</span>
-          </div>
-          <p class="testing-banner__sub">
-            Some of our apps are in closed testing and not yet publicly available on the Play Store.
-            To get early access, click <strong>"Join Testing"</strong> on any app card, enter your Gmail address, and you'll be automatically added to our testing group.
-            You'll then be redirected to Google Play to install the test version.
-          </p>
-
-          <div class="steps-grid">
-            <div class="step-card">
-              <div class="step-card__num">Step 1 — Click Join Testing</div>
-              <div class="step-card__text">
-                Click the <strong>"Join Testing"</strong> button on the app you want to test.
-              </div>
+        <!-- Status Guide -->
+        <section class="status-guide">
+            <h3>Status Guide</h3>
+            <div class="legend">
+                <span><span class="dot production"></span> Production — Live on Google Play</span>
+                <span><span class="dot closed"></span> Closed Testing — Join via button</span>
+                <span><span class="dot dev"></span> In Development — Not yet released</span>
             </div>
+        </section>
+    </main>
 
-            <div class="step-card">
-              <div class="step-card__num">Step 2 — Enter Your Email</div>
-              <div class="step-card__text">
-                A modal will appear asking for your Gmail address. Enter the email you use for Google Play.
-              </div>
-            </div>
-
-            <div class="step-card">
-              <div class="step-card__num">Step 3 — Auto-Added to Group</div>
-              <div class="step-card__text">
-                We'll automatically add you to the testing group. You'll see a success notification when it's complete.
-              </div>
-            </div>
-
-            <div class="step-card">
-              <div class="step-card__num">Step 4 — Install &amp; Test</div>
-              <div class="step-card__text">
-                You'll be redirected to Google Play. Install the app and share your feedback — we read every review!
-              </div>
-            </div>
-          </div>
-
-          <div class="testing-note">
-            <i class="ti ti-info-circle" aria-hidden="true"></i>
-            <span>
-              Use the <strong>same Gmail account</strong> for testing and Google Play.
-              It may take up to <strong>1 hour</strong> after joining before the test link becomes active on your device.
-            </span>
-          </div>
+    <!-- Google Sign-In Button Container (hidden by default, shown in modal) -->
+    <div id="auth-modal" class="modal" style="display:none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <h3>Join Testing Group</h3>
+            <p>Sign in with your Google account to check your testing group membership.</p>
+            <div id="g_id_signin"></div>
+            <button class="btn btn--secondary modal-close">Cancel</button>
         </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════
-         STATUS LEGEND
-    ═══════════════════════════════════════════ -->
-    <section class="section section--legend" aria-label="Status Guide">
-      <div class="container">
-        <h2 class="section__title">Status Guide</h2>
-        <div class="legend">
-          <span class="status status--production"><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Production — Live on Google Play</span>
-          <span class="status status--closed"><i class="ti ti-lock" aria-hidden="true"></i> Closed Testing — Join via button above</span>
-          <span class="status status--dev"><i class="ti ti-code" aria-hidden="true"></i> In Development — Not yet released</span>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <nav class="footer__social" aria-label="Social links">
-        <a href="https://play.google.com/store/apps/dev?id=5074686766015940849"
-           target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-brand-google-play" aria-hidden="true"></i> Google Play
-        </a>
-        <a href="https://www.instagram.com/ipoktala"
-           target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-brand-instagram" aria-hidden="true"></i> @ipoktala
-        </a>
-        <a href="mailto:john.irianto.susanto.dev@gmail.com">
-          <i class="ti ti-mail" aria-hidden="true"></i> Contact
-        </a>
-      </nav>
-      <p class="footer__copy">© 2025 John Development Studio · Jakarta, Indonesia</p>
-      <p class="footer__stack">Built with Kotlin · Firebase · AdMob</p>
     </div>
-  </footer>
 
-  <!-- JS -->
-  <script src="js/main.js"></script>
-  <script src="js/testing.js"></script>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display:none;">
+        <div class="spinner"></div>
+        <p>Checking membership...</p>
+    </div>
 
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <footer>
+        <p>&copy; 2026 John Development Studio. All rights reserved.</p>
+    </footer>
+
+    <script src="js/testing.js"></script>
 </body>
 </html>
