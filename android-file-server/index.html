@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android File Server - John Development Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-light: #60A5FA;
+            --accent: #0EA5E9;
+            --accent-light: #38BDF8;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --gray: #64748B;
+            --card-bg: #FFFFFF;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0c1a3a 0%, #1e3a5f 50%, #0c1a3a 100%);
+            color: white;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-app-icon {
+            max-width: 220px;
+            width: 55%;
+            height: auto;
+            display: block;
+            margin: 0 auto 1.5rem;
+            border-radius: 28px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+            border: 4px solid rgba(255,255,255,0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-app-icon:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-app-icon {
+                max-width: 160px;
+                border-radius: 20px;
+                border-width: 3px;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-dark {
+            background: var(--dark);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #1e293b;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Screenshots */
+        .screenshots-section {
+            background: linear-gradient(to bottom, #eff6ff, var(--light));
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.2);
+            transition: all 0.4s;
+            background: #1a1a1a;
+            aspect-ratio: 9/19;
+            max-height: 600px;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* User Guide */
+        .guide-section {
+            background: white;
+        }
+
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .step-content ul {
+            margin-top: 0.5rem;
+            margin-left: 1.2rem;
+            color: var(--gray);
+        }
+
+        .step-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            margin: 4rem auto;
+            padding: 4rem 2rem;
+            max-width: 1000px;
+        }
+
+        .download-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-section p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .download-btn i {
+            font-size: 2rem;
+        }
+
+        .download-btn .small {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn .big {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .btn-playstore {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-playstore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .btn-github {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .btn-github:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .guide-step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 3rem auto 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="logo">
+                <i class="fas fa-code"></i>
+                John Dev Studio
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#guide">User Guide</a>
+                <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-wifi"></i> Android Application
+            </div>
+
+            <img src="../images/AndroidFileServer.png" class="hero-app-icon" alt="Android File Server App Icon">
+
+            <h1>Android File Server</h1>
+            <p>Transfer files wirelessly between Android, iPhone, iPad, Mac, Windows PC, and laptops over Wi-Fi. No cables, no cloud, no internet needed.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Now
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="section-header">
+            <h2>App Features & Functions</h2>
+            <div class="divider"></div>
+            <p>Everything you need to share files seamlessly across all your devices</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>Wireless File Transfer</h3>
+                <p>Share files instantly over your local Wi-Fi network. No USB cables, no Bluetooth pairing, and no internet connection required. Just start the server and connect from any device.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h3>QR Code Connection</h3>
+                <p>Simply scan the QR code displayed in the app with any other device to instantly access the file server. No need to type long IP addresses manually.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Cross-Platform Access</h3>
+                <p>Works with any device that has a web browser — Windows, Mac, Linux, iPhone, iPad, Android, and more. Access your files from anywhere on the same network.</p>
+            </div>
+
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3>Multiple File Types</h3>
+                <p>Transfer images, music, videos, documents, APK files, and many other formats. Drag and drop files directly in the browser or use the file picker.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Private & Secure</h3>
+                <p>All transfers happen locally on your Wi-Fi network. No files are uploaded to the cloud or any external server. Your data stays completely private.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Lightning Fast Speed</h3>
+                <p>High-speed local network transfer that outperforms cloud uploads and Bluetooth. Transfer large files in seconds, not minutes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section style="background: linear-gradient(to bottom, var(--light), white);">
+        <div class="section-header">
+            <h2>Why Choose Android File Server?</h2>
+            <div class="divider"></div>
+            <p>Key advantages that make file sharing effortless</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3>No Cables Needed</h3>
+                <p>Forget about USB cables and OTG adapters. Simply connect all devices to the same Wi-Fi network and start sharing files instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #16A34A, #4ADE80);">
+                    <i class="fas fa-cloud-slash"></i>
+                </div>
+                <h3>No Cloud Uploads</h3>
+                <p>Your files never leave your local network. No Google Drive, no Dropbox, no WeTransfer. Perfect for sensitive documents and privacy-conscious users.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Works on Any Device</h3>
+                <p>Receiver doesn't need to install anything. Just open a browser and visit the IP address or scan the QR code. iPhone, iPad, Mac, PC — all supported.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+                <h3>Battery Friendly</h3>
+                <p>Optimized for low battery usage. The server runs efficiently in the background with minimal power consumption. Optional "Keep screen on" toggle available.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #EA580C, #FB923C);">
+                    <i class="fas fa-infinity"></i>
+                </div>
+                <h3>No File Size Limits</h3>
+                <p>Transfer files of any size without restrictions. Unlike cloud services with upload limits, your only constraint is your local network speed.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #0891B2, #22D3EE);">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3>Open Source</h3>
+                <p>Developed by John Irianto Susanto. The app is available on GitHub for transparency and community contributions. Clean, reliable, and ad-free.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots-section">
+        <div class="section-header">
+            <h2>App Screenshots</h2>
+            <div class="divider"></div>
+            <p>See the app in action — simple interface, powerful sharing</p>
+        </div>
+
+        <div class="screenshots-grid">
+            <div class="screenshot-item">
+                <img src="../images/androidFS.png" alt="Android File Server - Feature overview showing cross-platform file sharing">
+                <div class="screenshot-label">
+                    <i class="fas fa-star"></i> Feature Overview
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS1.png" alt="Main screen - Start and stop server with one tap">
+                <div class="screenshot-label">
+                    <i class="fas fa-power-off"></i> Server Control
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS2.png" alt="Server running with IP address and QR code">
+                <div class="screenshot-label">
+                    <i class="fas fa-qrcode"></i> QR Code & IP Address
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS3.png" alt="QR code scanning for quick connection">
+                <div class="screenshot-label">
+                    <i class="fas fa-mobile-alt"></i> Scan to Connect
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS5.png" alt="Built-in user guide with step-by-step instructions">
+                <div class="screenshot-label">
+                    <i class="fas fa-book"></i> User Guide
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS6.png" alt="QR code scanning with another phone">
+                <div class="screenshot-label">
+                    <i class="fas fa-camera"></i> Camera Scan
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS7.png" alt="Web browser interface for file upload">
+                <div class="screenshot-label">
+                    <i class="fas fa-upload"></i> Web Upload Interface
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/androidFS8.png" alt="Drag and drop file upload area">
+                <div class="screenshot-label">
+                    <i class="fas fa-hand-pointer"></i> Drag & Drop Upload
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; color: var(--gray); font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Screenshots taken on Samsung Galaxy S23 Ultra
+        </p>
+    </section>
+
+    <!-- User Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="section-header">
+            <h2>User Guide</h2>
+            <div class="divider"></div>
+            <p>Step-by-step instructions to start sharing files</p>
+        </div>
+
+        <div class="guide-container">
+            <div class="guide-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Installation & Setup</h3>
+                    <p>Download the app from Google Play Store or GitHub. Install and open the app. Grant the following permissions:</p>
+                    <ul>
+                        <li><strong>Wi-Fi / Network Access:</strong> Required to create and run the local file server.</li>
+                        <li><strong>Storage Access:</strong> Needed to access files for sharing and saving received files.</li>
+                        <li><strong>Keep Screen On (optional):</strong> Prevents the server from stopping when your screen turns off.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Connect Devices to Same Wi-Fi</h3>
+                    <p>Make sure both your Android device (sender) and the receiving device are connected to the same Wi-Fi network. This can be:</p>
+                    <ul>
+                        <li>Your home or office Wi-Fi router.</li>
+                        <li>Android Hotspot (mobile hotspot from the sender device).</li>
+                        <li>Any shared local network connection.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Start the Server</h3>
+                    <p>Open the Android File Server app and tap the "Start Server" button. The app will:</p>
+                    <ul>
+                        <li>Display your device's local IP address (e.g., http://192.168.1.100:8080).</li>
+                        <li>Generate a QR code for quick connection.</li>
+                        <li>Show server status as "Running" with a green indicator.</li>
+                        <li>Enable "Keep screen on" toggle if you want the server to stay active.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Connect from Another Device</h3>
+                    <p>On the receiving device (PC, Mac, iPhone, iPad, or another Android), do one of the following:</p>
+                    <ul>
+                        <li><strong>Scan QR Code:</strong> Open the camera app and scan the QR code displayed on your Android device.</li>
+                        <li><strong>Enter IP Address:</strong> Open any web browser and type the IP address shown in the app (e.g., http://192.168.1.100:8080).</li>
+                        <li><strong>Copy & Share:</strong> Tap the copy button next to the IP address and share it via messaging apps.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Transfer Files</h3>
+                    <p>Once connected via the browser, you can:</p>
+                    <ul>
+                        <li><strong>Upload to Android:</strong> Drag and drop files into the browser window or click "Select Files" to choose from your computer.</li>
+                        <li><strong>Download from Android:</strong> Browse the shared folders and click on any file to download it to your device.</li>
+                        <li><strong>Multiple Files:</strong> Select multiple files at once for batch transfer.</li>
+                        <li><strong>All File Types:</strong> Images, videos, music, documents, APKs, and more are supported.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Stop the Server & Troubleshooting</h3>
+                    <p>When done, tap "Stop Server" to close the connection. If you encounter issues:</p>
+                    <ul>
+                        <li><strong>Can't connect:</strong> Ensure both devices are on the exact same Wi-Fi network (same SSID).</li>
+                        <li><strong>Firewall blocking:</strong> Disable firewall temporarily or allow port 8080 on your router.</li>
+                        <li><strong>Server stops unexpectedly:</strong> Enable "Keep screen on" toggle or disable battery optimization for the app.</li>
+                        <li><strong>Slow transfer:</strong> Move closer to the Wi-Fi router for better signal strength.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <h2>Get Android File Server</h2>
+        <p>Available for free on Google Play Store and GitHub. Start sharing files wirelessly today.</p>
+
+        <div class="download-buttons">
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.androidfileserver" target="_blank" rel="noopener noreferrer" class="download-btn btn-playstore">
+                <i class="fab fa-google-play"></i>
+                <div>
+                    <span class="small">Get it on</span>
+                    <span class="big">Google Play</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/johniriantosusanto888-cyber" target="_blank" rel="noopener noreferrer" class="download-btn btn-github">
+                <i class="fab fa-github"></i>
+                <div>
+                    <span class="small">View source on</span>
+                    <span class="big">GitHub</span>
+                </div>
+            </a>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.6;">
+            <i class="fas fa-code"></i> Developed by <strong>John Irianto Susanto</strong>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 John Development Studio. Android File Server.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/">
+                <i class="fas fa-arrow-left"></i> Back to John Development Studio
+            </a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
