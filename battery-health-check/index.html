@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Health Check & Alarm - John Development Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6B21A8;
+            --primary-light: #A855F7;
+            --accent: #16A34A;
+            --accent-light: #4ADE80;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+            --gray: #64748B;
+            --card-bg: #FFFFFF;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(107, 33, 168, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a0f 0%, #2d5a1e 50%, #1e3a0f 100%);
+            color: white;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(22, 163, 74, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-dark {
+            background: var(--dark);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #1e293b;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Screenshots */
+        .screenshots-section {
+            background: linear-gradient(to bottom, #f0fdf4, var(--light));
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.2);
+            transition: all 0.4s;
+            background: #1a1a1a;
+            aspect-ratio: 9/19;
+            max-height: 600px;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* User Guide */
+        .guide-section {
+            background: white;
+        }
+
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(107, 33, 168, 0.3);
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .step-content ul {
+            margin-top: 0.5rem;
+            margin-left: 1.2rem;
+            color: var(--gray);
+        }
+
+        .step-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            margin: 4rem auto;
+            padding: 4rem 2rem;
+            max-width: 1000px;
+        }
+
+        .download-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-section p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .download-btn i {
+            font-size: 2rem;
+        }
+
+        .download-btn .small {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn .big {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .btn-playstore {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-playstore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(22, 163, 74, 0.6);
+        }
+
+        .btn-github {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .btn-github:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .guide-step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 3rem auto 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="logo">
+                <i class="fas fa-code"></i>
+                John Dev Studio
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#guide">User Guide</a>
+                <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> Android Application
+            </div>
+            <h1>Battery Health Check & Alarm</h1>
+            <p>Monitor your battery health in real-time, prevent overcharging, and extend your battery lifespan with intelligent charging alerts.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Now
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="section-header">
+            <h2>App Features & Functions</h2>
+            <div class="divider"></div>
+            <p>Everything you need to monitor, protect, and optimize your Android device battery</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Smart Charging Alarm</h3>
+                <p>Get instant sound alerts when your battery reaches your desired percentage (10%–100%). Never overcharge your device again. The alarm works even on lock screen and auto-stops when charger is unplugged.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Real-Time Charging Monitor</h3>
+                <p>View live voltage, current (mA), power (W), and charging status. Supports AC, USB, and wireless charging detection with accurate real-time readings directly from BatteryManager API.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Battery Health Estimator</h3>
+                <p>Calculate your battery's current health percentage based on charging sessions. Auto-detects design capacity and compares estimated vs actual capacity with reliability indicators.</p>
+            </div>
+
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>Charge History Log</h3>
+                <p>Track and analyze every charging session with detailed logs including duration, temperature ranges (min/avg/max), and percentage gained. Perfect for spotting battery degradation patterns.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3>BatteryManager API Info</h3>
+                <p>Access deep system battery information: Charge Counter, Current Now/Average, Technology, Temperature, Voltage, Manufacturer, Model, Android Version, and Build ID.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Quick Notification Overview</h3>
+                <p>Get persistent notification showing battery percentage, voltage, temperature, and charging status at a glance without opening the app. Tap to open full details instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section style="background: linear-gradient(to bottom, var(--light), white);">
+        <div class="section-header">
+            <h2>Why Choose This App?</h2>
+            <div class="divider"></div>
+            <p>Key advantages that make Battery Health Check stand out</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #16A34A, #4ADE80);">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Prevent Overcharging Damage</h3>
+                <p>Overcharging is one of the main causes of battery degradation. Our alarm notifies you exactly when to unplug, helping maintain your battery's chemical health and extending its lifespan by months or even years.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">
+                    <i class="fas fa-battery-full"></i>
+                </div>
+                <h3>Accurate Health Estimation</h3>
+                <p>Unlike generic battery apps, we calculate health based on actual charging session data, not just voltage readings. The more you use it, the more accurate the estimation becomes.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-thermometer-half"></i>
+                </div>
+                <h3>Temperature Monitoring</h3>
+                <p>Track min, average, and max temperature for every charging session. High temperatures damage Li-ion batteries permanently — our logs help you identify problematic chargers or environments.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <h3>Works on Lock Screen</h3>
+                <p>The alarm popup and charger connection popup work seamlessly whether your screen is on or off, and even when the device is locked. You'll never miss an alert.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #EA580C, #FB923C);">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h3>Fully Customizable</h3>
+                <p>Set your own alarm threshold anywhere from 10% to 100%. Toggle the alarm on/off anytime. The app adapts to your charging habits, not the other way around.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #0891B2, #22D3EE);">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3>Open Source & Ad-Free Core</h3>
+                <p>Developed by John Irianto Susanto. The app is available on GitHub for transparency and community contributions. Clean interface with no unnecessary bloatware.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots-section">
+        <div class="section-header">
+            <h2>App Screenshots</h2>
+            <div class="divider"></div>
+            <p>See the app in action — clean interface, powerful features</p>
+        </div>
+
+        <div class="screenshots-grid">
+            <div class="screenshot-item">
+                <img src="../images/battery1.png" alt="Charging Monitor - Real time voltage, current, and power readings with battery level indicator">
+                <div class="screenshot-label">
+                    <i class="fas fa-bolt"></i> Charging Monitor Dashboard
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery2.png" alt="Charging Alarm Settings - Set custom percentage threshold with slider">
+                <div class="screenshot-label">
+                    <i class="fas fa-bell"></i> Alarm Configuration
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery3.png" alt="Full Battery Alert - Red screen with swipe to dismiss alarm">
+                <div class="screenshot-label">
+                    <i class="fas fa-exclamation-circle"></i> Full Battery Alarm
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery5.png" alt="BatteryManager API - Detailed system battery information">
+                <div class="screenshot-label">
+                    <i class="fas fa-microchip"></i> BatteryManager API Details
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery6.jpg" alt="Notification Overview - Quick battery stats in notification panel">
+                <div class="screenshot-label">
+                    <i class="fas fa-mobile-alt"></i> Quick Notification View
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery7.png" alt="Battery Health Estimator - Health percentage and recommendations">
+                <div class="screenshot-label">
+                    <i class="fas fa-heartbeat"></i> Battery Health Estimator
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery8.png" alt="Charge History - Log of past charging sessions with temperature data">
+                <div class="screenshot-label">
+                    <i class="fas fa-history"></i> Charging History Log
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/Battery9.png" alt="About Page - Developer info and store links">
+                <div class="screenshot-label">
+                    <i class="fas fa-user"></i> About & Links
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; color: var(--gray); font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Screenshots taken on Samsung Galaxy S23 Ultra (SM-S918B) running Android 16
+        </p>
+    </section>
+
+    <!-- User Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="section-header">
+            <h2>User Guide</h2>
+            <div class="divider"></div>
+            <p>Step-by-step instructions to get the most out of the app</p>
+        </div>
+
+        <div class="guide-container">
+            <div class="guide-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Installation & Permissions</h3>
+                    <p>Download the app from Google Play Store or GitHub. Upon first launch, grant the necessary permissions:</p>
+                    <ul>
+                        <li><strong>Battery Stats:</strong> Required to read voltage, current, and temperature.</li>
+                        <li><strong>Notification Access:</strong> Needed for the persistent battery notification.</li>
+                        <li><strong>Display over other apps:</strong> Allows alarm popup to appear on lock screen.</li>
+                        <li><strong>Ignore Battery Optimization:</strong> Ensures background monitoring isn't killed by the system.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Using the Charging Monitor</h3>
+                    <p>Open the app to view the main dashboard. You'll see:</p>
+                    <ul>
+                        <li>Real-time battery percentage with animated battery icon.</li>
+                        <li>Voltage (V) and Current (mA) readings updated every second.</li>
+                        <li>Calculated Power (W) = Voltage × Current.</li>
+                        <li>Charging source indicator (AC, USB, Wireless, or Not Charging).</li>
+                        <li>Device model and current temperature.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Setting Up the Charging Alarm</h3>
+                    <p>To prevent overcharging:</p>
+                    <ul>
+                        <li>Toggle the "Charging alarm" switch to ON.</li>
+                        <li>Use the slider to set your desired alarm percentage (e.g., 80% for daily use, 100% for full charge).</li>
+                        <li>Connect your charger. The app will monitor in background.</li>
+                        <li>When the target percentage is reached, a full-screen alarm will trigger with sound.</li>
+                        <li>Swipe the slider or unplug the charger to stop the alarm.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Checking Battery Health</h3>
+                    <p>Navigate to the Battery Health tab:</p>
+                    <ul>
+                        <li>The app auto-detects your device's design capacity (e.g., 5000 mAh).</li>
+                        <li>After 10+ charging sessions, it calculates estimated battery health %.</li>
+                        <li>View reliability rating based on number of recorded sessions.</li>
+                        <li>Read personalized recommendations (e.g., "Keep charging between 20–80%").</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Reviewing Charge History</h3>
+                    <p>Every charging session is automatically logged:</p>
+                    <ul>
+                        <li>Date and time of session start.</li>
+                        <li>Percentage range (e.g., 29% → 100%).</li>
+                        <li>Duration in minutes.</li>
+                        <li>Temperature statistics: Min, Average, and Max °C.</li>
+                        <li>Use this data to identify slow chargers or overheating issues.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Troubleshooting</h3>
+                    <p>If features aren't working as expected:</p>
+                    <ul>
+                        <li><strong>Alarm not ringing:</strong> Ensure "Ignore Battery Optimization" is granted and app has auto-start permission.</li>
+                        <li><strong>Current shows 0 mA:</strong> Some devices restrict current reading on Android 10+. Try using the Average Current instead.</li>
+                        <li><strong>Popup not showing on lock screen:</strong> Enable "Display over other apps" in system settings.</li>
+                        <li><strong>History not saving:</strong> Check that storage permission is granted.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <h2>Get Battery Health Check</h2>
+        <p>Available for free on Google Play Store and GitHub. Download now and start protecting your battery today.</p>
+
+        <div class="download-buttons">
+            <a href="#" class="download-btn btn-playstore">
+                <i class="fab fa-google-play"></i>
+                <div>
+                    <span class="small">Get it on</span>
+                    <span class="big">Google Play</span>
+                </div>
+            </a>
+
+            <a href="#" class="download-btn btn-github">
+                <i class="fab fa-github"></i>
+                <div>
+                    <span class="small">View source on</span>
+                    <span class="big">GitHub</span>
+                </div>
+            </a>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.6;">
+            <i class="fas fa-code"></i> Developed by <strong>John Irianto Susanto</strong> | Version 3.6.8
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 John Development Studio. Battery Health Check & Alarm.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/">
+                <i class="fas fa-arrow-left"></i> Back to John Development Studio
+            </a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
