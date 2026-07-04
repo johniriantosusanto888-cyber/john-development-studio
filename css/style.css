@@ -174,6 +174,13 @@ img { display: block; max-width: 100%; }
 }
 .btn--primary:hover { background: var(--blue-btn-hv); }
 
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.btn--secondary:hover { background: rgba(255, 255, 255, 0.15); }
+
 .btn--play {
   background: rgba(26, 86, 219, 0.15);
   border: 1px solid rgba(59, 130, 246, 0.3);
@@ -422,6 +429,273 @@ img { display: block; max-width: 100%; }
 }
 .testing-note i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
 .testing-note strong { color: #FDE68A; }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EMAIL MODAL & NOTIFICATIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ── EMAIL MODAL BACKDROP ─────────────────────────── */
+.email-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 999;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── EMAIL MODAL ──────────────────────────────────── */
+.email-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  animation: slideUp 0.3s ease cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.email-modal-content {
+  background: linear-gradient(135deg, #111827 0%, #0f1f3d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 28px 32px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.email-modal-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.email-modal-content p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.email-input-group {
+  margin-bottom: 18px;
+}
+
+.email-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: var(--font);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.email-input:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: rgba(96, 165, 250, 0.08);
+}
+
+.email-input::placeholder {
+  color: var(--text-muted);
+}
+
+.email-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.email-modal-actions .btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.email-modal-actions .email-submit {
+  background: var(--blue-btn-bg);
+  color: #fff;
+}
+
+.email-modal-actions .email-submit:hover {
+  background: var(--blue-btn-hv);
+}
+
+.email-modal-actions .email-cancel {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.email-modal-actions .email-cancel:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.email-modal-info {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.email-modal-info i {
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--amber);
+}
+
+/* ── NOTIFICATION TOASTS ──────────────────────────── */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  max-width: 380px;
+  border-radius: 12px;
+  padding: 14px 16px;
+  z-index: 998;
+  opacity: 0;
+  transform: translateX(450px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notification-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.notification-icon i {
+  font-size: 18px;
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.notification-message {
+  font-size: 12px;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  flex-shrink: 0;
+  padding: 0;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-close:hover {
+  opacity: 1;
+}
+
+/* ── NOTIFICATION TYPES ───────────────────────────– */
+.notification--success {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(52, 211, 153, 0.1));
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: var(--green);
+}
+
+.notification--error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(248, 113, 113, 0.1));
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #F87171;
+}
+
+.notification--info {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(147, 197, 253, 0.1));
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  color: var(--blue);
+}
+
+.notification--loading {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(196, 181, 253, 0.1));
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: var(--purple);
+}
+
+.notification--loading .notification-icon i {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── RESPONSIVE NOTIFICATIONS ─────────────────────── */
+@media (max-width: 640px) {
+  .notification {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+    transform: translateY(200px);
+  }
+
+  .notification.show {
+    transform: translateY(0);
+  }
+
+  .email-modal-content {
+    width: 85%;
+    padding: 24px;
+  }
+}
 
 /* ── FOOTER ───────────────────────────────────────── */
 .footer {
