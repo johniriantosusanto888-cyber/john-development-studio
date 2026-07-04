@@ -1,76 +1,391 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>John Development Studio</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #ffffff;
-    color: #111;
-  }
-  .banner {
-    width: 100%;
-    display: block;
-  }
-  .profile-section {
-    display: flex;
-    align-items: flex-start;
-    gap: 30px;
-    padding: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-  .logo-circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: #0d0d0d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  }
-  .logo-circle img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  .title-block h1 {
-    font-size: 42px;
-    font-weight: 400;
-    margin: 0 0 10px 0;
-    line-height: 1.15;
-  }
-  .description {
-    flex: 1;
-    min-width: 280px;
-    font-size: 18px;
-    line-height: 1.5;
-    color: #222;
-    padding-top: 10px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="John Development Studio — Smart utility Android apps built with Kotlin. Battery Health Check, BrewMaster, LanChat, and more.">
+  <meta name="keywords" content="Android apps, John Development Studio, Battery Health, BrewMaster, LanChat, NFC, Jakarta">
+  <meta name="author" content="John Development Studio">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="John Development Studio">
+  <meta property="og:description" content="Smart utility apps to protect, optimize, and simplify your digital life.">
+  <meta property="og:image" content="images/og-banner.png">
+  <meta property="og:type" content="website">
+
+  <title>John Development Studio</title>
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
 
-  <img class="banner" src="images/jds_banner.jpg" alt="John Development Studio Banner">
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="hero__glow" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <div class="hero__logo" aria-hidden="true">⚡</div>
+      <h1 class="hero__title">John Development Studio</h1>
+      <p class="hero__tagline">Smart utility apps to protect, optimize, and simplify your digital life. Built with Kotlin, designed for everyday use on Android.</p>
+      <div class="hero__badges">
+        <span class="badge"><i class="ti ti-device-mobile" aria-hidden="true"></i> Android</span>
+        <span class="badge"><i class="ti ti-map-pin" aria-hidden="true"></i> Jakarta, Indonesia</span>
+        <span class="badge"><i class="ti ti-brand-instagram" aria-hidden="true"></i> @ipoktala</span>
+      </div>
+      <a href="https://play.google.com/store/apps/dev?id=5074686766015940849"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="btn btn--primary hero__cta">
+        <i class="ti ti-brand-google-play" aria-hidden="true"></i>
+        View on Google Play
+      </a>
+    </div>
+  </header>
 
-  <div class="profile-section">
-    <div class="logo-circle">
-      <img src="images/jds_banner.jpg" alt="JDS Logo" style="object-position: -38px -610px; width: 700%; height: 700%;">
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         APPS LIST
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="apps" aria-label="Our Apps">
+      <div class="container">
+        <h2 class="section__title">Our Apps</h2>
+
+        <!-- ── Battery Health Check — PRODUCTION ── -->
+        <article class="app-card" id="battery-health">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-battery-health.png"
+              alt="Battery Health Check app icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#1e3a5f,#2563eb);" aria-hidden="true">🔋</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">Battery Health Check &amp; Alarm</h3>
+            <p class="app-card__desc">Real-time battery monitoring with calibrated health estimator, smart charge alarm, charging history log, and auto popup on charger connect.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.batteryhealthcheckapp</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--production">
+              <i class="ti ti-circle-check-filled" aria-hidden="true"></i> Production
+            </span>
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.batteryhealthcheckapp"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn--play">
+              <i class="ti ti-brand-google-play" aria-hidden="true"></i> Google Play
+            </a>
+          </div>
+        </article>
+
+        <!-- ── BrewMaster — CLOSED TESTING ── -->
+        <article class="app-card" id="brewmaster">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-brewmaster.png"
+              alt="BrewMaster app icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#3b1f0a,#7c3f1e);" aria-hidden="true">☕</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">BrewMaster</h3>
+            <p class="app-card__desc">Coffee brewing companion with step-by-step recipes for espresso, ristretto, lungo, and more. Supports manual lever machines with custom brew profiles.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.brewmasterapp</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--closed">
+              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
+            </span>
+            <!-- UPDATE: replace href with your actual closed testing opt-in link from Play Console -->
+            <a href="https://groups.google.com/g/john-development-studio-testers"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn--test">
+              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
+            </a>
+          </div>
+        </article>
+
+        <!-- ── LanChat — CLOSED TESTING ── -->
+        <article class="app-card" id="lanchat">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-lanchat.png"
+              alt="LanChat app icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0f2027,#1a6b5a);" aria-hidden="true">💬</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">LanChat</h3>
+            <p class="app-card__desc">WiFi LAN chat app for local network messaging. Share messages and files across devices without internet — perfect for office or home networks.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.lanchat</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--closed">
+              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
+            </span>
+            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
+            <a href="https://groups.google.com/g/john-development-studio-testers"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn--test">
+              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
+            </a>
+          </div>
+        </article>
+
+        <!-- ── Android File Server — CLOSED TESTING ── -->
+        <article class="app-card" id="file-server">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-fileserver.png"
+              alt="Android File Server app icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#1a1a2e,#4a4e8c);" aria-hidden="true">📂</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">Android File Server</h3>
+            <p class="app-card__desc">Turn your Android device into a local file server. Browse, share, and transfer files over WiFi with a built-in file browser sorted by date.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.androidfileserverapp</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--closed">
+              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
+            </span>
+            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
+            <a href="https://groups.google.com/g/john-development-studio-testers"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn--test">
+              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
+            </a>
+          </div>
+        </article>
+
+        <!-- ── NFC Card Manager — CLOSED TESTING ── -->
+        <article class="app-card" id="nfc-manager">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-nfc.png"
+              alt="NFC Card Manager app icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0d1b2a,#1a237e);" aria-hidden="true">📶</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">NFC Card Manager</h3>
+            <p class="app-card__desc">Manage, read, and write NFC cards and tags with ease. Share NFC data instantly with a clean, user-friendly interface built for everyday use.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.nfccardmanager</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--closed">
+              <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
+            </span>
+            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
+            <a href="https://groups.google.com/g/john-development-studio-testers"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn--test">
+              <i class="ti ti-user-plus" aria-hidden="true"></i> Join Testing
+            </a>
+          </div>
+        </article>
+
+        <!-- ── Invoice App — IN DEVELOPMENT ── -->
+        <article class="app-card" id="invoice">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-invoice.png"
+              alt="Invoice App icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0a2540,#1565C0);" aria-hidden="true">🧾</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">Invoice App</h3>
+            <p class="app-card__desc">Professional invoicing with PDF export, Bluetooth thermal printer support, client &amp; product management, and cloud sync via Firebase.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.invoiceapp</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--dev">
+              <i class="ti ti-code" aria-hidden="true"></i> In Development
+            </span>
+            <span class="coming-soon">Coming soon</span>
+          </div>
+        </article>
+
+        <!-- ── Hidden Camera Detector — IN DEVELOPMENT ── -->
+        <article class="app-card" id="camera-detector">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-camera-detector.png"
+              alt="Hidden Camera Detector icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#1a0a2e,#5b21b6);" aria-hidden="true">🔍</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">Hidden Camera Detector</h3>
+            <p class="app-card__desc">Detect hidden cameras and suspicious devices around you using infrared and network scanning. Stay protected in hotels, changing rooms, and public spaces.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.hiddencameradetector</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--dev">
+              <i class="ti ti-code" aria-hidden="true"></i> In Development
+            </span>
+            <span class="coming-soon">Coming soon</span>
+          </div>
+        </article>
+
+        <!-- ── Find My Car — IN DEVELOPMENT ── -->
+        <article class="app-card" id="find-my-car">
+          <div class="app-card__icon-wrap">
+            <img
+              class="app-card__icon"
+              src="images/icon-findmycar.png"
+              alt="Find My Car icon"
+              width="64" height="64"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="app-card__icon-ph" style="display:none; background:linear-gradient(135deg,#0f2a1a,#14532d);" aria-hidden="true">🚗</div>
+          </div>
+          <div class="app-card__info">
+            <h3 class="app-card__name">Find My Car</h3>
+            <p class="app-card__desc">Save your parking location instantly and navigate back to your car with ease. Works offline with GPS — never forget where you parked again.</p>
+            <p class="app-card__pkg">com.johniriantosusanto.findmycar</p>
+          </div>
+          <div class="app-card__right">
+            <span class="status status--dev">
+              <i class="ti ti-code" aria-hidden="true"></i> In Development
+            </span>
+            <span class="coming-soon">Coming soon</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         HOW TO JOIN CLOSED TESTING
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="join-testing" aria-label="How to Join Closed Testing">
+      <div class="container">
+        <h2 class="section__title">How to Join Closed Testing</h2>
+
+        <div class="testing-banner">
+          <div class="testing-banner__header">
+            <i class="ti ti-flask" aria-hidden="true"></i>
+            <span>Become a Beta Tester</span>
+          </div>
+          <p class="testing-banner__sub">
+            Some of our apps are in closed testing and not yet publicly available on the Play Store.
+            To get early access, you need to join our Google Group first — then install the test version directly from Google Play.
+          </p>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-card__num">Step 1 — Join the Group</div>
+              <div class="step-card__text">
+                Go to our Google Group using your Gmail account and request to join:
+                <br><br>
+                <!-- UPDATE: Replace with your actual Google Group link -->
+                <a href="https://groups.google.com/g/john-development-studio-testers"
+                   target="_blank" rel="noopener noreferrer"
+                   class="step-link">
+                  <i class="ti ti-external-link" aria-hidden="true"></i>
+                  john-development-studio-testers
+                </a>
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-card__num">Step 2 — Wait for Approval</div>
+              <div class="step-card__text">
+                Click <strong>Ask to join group</strong> on the Google Group page. We review requests and approve within <strong>24 hours</strong>.
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-card__num">Step 3 — Open the Test Link</div>
+              <div class="step-card__text">
+                Once approved, click the <strong>Join Testing</strong> button on the app you want. You'll be redirected to Google Play to opt in as a tester.
+              </div>
+            </div>
+
+            <div class="step-card">
+              <div class="step-card__num">Step 4 — Install &amp; Give Feedback</div>
+              <div class="step-card__text">
+                After opting in on Google Play, the app will appear in your library. Install it and share your feedback — we read every review!
+              </div>
+            </div>
+          </div>
+
+          <div class="testing-note">
+            <i class="ti ti-info-circle" aria-hidden="true"></i>
+            <span>
+              Use the <strong>same Gmail account</strong> for the Google Group and Google Play.
+              It may take up to <strong>1 hour</strong> after joining before the test link becomes active on your device.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STATUS LEGEND
+    ═══════════════════════════════════════════ -->
+    <section class="section section--legend" aria-label="Status Guide">
+      <div class="container">
+        <h2 class="section__title">Status Guide</h2>
+        <div class="legend">
+          <span class="status status--production"><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Production — Live on Google Play</span>
+          <span class="status status--closed"><i class="ti ti-lock" aria-hidden="true"></i> Closed Testing — Join group to access</span>
+          <span class="status status--dev"><i class="ti ti-code" aria-hidden="true"></i> In Development — Not yet released</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <nav class="footer__social" aria-label="Social links">
+        <a href="https://play.google.com/store/apps/dev?id=5074686766015940849"
+           target="_blank" rel="noopener noreferrer">
+          <i class="ti ti-brand-google-play" aria-hidden="true"></i> Google Play
+        </a>
+        <a href="https://www.instagram.com/ipoktala"
+           target="_blank" rel="noopener noreferrer">
+          <i class="ti ti-brand-instagram" aria-hidden="true"></i> @ipoktala
+        </a>
+        <!-- UPDATE: Replace with your actual email -->
+        <a href="mailto:your@email.com">
+          <i class="ti ti-mail" aria-hidden="true"></i> Contact
+        </a>
+      </nav>
+      <p class="footer__copy">© 2025 John Development Studio · Jakarta, Indonesia</p>
+      <p class="footer__stack">Built with Kotlin · Firebase · AdMob</p>
     </div>
-    <div class="title-block">
-      <h1>John Development Studio</h1>
-    </div>
-    <div class="description">
-      Smart utility apps to protect, optimize, and simplify your digital life. Built for performance, designed for everyday use.
-    </div>
-  </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/main.js"></script>
 
 </body>
 </html>
