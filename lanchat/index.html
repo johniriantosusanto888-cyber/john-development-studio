@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LanChat - John Development Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-light: #60A5FA;
+            --accent: #10B981;
+            --accent-light: #6EE7B7;
+            --dark: #0F172A;
+            --light: #F0F9FF;
+            --gray: #64748B;
+            --card-bg: #FFFFFF;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #0F172A 100%);
+            color: white;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-app-icon {
+            max-width: 220px;
+            width: 55%;
+            height: auto;
+            display: block;
+            margin: 0 auto 1.5rem;
+            border-radius: 28px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+            border: 4px solid rgba(96, 165, 250, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-app-icon:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-app-icon {
+                max-width: 160px;
+                border-radius: 20px;
+                border-width: 3px;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        .btn-dark {
+            background: var(--dark);
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #1E293B;
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Screenshots */
+        .screenshots-section {
+            background: linear-gradient(to bottom, #EFF6FF, var(--light));
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.2);
+            transition: all 0.4s;
+            background: #1a1a1a;
+            aspect-ratio: 9/19;
+            max-height: 600px;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* User Guide */
+        .guide-section {
+            background: white;
+        }
+
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .step-content ul {
+            margin-top: 0.5rem;
+            margin-left: 1.2rem;
+            color: var(--gray);
+        }
+
+        .step-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Download Section */
+        .download-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #1E3A5F 100%);
+            color: white;
+            text-align: center;
+            border-radius: 30px;
+            margin: 4rem auto;
+            padding: 4rem 2rem;
+            max-width: 1000px;
+        }
+
+        .download-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-section p {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .download-btn i {
+            font-size: 2rem;
+        }
+
+        .download-btn .small {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn .big {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .btn-playstore {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-playstore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6);
+        }
+
+        .btn-github {
+            background: transparent;
+            color: white;
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .btn-github:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .guide-step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 3rem auto 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="logo">
+                <i class="fas fa-code"></i>
+                John Dev Studio
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#guide">User Guide</a>
+                <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-wifi"></i> Android Application
+            </div>
+
+            <img src="../images/LanChat.png" class="hero-app-icon" alt="LanChat App Icon">
+
+            <h1>LanChat</h1>
+            <p>Instant messaging over local Wi-Fi. Chat with nearby devices on the same network — no internet connection required. Stay connected anytime, anywhere.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Now
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <div class="section-header">
+            <h2>App Features & Functions</h2>
+            <div class="divider"></div>
+            <p>Everything you need for fast, private, and reliable local messaging</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>Chat Over Wi-Fi or Hotspot</h3>
+                <p>Connect multiple devices to the same Wi-Fi router or use one phone as a mobile hotspot. LanChat creates a local communication network instantly — no internet needed.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-slash"></i>
+                </div>
+                <h3>No Internet Required</h3>
+                <p>Works completely offline using your local network. No mobile data, no external servers, no cloud dependency. Perfect for areas with poor or no internet coverage.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Automatic Nearby User Discovery</h3>
+                <p>The app automatically scans and discovers all LanChat users connected to the same network. See device names and IP addresses in real-time with a single tap to refresh.</p>
+            </div>
+
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Fast Local Network Messaging</h3>
+                <p>Messages are delivered instantly over your local Wi-Fi with minimal latency. Experience real-time chat speed comparable to popular messaging apps — but without the internet.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Private & Group Chat</h3>
+                <p>Enjoy one-to-one private conversations or create group chats for multiple participants. Perfect for family rooms, classrooms, offices, and team coordination.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3>Send Images & Files</h3>
+                <p>Share photos, screenshots, and files directly within the chat. Images appear inline with sender info and timestamps for easy reference.</p>
+            </div>
+
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3>Privacy First</h3>
+                <p>Your messages stay within your local network and are never stored on external servers. No accounts, no phone numbers, no tracking — just pure local communication.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-feather"></i>
+                </div>
+                <h3>Simple & Lightweight</h3>
+                <p>Clean, user-friendly interface designed for everyone. Minimal battery and resource usage. No unnecessary bloat — just open the app, enter your name, and start chatting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section style="background: linear-gradient(to bottom, var(--light), white);">
+        <div class="section-header">
+            <h2>Why Choose LanChat?</h2>
+            <div class="divider"></div>
+            <p>Key advantages for homes, offices, classrooms, and beyond</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #2563EB, #60A5FA);">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h3>Works Anywhere</h3>
+                <p>Whether you're on a plane, in a remote area, at a camping site, or during a power outage — as long as devices share a Wi-Fi or hotspot, LanChat works. No SIM card or data plan needed.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #10B981, #6EE7B7);">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3>Perfect for Gaming & Events</h3>
+                <p>Coordinate with your gaming squad, manage event teams, or organize classroom activities without relying on unstable internet connections or draining mobile data.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #64748B, #94A3B8);">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Truly Private Communication</h3>
+                <p>No cloud storage, no message logging, no third-party access. Your conversations exist only on the devices in your local network. Ideal for sensitive discussions and confidential work.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #0F172A, #334155);">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Multiple Devices Simultaneously</h3>
+                <p>Connect as many Android devices as your Wi-Fi network supports. Everyone sees each other in the user list and can join group chats instantly with no setup complexity.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #1E3A5F, #3B82F6);">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Great for Education</h3>
+                <p>Teachers can create group chats for classroom discussions, share files with students, and facilitate collaborative learning — all without needing school internet access.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #2563EB, #1D4ED8);">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3>Open Source & Transparent</h3>
+                <p>Developed by John Irianto Susanto. The app is available on GitHub for transparency. Clean interface with no unnecessary bloatware — just pure messaging focus.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots-section">
+        <div class="section-header">
+            <h2>App Screenshots</h2>
+            <div class="divider"></div>
+            <p>See the app in action — elegant interface, powerful messaging tools</p>
+        </div>
+
+        <div class="screenshots-grid">
+            <div class="screenshot-item">
+                <img src="../images/Lanchat_header2.png" alt="LanChat Header - Instant messaging over local Wi-Fi">
+                <div class="screenshot-label">
+                    <i class="fas fa-wifi"></i> LanChat Overview
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat1.png" alt="Welcome Screen - Enter your name and start chatting">
+                <div class="screenshot-label">
+                    <i class="fas fa-door-open"></i> Welcome Screen
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat2.png" alt="Important Notice - Connect to the same Wi-Fi network">
+                <div class="screenshot-label">
+                    <i class="fas fa-circle-info"></i> Setup Guide
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat3.png" alt="User Discovery - Waiting for nearby users">
+                <div class="screenshot-label">
+                    <i class="fas fa-search"></i> User Discovery
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat5.png" alt="Connected Users - See all devices on the network">
+                <div class="screenshot-label">
+                    <i class="fas fa-users"></i> Connected Users
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat6.png" alt="Private Chat - One-to-one messaging with image sharing">
+                <div class="screenshot-label">
+                    <i class="fas fa-comment"></i> Private Chat
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat7.png" alt="Group Chat - Multiple members chatting together">
+                <div class="screenshot-label">
+                    <i class="fas fa-comments"></i> Group Chat
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="../images/lanchat8.jpg" alt="Group Management - Create and manage group chats">
+                <div class="screenshot-label">
+                    <i class="fas fa-users-cog"></i> Group Management
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; color: var(--gray); font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Screenshots taken on Samsung Galaxy S23 Ultra
+        </p>
+    </section>
+
+    <!-- User Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="section-header">
+            <h2>User Guide</h2>
+            <div class="divider"></div>
+            <p>Step-by-step instructions to start chatting instantly</p>
+        </div>
+
+        <div class="guide-container">
+            <div class="guide-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Installation & First Launch</h3>
+                    <p>Download LanChat from Google Play Store or GitHub. Install and open the app. On the welcome screen:</p>
+                    <ul>
+                        <li>Enter your preferred display name (e.g., "John", "PixelNova X7").</li>
+                        <li>Tap <strong>START CHATTING</strong> to enter the main screen.</li>
+                        <li>Tap <strong>USER GUIDE</strong> anytime to revisit these instructions.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Connect All Devices to the Same Network</h3>
+                    <p>For LanChat to work properly, all users must connect to the <strong>SAME</strong> Wi-Fi network or hotspot:</p>
+                    <ul>
+                        <li><strong>Recommended:</strong> Connect all devices to one Wi-Fi router.</li>
+                        <li><strong>Alternative:</strong> Use one phone as a mobile hotspot and connect all other devices to it.</li>
+                        <li>Different Wi-Fi networks will prevent messages from being delivered.</li>
+                    </ul>
+                    <p><em>Tip: Make sure everyone joins the same network before starting the chat for the best experience.</em></p>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Discover Nearby Users</h3>
+                    <p>On the main screen, LanChat will automatically scan for other users:</p>
+                    <ul>
+                        <li>Your device name and ID appear at the top (e.g., "You: PixelNova X7").</li>
+                        <li>Tap <strong>REFRESH</strong> to scan for newly connected users.</li>
+                        <li>Discovered users appear in a list with their device name and IP address.</li>
+                        <li>Each user shows a status indicator (green dot = online).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Start a Private Chat</h3>
+                    <p>Tap on any discovered user to start a one-to-one conversation:</p>
+                    <ul>
+                        <li>Type your message in the text field at the bottom.</li>
+                        <li>Tap the <strong>+</strong> button to attach and send images or files.</li>
+                        <li>Tap <strong>SEND</strong> to deliver your message instantly.</li>
+                        <li>Messages appear with sender name and timestamp.</li>
+                    </ul>
+                    <p><em>Note: Images sent will be displayed inline in the chat thread.</em></p>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Create & Join Group Chats</h3>
+                    <p>Tap <strong>GROUPS</strong> to access the group chat feature:</p>
+                    <ul>
+                        <li>Tap <strong>+ NEW GROUP</strong> to create a new group chat room.</li>
+                        <li>Give your group a name (e.g., "Ultra Home", "Classroom A").</li>
+                        <li>Other users on the network can see and join available groups.</li>
+                        <li>Tap <strong>OPEN</strong> to enter a group, or <strong>LEAVE</strong> to exit.</li>
+                        <li>Tap <strong>REFRESH</strong> to update the group list.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h3>Tips for Best Performance</h3>
+                    <p>Get the most out of LanChat with these recommendations:</p>
+                    <ul>
+                        <li><strong>Same Network:</strong> Always ensure all devices are on the identical Wi-Fi or hotspot.</li>
+                        <li><strong>Refresh Often:</strong> Tap REFRESH when new users join to see them immediately.</li>
+                        <li><strong>Stable Connection:</strong> Keep your Wi-Fi signal strong for reliable message delivery.</li>
+                        <li><strong>No Internet Needed:</strong> LanChat works perfectly offline — save your mobile data!</li>
+                        <li><strong>Privacy:</strong> Your messages never leave your local network. No external servers involved.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <h2>Get LanChat</h2>
+        <p>Available for free on Google Play Store and GitHub. Start chatting with your local network today.</p>
+
+        <div class="download-buttons">
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.lanchatapp" target="_blank" rel="noopener noreferrer" class="download-btn btn-playstore">
+                <i class="fab fa-google-play"></i>
+                <div>
+                    <span class="small">Get it on</span>
+                    <span class="big">Google Play</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/johniriantosusanto888-cyber" target="_blank" rel="noopener noreferrer" class="download-btn btn-github">
+                <i class="fab fa-github"></i>
+                <div>
+                    <span class="small">View source on</span>
+                    <span class="big">GitHub</span>
+                </div>
+            </a>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.6;">
+            <i class="fas fa-code"></i> Developed by <strong>John Irianto Susanto</strong>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 John Development Studio. LanChat.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/">
+                <i class="fas fa-arrow-left"></i> Back to John Development Studio
+            </a>
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
