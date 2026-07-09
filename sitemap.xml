@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/0.5/sitemap">
+  <url>
+    <loc>https://john-development-studio.pages.dev/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://john-development-studio.pages.dev/battery-health-check/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://john-development-studio.pages.dev/android-file-server/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://john-development-studio.pages.dev/brewmaster/</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://john-development-studio.pages.dev/lanchat/</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
