@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Chicken Flap - Farm Flyer</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;touch-action:none;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+body{overflow:hidden;background:#87CEEB;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+#gameCanvas{display:block;width:100vw;height:100vh}
+#uiLayer{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10}
+#topBar{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;gap:10px}
+#topBar .pill{background:rgba(255,255,255,0.92);border-radius:20px;padding:8px 18px;font-size:15px;font-weight:700;color:#5D4037;box-shadow:0 2px 8px rgba(0,0,0,0.15);display:flex;align-items:center;gap:6px;min-width:80px;justify-content:center}
+#topBar .pill img{width:20px;height:20px}
+#bottomBar{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:center;padding:16px;gap:16px}
+#bottomBar .powerupBtn{width:64px;height:64px;border-radius:50%;border:3px solid #fff;background:rgba(255,255,255,0.95);display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:auto;box-shadow:0 4px 12px rgba(0,0,0,0.2);transition:transform 0.1s,opacity 0.2s;position:relative}
+#bottomBar .powerupBtn:active{transform:scale(0.92)}
+#bottomBar .powerupBtn.disabled{opacity:0.4;pointer-events:none}
+#bottomBar .powerupBtn img{width:40px;height:40px}
+#bottomBar .powerupBtn .cooldown{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700}
+#overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:20;pointer-events:auto}
+#overlay.hidden{display:none}
+#overlay h1{color:#FFD700;font-size:42px;text-shadow:2px 2px 0 #B8860B,0 0 20px rgba(255,215,0,0.5);margin-bottom:8px;text-align:center}
+#overlay h2{color:#fff;font-size:20px;margin-bottom:24px;text-align:center}
+#overlay .stats{background:rgba(255,255,255,0.95);border-radius:16px;padding:20px 28px;margin-bottom:20px;min-width:260px;text-align:center}
+#overlay .stats .row{display:flex;justify-content:space-between;padding:6px 0;color:#5D4037;font-size:16px;border-bottom:1px dashed #ddd}
+#overlay .stats .row:last-child{border-bottom:none}
+#overlay .stats .row .val{font-weight:700;color:#E65100}
+#overlay .btn{background:linear-gradient(180deg,#FFD700,#FFA000);border:none;border-radius:28px;padding:14px 36px;font-size:18px;font-weight:700;color:#5D4037;cursor:pointer;box-shadow:0 4px 0 #E65100,0 6px 12px rgba(0,0,0,0.2);transition:transform 0.1s;margin:6px;pointer-events:auto}
+#overlay .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #E65100,0 2px 6px rgba(0,0,0,0.2)}
+#overlay .btn.secondary{background:linear-gradient(180deg,#90CAF9,#1976D2);color:#fff;box-shadow:0 4px 0 #0D47A1}
+#overlay .btn.secondary:active{box-shadow:0 1px 0 #0D47A1}
+#startScreen h1{font-size:52px;margin-bottom:4px}
+#startScreen .chickenIcon{width:120px;height:120px;margin-bottom:12px;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+#startScreen .instructions{color:#fff;font-size:15px;line-height:1.6;text-align:center;max-width:320px;margin-bottom:20px;background:rgba(0,0,0,0.3);padding:12px 16px;border-radius:12px}
+#windWarning{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:28px;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.4);pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:5}
+#windWarning.show{opacity:1}
+#shieldIndicator{position:absolute;width:56px;height:56px;border-radius:50%;border:3px solid #FFD700;background:rgba(255,215,0,0.2);pointer-events:none;display:none;z-index:4}
+#magnetIndicator{position:absolute;width:120px;height:120px;border-radius:50%;border:2px dashed #4FC3F7;pointer-events:none;display:none;z-index:3;animation:spin 2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<div id="uiLayer">
+  <div id="topBar">
+    <div class="pill">&#9650; <span id="scoreVal">0</span></div>
+    <div class="pill"><img src="assets/egg_regular.png"> <span id="eggVal">0</span></div>
+    <div class="pill">Best <span id="bestVal">0</span></div>
+  </div>
+  <div id="windWarning">&#127786; ANGIN KENCANG!</div>
+  <div id="shieldIndicator"></div>
+  <div id="magnetIndicator"></div>
+  <div id="bottomBar">
+    <div class="powerupBtn" id="btnShield" title="Shield"><img src="assets/powerup_shield.png"><div class="cooldown" id="cdShield"></div></div>
+    <div class="powerupBtn" id="btnMagnet" title="Egg Magnet"><img src="assets/powerup_magnet.png"><div class="cooldown" id="cdMagnet"></div></div>
+    <div class="powerupBtn" id="btnSlowmo" title="Slow Motion"><img src="assets/powerup_slowmo.png"><div class="cooldown" id="cdSlowmo"></div></div>
+  </div>
+</div>
+<div id="overlay" class="hidden">
+  <div id="startScreen" class="hidden">
+    <img src="assets/chicken_fly.png" class="chickenIcon">
+    <h1>Chicken Flap</h1>
+    <h2>Petualangan Ayam Peternakan</h2>
+    <div class="instructions">
+      <b>Tap / Klik</b> = Flap kecil naik<br>
+      <b>Tahan Layar</b> = Terbang terus naik<br>
+      <b>Lepas</b> = Glide turun pelan<br><br>
+      Hindari pagar kayu & gerobak!<br>
+      Kumpulkan telur, telur emas & bulu!
+    </div>
+    <button class="btn" onclick="startGame()">Main Sekarang!</button>
+  </div>
+  <div id="gameOverScreen" class="hidden">
+    <h1>&#128165; Game Over!</h1>
+    <div class="stats">
+      <div class="row"><span>Skor Jarak</span><span class="val" id="goScore">0</span></div>
+      <div class="row"><span>Telur Terkumpul</span><span class="val" id="goEggs">0</span></div>
+      <div class="row"><span>Coin Didapat</span><span class="val" id="goCoins">0</span></div>
+      <div class="row"><span>Best Score</span><span class="val" id="goBest">0</span></div>
+    </div>
+    <button class="btn" onclick="startGame()">Main Lagi</button>
+    <button class="btn secondary" onclick="goHome()">Home</button>
+  </div>
+</div>
+<script>
+const canvas=document.getElementById('gameCanvas');
+const ctx=canvas.getContext('2d');
+let W,H,SCALE,DPR;
+function resize(){
+  DPR=Math.min(window.devicePixelRatio||1,2);
+  W=window.innerWidth;H=window.innerHeight;
+  canvas.width=W*DPR;canvas.height=H*DPR;
+  canvas.style.width=W+'px';canvas.style.height=H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  SCALE=Math.min(W/400,H/700);
+}
+window.addEventListener('resize',resize);resize();
+
+const ASSETS={
+  chicken:'assets/chicken_fly.png',bgFar:'assets/bg_hills_far.png',bgMid:'assets/bg_farm.png',bgNear:'assets/bg_ground_near.png',
+  fence:'assets/fence_post.png',haycart:'assets/hay_cart.png',
+  egg:'assets/egg_regular.png',eggGold:'assets/egg_golden.png',feather:'assets/feather.png',
+  shield:'assets/powerup_shield.png',magnet:'assets/powerup_magnet.png',slowmo:'assets/powerup_slowmo.png'
+};
+const images={};let loaded=0,total=Object.keys(ASSETS).length;
+function loadAssets(){return new Promise(res=>{Object.entries(ASSETS).forEach(([k,src])=>{images[k]=new Image();images[k].onload=()=>{loaded++;if(loaded>=total)res()};images[k].onerror=()=>{loaded++;if(loaded>=total)res()};images[k].src=src;});});}
+function rand(a,b){return Math.random()*(b-a)+a;}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function rectIntersect(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;}
+function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
+
+const GRAVITY=0.35,FLAP_IMPULSE=-6.5,MAX_FALL=9,GLIDE_GRAVITY=0.12,FLAP_INTERVAL=120,HOLD_FORCE=-0.55,CHICKEN_X_PCT=0.28;
+const OBSTACLE_TYPES={
+  FENCE:{w:50,h:180,img:'fence',gapMin:140,gapMax:220},
+  HAYCART:{w:140,h:90,img:'haycart',gapMin:160,gapMax:240},
+  TUNNEL:{w:80,h:300,img:'fence',gapMin:130,gapMax:190}
+};
+const COLLECT_TYPES={
+  EGG:{r:18,img:'egg',val:1},
+  EGG_GOLD:{r:22,img:'eggGold',val:10},
+  FEATHER:{r:16,img:'feather',val:0}
+};
+const POWERUPS={
+  SHIELD:{dur:0,cooldown:8000},
+  MAGNET:{dur:5000,cooldown:12000},
+  SLOWMO:{dur:4000,cooldown:15000}
+};
+
+class Particle{
+  constructor(x,y,color,type='dust'){this.x=x;this.y=y;this.vx=rand(-3,3);this.vy=rand(-4,-1);this.life=1;this.decay=rand(0.02,0.04);this.size=rand(3,7);this.color=color;this.type=type;}
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.15;this.life-=this.decay;}
+  draw(ctx){ctx.globalAlpha=this.life;ctx.fillStyle=this.color;ctx.beginPath();if(this.type==='feather')ctx.ellipse(this.x,this.y,this.size,this.size*0.5,this.vx,0,Math.PI*2);else ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
+}
+
+class Chicken{
+  constructor(){this.reset();}
+  reset(){this.x=W*CHICKEN_X_PCT;this.y=H*0.45;this.vy=0;this.w=56;this.h=48;this.angle=0;this.flapTimer=0;this.state='idle';this.shield=false;this.shieldTimer=0;this.magnet=false;this.magnetTimer=0;this.slowmo=false;this.slowmoTimer=0;this.invincible=0;}
+  update(dt,holding){
+    if(this.invincible>0)this.invincible-=dt;
+    let g=this.slowmo?GRAVITY*0.4:GRAVITY;
+    if(this.state==='glide')g=GLIDE_GRAVITY;
+    if(holding){this.flapTimer+=dt;if(this.flapTimer>=FLAP_INTERVAL){this.flapTimer=0;this.vy+=HOLD_FORCE;this.state='flap';}}
+    else if(this.vy>0)this.state='glide';else this.state='idle';
+    this.vy+=g;this.vy=clamp(this.vy,-10,MAX_FALL*(this.slowmo?0.6:1));
+    this.y+=this.vy;this.angle=clamp(this.vy*0.08,-0.6,0.6);
+    if(this.y<0){this.y=0;this.vy=0;}if(this.y>H-this.h-10){this.y=H-this.h-10;this.vy=0;}
+    if(this.shieldTimer>0){this.shieldTimer-=dt;if(this.shieldTimer<=0)this.shield=false;}
+    if(this.magnetTimer>0){this.magnetTimer-=dt;if(this.magnetTimer<=0)this.magnet=false;}
+    if(this.slowmoTimer>0){this.slowmoTimer-=dt;if(this.slowmoTimer<=0)this.slowmo=false;}
+  }
+  draw(ctx){
+    ctx.save();ctx.translate(this.x+this.w/2,this.y+this.h/2);ctx.rotate(this.angle);
+    let sx=1;if(this.state==='flap')sx=1+Math.sin(Date.now()/40)*0.08;ctx.scale(sx,1);
+    let img=images.chicken;
+    if(img&&img.complete)ctx.drawImage(img,-this.w/2,-this.h/2,this.w,this.h);
+    else{ctx.fillStyle='#FFD700';ctx.beginPath();ctx.ellipse(0,0,this.w/2,this.h/2,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#FF6F00';ctx.beginPath();ctx.moveTo(10,-5);ctx.lineTo(22,0);ctx.lineTo(10,5);ctx.fill();}
+    ctx.restore();
+    if(this.shield){ctx.save();ctx.strokeStyle='#FFD700';ctx.lineWidth=3;ctx.shadowColor='#FFD700';ctx.shadowBlur=10;ctx.beginPath();ctx.arc(this.x+this.w/2,this.y+this.h/2,36,0,Math.PI*2);ctx.stroke();ctx.restore();}
+  }
+  getRect(){return{x:this.x+8,y:this.y+6,w:this.w-16,h:this.h-12};}
+  center(){return{x:this.x+this.w/2,y:this.y+this.h/2};}
+}
+
+class Obstacle{
+  constructor(type,x,gapY){this.type=type;this.x=x;this.w=type.w*SCALE;this.h=type.h*SCALE;this.passed=false;this.nearMissed=false;this.gapY=gapY;this.gapH=(type.gapMin+rand(0,type.gapMax-type.gapMin))*SCALE;this.topH=gapY-this.gapH/2;this.bottomY=gapY+this.gapH/2;}
+  update(speed){this.x-=speed;}
+  draw(ctx){
+    let img=images[this.type.img];
+    if(this.type===OBSTACLE_TYPES.TUNNEL){
+      ctx.fillStyle='#5D4037';ctx.fillRect(this.x,0,this.w,this.topH);ctx.fillRect(this.x,this.bottomY,this.w,H-this.bottomY);
+      ctx.fillStyle='#8D6E63';for(let i=0;i<this.topH;i+=20)ctx.fillRect(this.x-2,i,this.w+4,4);for(let i=this.bottomY;i<H;i+=20)ctx.fillRect(this.x-2,i,this.w+4,4);
+    }else if(img&&img.complete){
+      if(this.type===OBSTACLE_TYPES.FENCE){ctx.drawImage(img,this.x,0,this.w,this.topH);ctx.drawImage(img,this.x,this.bottomY,this.w,H-this.bottomY);}
+      else{ctx.drawImage(img,this.x,this.topH-this.h/2,this.w,this.h);ctx.drawImage(img,this.x,this.bottomY-this.h/2,this.w,this.h);}
+    }else{ctx.fillStyle='#8B4513';ctx.fillRect(this.x,0,this.w,this.topH);ctx.fillRect(this.x,this.bottomY,this.w,H-this.bottomY);}
+  }
+  getRects(){return[{x:this.x,y:0,w:this.w,h:this.topH},{x:this.x,y:this.bottomY,w:this.w,h:H-this.bottomY}];}
+  isOffScreen(){return this.x+this.w<0;}
+}
+
+class Collectible{
+  constructor(type,x,y){this.type=type;this.x=x;this.y=y;this.r=type.r*SCALE;this.collected=false;this.bobOffset=rand(0,Math.PI*2);}
+  update(speed){this.x-=speed;}
+  draw(ctx){
+    let img=images[this.type.img];let bob=Math.sin(Date.now()/300+this.bobOffset)*6;let drawR=this.r*1.4;
+    if(img&&img.complete)ctx.drawImage(img,this.x-drawR,this.y-drawR+bob,drawR*2,drawR*2);
+    else{ctx.fillStyle=this.type===COLLECT_TYPES.EGG_GOLD?'#FFD700':'#FFF';ctx.beginPath();ctx.ellipse(this.x,this.y+bob,this.r,this.r*1.2,0,0,Math.PI*2);ctx.fill();}
+  }
+  getRect(){return{x:this.x-this.r,y:this.y-this.r,w:this.r*2,h:this.r*2};}
+  isOffScreen(){return this.x+this.r<0;}
+}
+
+class Wind{
+  constructor(){this.active=false;this.timer=0;this.duration=0;this.force=0;this.particles=[];}
+  start(){this.active=true;this.duration=rand(3000,5000);this.timer=this.duration;this.force=rand(2,4)*(Math.random()<0.5?1:-1);document.getElementById('windWarning').classList.add('show');setTimeout(()=>document.getElementById('windWarning').classList.remove('show'),2000);}
+  update(dt,chicken){
+    if(!this.active)return;this.timer-=dt;if(this.timer<=0){this.active=false;return;}
+    chicken.vy+=this.force*0.015;
+    this.particles.push({x:W+10,y:rand(0,H),vx:-rand(4,8),len:rand(30,60),life:1});
+    this.particles.forEach(p=>{p.x+=p.vx;p.life-=0.015;});
+    this.particles=this.particles.filter(p=>p.life>0);
+  }
+  draw(ctx){if(!this.active)return;ctx.strokeStyle='rgba(255,255,255,0.4)';ctx.lineWidth=2;this.particles.forEach(p=>{ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+p.len,p.y);ctx.stroke();});}
+}
+
+let chicken,obstacles=[],collectibles=[],particles=[],wind;
+let gameState='menu';
+let score=0,eggs=0,feathers=0,coins=0,best=0;
+let worldSpeed=3,distance=0,obstacleCount=0;
+let spawnTimer=0,collectTimer=0,windTimer=0;
+let nearMissDist=40*SCALE;
+let powerupState={shield:{ready:true,cd:0},magnet:{ready:true,cd:0},slowmo:{ready:true,cd:0}};
+let holding=false;
+
+function initGame(){
+  chicken=new Chicken();wind=new Wind();obstacles=[];collectibles=[];particles=[];
+  score=0;eggs=0;feathers=0;coins=0;distance=0;obstacleCount=0;worldSpeed=3*SCALE;
+  spawnTimer=0;collectTimer=0;windTimer=rand(8000,15000);
+  powerupState={shield:{ready:true,cd:0},magnet:{ready:true,cd:0},slowmo:{ready:true,cd:0}};
+  holding=false;updateUI();
+}
+function spawnObstacle(){
+  let types=[OBSTACLE_TYPES.FENCE];
+  if(obstacleCount>=10)types.push(OBSTACLE_TYPES.HAYCART);
+  if(obstacleCount>=25)types.push(OBSTACLE_TYPES.TUNNEL);
+  let type=types[Math.floor(rand(0,types.length))];
+  let gapY=rand(H*0.25,H*0.75);
+  obstacles.push(new Obstacle(type,W+50,gapY));
+}
+function spawnCollectible(){
+  let types=[COLLECT_TYPES.EGG];
+  if(Math.random()<0.08)types.push(COLLECT_TYPES.EGG_GOLD);
+  if(Math.random()<0.05)types.push(COLLECT_TYPES.FEATHER);
+  let type=types[Math.floor(rand(0,types.length))];
+  collectibles.push(new Collectible(type,W+30,rand(H*0.15,H*0.85)));
+}
+function addParticles(x,y,color,count=8,type='dust'){for(let i=0;i<count;i++)particles.push(new Particle(x,y,color,type));}
+function update(dt){
+  if(gameState!=='playing')return;
+  let spd=worldSpeed;if(chicken.slowmo)spd*=0.5;
+  distance+=spd/SCALE;chicken.update(dt,holding);wind.update(dt,chicken);
+  spawnTimer-=dt;if(spawnTimer<=0){spawnObstacle();obstacleCount++;spawnTimer=rand(1800,2500)/worldSpeed*3;if(obstacleCount%20===0&&obstacleCount>0){worldSpeed+=0.3*SCALE;spawnTimer+=500;}}
+  collectTimer-=dt;if(collectTimer<=0){spawnCollectible();collectTimer=rand(1200,2000)/worldSpeed*3;}
+  windTimer-=dt;if(windTimer<=0&&obstacleCount>=15){wind.start();windTimer=rand(10000,18000);}
+  obstacles.forEach(o=>o.update(spd));collectibles.forEach(c=>c.update(spd));particles.forEach(p=>p.update());
+  particles=particles.filter(p=>p.life>0);obstacles=obstacles.filter(o=>!o.isOffScreen());collectibles=collectibles.filter(c=>!c.isOffScreen());
+  let cRect=chicken.getRect(),cCenter=chicken.center();
+  obstacles.forEach(o=>{
+    for(let r of o.getRects()){
+      if(rectIntersect(cRect,r)){
+        if(chicken.shield){chicken.shield=false;chicken.invincible=500;addParticles(cCenter.x,cCenter.y,'#FFD700',12);return;}
+        else if(chicken.invincible<=0){gameOver();return;}
+      }
+    }
+    if(!o.passed&&o.x+o.w<cRect.x){o.passed=true;score++;if(!o.nearMissed){let closestDist=Math.min(Math.abs(cRect.y-o.topH),Math.abs(cRect.y+cRect.h-o.bottomY));if(closestDist<nearMissDist){score+=5;o.nearMissed=true;addParticles(cCenter.x,cCenter.y,'#00E676',6);}}}
+  });
+  collectibles.forEach(c=>{
+    if(c.collected)return;
+    if(chicken.magnet&&c.type!==COLLECT_TYPES.FEATHER){if(dist(c,cCenter)<150*SCALE){let a=Math.atan2(cCenter.y-c.y,cCenter.x-c.x);c.x+=Math.cos(a)*4;c.y+=Math.sin(a)*4;}}
+    if(rectIntersect(c.getRect(),cRect)||dist(c,cCenter)<c.r+20){
+      c.collected=true;addParticles(c.x,c.y,'#FFD700',6);
+      if(c.type===COLLECT_TYPES.EGG){eggs++;coins+=1;}else if(c.type===COLLECT_TYPES.EGG_GOLD){eggs+=10;coins+=5;addParticles(c.x,c.y,'#FFD700',15);}else if(c.type===COLLECT_TYPES.FEATHER){feathers++;addParticles(c.x,c.y,'#FFEB3B',8,'feather');}
+    }
+  });
+  if(cRect.y<=0||cRect.y+cRect.h>=H-10){
+    if(chicken.shield){chicken.shield=false;chicken.invincible=500;addParticles(cCenter.x,cCenter.y,'#FFD700',12);}
+    else if(chicken.invincible<=0)gameOver();
+  }
+  updatePowerups(dt);updateUI();
+}
+function updatePowerups(dt){
+  Object.values(powerupState).forEach(v=>{if(!v.ready){v.cd-=dt;if(v.cd<=0)v.ready=true;}});
+  ['shield','magnet','slowmo'].forEach(k=>{
+    let btn=document.getElementById('btn'+k.charAt(0).toUpperCase()+k.slice(1));
+    let cd=document.getElementById('cd'+k.charAt(0).toUpperCase()+k.slice(1));
+    if(!powerupState[k].ready){btn.classList.add('disabled');cd.style.display='flex';cd.textContent=Math.ceil(powerupState[k].cd/1000)+'s';}
+    else{btn.classList.remove('disabled');cd.style.display='none';}
+  });
+}
+function activatePowerup(type){
+  if(gameState!=='playing'||!powerupState[type].ready)return;
+  powerupState[type].ready=false;powerupState[type].cd=POWERUPS[type.toUpperCase()].cooldown;
+  if(type==='shield'){chicken.shield=true;chicken.shieldTimer=0;}
+  else if(type==='magnet'){chicken.magnet=true;chicken.magnetTimer=POWERUPS.MAGNET.dur;}
+  else if(type==='slowmo'){chicken.slowmo=true;chicken.slowmoTimer=POWERUPS.SLOWMO.dur;}
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  let spd=worldSpeed;if(chicken&&chicken.slowmo)spd*=0.5;
+  drawParallax(spd);if(gameState==='menu')return;
+  wind.draw(ctx);collectibles.forEach(c=>c.draw(ctx));obstacles.forEach(o=>o.draw(ctx));
+  if(chicken)chicken.draw(ctx);particles.forEach(p=>p.draw(ctx));drawIndicators();
+}
+function drawParallax(spd){
+  let farSpd=spd*0.2,midSpd=spd*0.5,nearSpd=spd*1.0;
+  let farImg=images.bgFar,midImg=images.bgMid,nearImg=images.bgNear;
+  let farW=farImg&&farImg.complete?farImg.width:W;let farH=farImg&&farImg.complete?farImg.height:H;
+  let farOffset=(Date.now()*farSpd*0.05)%farW;
+  ctx.save();let farS=Math.max(W/farW,H/farH);ctx.scale(farS,farS);
+  if(farImg&&farImg.complete){ctx.drawImage(farImg,-farOffset,0);ctx.drawImage(farImg,farW-farOffset,0);}ctx.restore();
+  let midW=midImg&&midImg.complete?midImg.width:W;let midH=midImg&&midImg.complete?midImg.height:H;
+  let midOffset=(Date.now()*midSpd*0.05)%midW;
+  ctx.save();let midS=Math.max(W/midW,H/midH);ctx.scale(midS,midS);
+  if(midImg&&midImg.complete){ctx.drawImage(midImg,-midOffset,0);ctx.drawImage(midImg,midW-midOffset,0);}ctx.restore();
+  let nearW=nearImg&&nearImg.complete?nearImg.width:W;let nearH=nearImg&&nearImg.complete?nearImg.height:H;
+  let nearOffset=(Date.now()*nearSpd*0.08)%nearW;
+  ctx.save();let nearS=Math.max(W/nearW,(H*0.35)/nearH);ctx.translate(0,H-nearH*nearS);ctx.scale(nearS,nearS);
+  if(nearImg&&nearImg.complete){ctx.drawImage(nearImg,-nearOffset,0);ctx.drawImage(nearImg,nearW-nearOffset,0);}ctx.restore();
+}
+function drawIndicators(){
+  let s=document.getElementById('shieldIndicator'),m=document.getElementById('magnetIndicator');
+  if(chicken&&chicken.shield){s.style.display='block';s.style.left=(chicken.x+chicken.w/2-28)+'px';s.style.top=(chicken.y+chicken.h/2-28)+'px';}else s.style.display='none';
+  if(chicken&&chicken.magnet){m.style.display='block';m.style.left=(chicken.x+chicken.w/2-60)+'px';m.style.top=(chicken.y+chicken.h/2-60)+'px';}else m.style.display='none';
+}
+function updateUI(){document.getElementById('scoreVal').textContent=Math.floor(score);document.getElementById('eggVal').textContent=eggs;document.getElementById('bestVal').textContent=best;}
+function startGame(){
+  document.getElementById('overlay').classList.add('hidden');
+  document.getElementById('startScreen').classList.add('hidden');
+  document.getElementById('gameOverScreen').classList.add('hidden');
+  initGame();gameState='playing';
+}
+function gameOver(){
+  gameState='gameover';
+  if(score>best){best=Math.floor(score);localStorage.setItem('chickenFlapBest',best);}
+  document.getElementById('goScore').textContent=Math.floor(score);
+  document.getElementById('goEggs').textContent=eggs;
+  document.getElementById('goCoins').textContent=coins;
+  document.getElementById('goBest').textContent=best;
+  document.getElementById('overlay').classList.remove('hidden');
+  document.getElementById('gameOverScreen').classList.remove('hidden');
+  document.getElementById('startScreen').classList.add('hidden');
+}
+function goHome(){alert('Kembali ke Pet Home!');location.reload();}
+let lastTime=0;
+function loop(timestamp){
+  if(!lastTime)lastTime=timestamp;let dt=timestamp-lastTime;lastTime=timestamp;dt=Math.min(dt,50);
+  update(dt);draw();requestAnimationFrame(loop);
+}
+function handleStart(e){e.preventDefault();holding=true;if(gameState==='menu'){startGame();return;}if(gameState==='playing'){chicken.vy+=FLAP_IMPULSE;chicken.state='flap';chicken.flapTimer=0;}}
+function handleEnd(e){e.preventDefault();holding=false;chicken.state='glide';}
+canvas.addEventListener('mousedown',handleStart);canvas.addEventListener('mouseup',handleEnd);
+canvas.addEventListener('touchstart',handleStart,{passive:false});canvas.addEventListener('touchend',handleEnd,{passive:false});
+document.getElementById('btnShield').addEventListener('click',()=>activatePowerup('shield'));
+document.getElementById('btnMagnet').addEventListener('click',()=>activatePowerup('magnet'));
+document.getElementById('btnSlowmo').addEventListener('click',()=>activatePowerup('slowmo'));
+document.addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();handleStart(e);}});
+document.addEventListener('keyup',e=>{if(e.code==='Space'||e.code==='ArrowUp'){e.preventDefault();handleEnd(e);}});
+loadAssets().then(()=>{
+  best=parseInt(localStorage.getItem('chickenFlapBest')||'0');updateUI();
+  document.getElementById('overlay').classList.remove('hidden');
+  document.getElementById('startScreen').classList.remove('hidden');
+  requestAnimationFrame(loop);
+});
+</script>
+</body>
+</html>
