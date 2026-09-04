@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — NFC Card Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy:    #1A237E;
+            --navy-2:  #283593;
+            --accent:  #3F51B5;
+            --green:   #1B8A3C;
+            --bg:      #F0F2F5;
+            --card:    #FFFFFF;
+            --text:    #1C1E2E;
+            --muted:   #6B7280;
+            --border:  #E5E7EB;
+            --radius:  16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #1A237E 0%, #283593 50%, #3F51B5 100%);
+            padding: 60px 24px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.07) 0%, transparent 60%);
+        }
+        .nfc-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px; height: 72px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            font-size: 36px;
+            margin-bottom: 20px;
+            border: 1.5px solid rgba(255,255,255,0.25);
+        }
+        .hero h1 {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .hero .app-name {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.9);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            color: rgba(255,255,255,0.75);
+            font-size: 15px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .updated-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* ── Summary cards ── */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .summary-card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 18px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .summary-card .icon {
+            font-size: 24px;
+        }
+        .summary-card .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .summary-card .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .badge-green {
+            display: inline-block;
+            background: #ECFDF5;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid #A7F3D0;
+        }
+        .badge-blue {
+            display: inline-block;
+            background: #EFF6FF;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid #BFDBFE;
+        }
+
+        /* ── Section ── */
+        .section {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 28px 28px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--navy), var(--accent));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .section h2 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -0.2px;
+        }
+        .section p {
+            font-size: 15px;
+            color: #374151;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        .section p:last-child { margin-bottom: 0; }
+
+        /* ── List ── */
+        .policy-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .policy-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.6;
+        }
+        .policy-list li::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px; height: 20px;
+            background: #ECFDF5;
+            color: var(--green);
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .policy-list.warn li::before {
+            content: '!';
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* ── AdMob highlight ── */
+        .admob-box {
+            background: #F8FAFF;
+            border: 1px solid #DBEAFE;
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin-top: 14px;
+        }
+        .admob-box .admob-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 6px;
+            letter-spacing: 0.04em;
+        }
+        .admob-box p {
+            font-size: 13px;
+            color: #374151;
+            margin: 0;
+        }
+        .admob-box a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .admob-box a:hover { text-decoration: underline; }
+
+        /* ── Contact ── */
+        .contact-box {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+            border-radius: var(--radius);
+            padding: 28px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .contact-box h2 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .contact-box p {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .contact-box a {
+            display: inline-block;
+            background: #fff;
+            color: var(--navy);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 10px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            padding-bottom: 40px;
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 480px) {
+            .section { padding: 20px 18px; }
+            .summary-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+    <div class="nfc-icon">📡</div>
+    <div class="app-name">NFC CARD MANAGER</div>
+    <h1>Privacy Policy</h1>
+    <p>We believe privacy is a right, not a feature. Here's exactly how we handle your data.</p>
+    <div class="updated-badge">📅 Last updated: May 2026</div>
+</div>
+
+<!-- ── Content ── -->
+<div class="container">
+
+    <!-- Summary cards -->
+    <div class="summary-grid">
+        <div class="summary-card">
+            <span class="icon">🔒</span>
+            <span class="label">Data Collection</span>
+            <span class="badge-green">None</span>
+        </div>
+        <div class="summary-card">
+            <span class="icon">🌐</span>
+            <span class="label">Internet Required</span>
+            <span class="badge-green">No</span>
+        </div>
+        <div class="summary-card">
+            <span class="icon">👤</span>
+            <span class="label">Account Required</span>
+            <span class="badge-green">No</span>
+        </div>
+        <div class="summary-card">
+            <span class="icon">📢</span>
+            <span class="label">Ads</span>
+            <span class="badge-blue">AdMob</span>
+        </div>
+    </div>
+
+    <!-- 1. Overview -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📋</div>
+            <h2>Overview</h2>
+        </div>
+        <p>NFC Card Manager ("the App") is developed by <strong>John Irianto Susanto</strong>. This Privacy Policy explains how the App handles information when you use it.</p>
+        <p>The App is designed with privacy as a core principle. <strong>We do not collect, store, or transmit any personal data to external servers.</strong> All NFC card data is stored exclusively on your device.</p>
+    </div>
+
+    <!-- 2. Data We Collect -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📊</div>
+            <h2>Data We Collect</h2>
+        </div>
+        <p>The App does <strong>not collect any personal information</strong>. The following data is stored <strong>locally on your device only</strong>:</p>
+        <ul class="policy-list">
+            <li>NFC card UID and raw card data (stored in device SharedPreferences)</li>
+            <li>Custom card names you assign</li>
+            <li>Card tech type and scan timestamp</li>
+        </ul>
+        <p style="margin-top: 14px;">This data <strong>never leaves your device</strong> and is not shared with us or any third party.</p>
+    </div>
+
+    <!-- 3. Permissions -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🛡️</div>
+            <h2>App Permissions</h2>
+        </div>
+        <ul class="policy-list">
+            <li><strong>NFC</strong> — Required to read and emulate NFC cards. No data is sent externally.</li>
+            <li><strong>VIBRATE</strong> — Used to provide haptic feedback when a card is scanned.</li>
+            <li><strong>INTERNET</strong> — Used only by Google AdMob to display advertisements. Not used by the App itself.</li>
+            <li><strong>ACCESS_NETWORK_STATE</strong> — Used by AdMob to check network availability for ads.</li>
+        </ul>
+    </div>
+
+    <!-- 4. Advertising -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📢</div>
+            <h2>Advertising (Google AdMob)</h2>
+        </div>
+        <p>The App displays banner advertisements provided by <strong>Google AdMob</strong>. Google may collect and use data to serve personalized ads based on your interests.</p>
+        <div class="admob-box">
+            <div class="admob-title">📌 What Google AdMob may collect:</div>
+            <p>Device identifiers, IP address, app usage data, and advertising ID for ad personalization. This is governed by Google's own Privacy Policy, not ours.</p>
+        </div>
+        <p style="margin-top: 14px;">You can opt out of personalized ads via your device settings: <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong>.</p>
+        <p>For more information, see: <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--accent); font-weight: 500;">Google Privacy Policy ↗</a></p>
+    </div>
+
+    <!-- 5. Data Security -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🔐</div>
+            <h2>Data Security</h2>
+        </div>
+        <ul class="policy-list">
+            <li>All card data is stored locally on your device using Android SharedPreferences</li>
+            <li>No data is transmitted to any server or cloud service by the App</li>
+            <li>Uninstalling the App permanently removes all stored card data from your device</li>
+            <li>We recommend keeping your device secured with a PIN, password, or biometric lock</li>
+        </ul>
+    </div>
+
+    <!-- 6. Important Notice -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">⚠️</div>
+            <h2>Important Notice</h2>
+        </div>
+        <ul class="policy-list warn">
+            <li>NFC Card Emulation uses Android Host Card Emulation (HCE). Not all card types can be fully emulated due to hardware security restrictions.</li>
+            <li>This App is intended for <strong>personal, educational, and testing purposes only</strong>. Users are responsible for complying with applicable laws regarding NFC card emulation in their region.</li>
+            <li>The developer is not responsible for any misuse of the App.</li>
+        </ul>
+    </div>
+
+    <!-- 7. Children -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">👶</div>
+            <h2>Children's Privacy</h2>
+        </div>
+        <p>This App is not directed at children under the age of 13. We do not knowingly collect any personal information from children. If you believe a child has provided personal information through this App, please contact us immediately.</p>
+    </div>
+
+    <!-- 8. Changes -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🔄</div>
+            <h2>Changes to This Policy</h2>
+        </div>
+        <p>We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date. We encourage you to review this page periodically.</p>
+        <p>Continued use of the App after changes constitutes acceptance of the updated policy.</p>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-box">
+        <h2>Questions or Concerns?</h2>
+        <p>If you have any questions about this Privacy Policy, feel free to reach out.</p>
+        <a href="https://github.com/johniriantosusanto888-cyber" target="_blank">Contact via GitHub ↗</a>
+    </div>
+
+    <footer>
+        <p>© 2026 John Irianto Susanto · NFC Card Manager</p>
+        <p style="margin-top: 6px;">
+            <a href="https://github.com/johniriantosusanto888-cyber" target="_blank">GitHub</a>
+            &nbsp;·&nbsp;
+            <a href="https://play.google.com/store/apps/details?id=com.johndevelopmentstudio.nfccardmanager" target="_blank">Play Store</a>
+        </p>
+    </footer>
+
+</div>
+</body>
+</html>
