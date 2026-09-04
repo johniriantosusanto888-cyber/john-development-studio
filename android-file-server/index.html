@@ -66,6 +66,7 @@
             display: flex;
             gap: 2rem;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -372,6 +373,54 @@
             font-size: 0.95rem;
         }
 
+        /* Privacy Policy Section */
+        .privacy-section {
+            background: white;
+        }
+
+        .privacy-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        .privacy-summary .summary-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .privacy-summary .summary-item .icon {
+            font-size: 2rem;
+        }
+
+        .privacy-summary .summary-item h4 {
+            margin: 0.5rem 0 0.2rem;
+            color: var(--dark);
+        }
+
+        .privacy-summary .summary-item p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--gray);
+        }
+
+        .privacy-text {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .privacy-text a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
         /* User Guide */
         .guide-section {
             background: white;
@@ -570,8 +619,6 @@
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
     </style>
-
-<base target="_blank">
 </head>
 <body>
 
@@ -586,6 +633,7 @@
                 <a href="#features">Features</a>
                 <a href="#screenshots">Screenshots</a>
                 <a href="#guide">User Guide</a>
+                <a href="#privacy">Privacy</a>
                 <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="btn-back">
                     <i class="fas fa-arrow-left"></i> Back to Home
                 </a>
@@ -804,6 +852,45 @@
         </p>
     </section>
 
+    <!-- Privacy Policy Section -->
+    <section id="privacy" class="privacy-section">
+        <div class="section-header">
+            <h2>Privacy Policy</h2>
+            <div class="divider"></div>
+            <p>Your data stays on your device — always.</p>
+        </div>
+
+        <div class="privacy-summary">
+            <div class="summary-item">
+                <div class="icon">🔒</div>
+                <h4>Data Collection</h4>
+                <p>None collected by developer.</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon">🌐</div>
+                <h4>Internet Required</h4>
+                <p>Local network only / AdMob</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon">👤</div>
+                <h4>Account Required</h4>
+                <p>No account needed.</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon">📢</div>
+                <h4>Ads</h4>
+                <p>Google AdMob – opt out possible.</p>
+            </div>
+        </div>
+
+        <div class="privacy-text">
+            <p><strong>Air Drop - Android File Server</strong> does <strong>not</strong> collect, store, or share any personal information. All file transfers happen <strong>locally</strong> on your Wi-Fi network. Files are never uploaded to any external server or cloud.</p>
+            <p style="margin-top: 1rem;">The app uses <strong>Google AdMob</strong> for advertisements and <strong>Firebase Analytics</strong> for anonymous usage data. These services are governed by Google's privacy policy.</p>
+            <p style="margin-top: 1rem;">You can opt out of personalized ads via <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong> on your device.</p>
+            <p style="margin-top: 1.5rem;">For full details, read the complete <a href="privacy_policy.html" target="_blank">Privacy Policy →</a></p>
+        </div>
+    </section>
+
     <!-- User Guide Section -->
     <section id="guide" class="guide-section">
         <div class="section-header">
@@ -920,14 +1007,16 @@
         </div>
 
         <p style="margin-top: 2rem; font-size: 0.85rem; opacity: 0.6;">
-            <i class="fas fa-code"></i> Developed by <strong>John Irianto Susanto</strong>
+            <i class="fas fa-code"></i> Developed with <i class="fas fa-heart" style="color: #EF4444;"></i> by <strong>John Irianto Susanto</strong>
         </p>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 John Development Studio. Android File Server.</p>
+        <p>&copy; 2026 John Development Studio. Android File Server.</p>
         <p style="margin-top: 0.5rem;">
+            <a href="privacy_policy.html" target="_blank">Privacy Policy</a>
+            &nbsp;·&nbsp;
             <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/">
                 <i class="fas fa-arrow-left"></i> Back to John Development Studio
             </a>
