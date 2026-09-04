@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Car - Remember where you parked</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero img.logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px 0;
+            font-size: 3em;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 0;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #1976D2;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: #1976D2;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background-color: #e3f2fd;
+        }
+
+        .card h3 {
+            color: #1565C0;
+            margin-top: 0;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-policy-container {
+            background: #fff;
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        }
+
+        .privacy-policy-container h1 {
+            color: #1976D2;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .privacy-policy-container h2 {
+            color: #1565C0;
+            margin-top: 35px;
+            border-bottom: 2px solid #E3F2FD;
+            padding-bottom: 8px;
+        }
+
+        .privacy-policy-container p {
+            margin: 12px 0;
+        }
+
+        .privacy-policy-container ul {
+            padding-left: 22px;
+        }
+
+        .privacy-policy-container li {
+            margin-bottom: 8px;
+        }
+
+        .privacy-policy-container .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .privacy-policy-container .notice {
+            background: #E3F2FD;
+            border-left: 5px solid #1976D2;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .privacy-policy-container .contact {
+            background: #F8F9FA;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        footer.main-footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <!-- Ganti dengan logo Anda jika sudah punya file -->
+        <img src="placeholder-logo.png" alt="Find My Car Logo" class="logo" onerror="this.style.display='none'"> 
+        <h1>Find My Car</h1>
+        <p>Remember where you parked</p>
+        <a href="#" class="btn">Download Now</a>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Fitur Utama</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="placeholder-save.jpg" alt="Save Location" onerror="this.style.display='none'">
+                <h3>Save Location</h3>
+                <p>Simpan lokasi parkir Anda dengan mudah dan tambahkan catatan lantai atau zona parkir.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-timer.jpg" alt="Parking Timer" onerror="this.style.display='none'">
+                <h3>Parking Timer</h3>
+                <p>Atur batas waktu parkir dan dapatkan pengingat sebelum waktu habis untuk menghindari tilang.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-nav.jpg" alt="Navigation" onerror="this.style.display='none'">
+                <h3>Google Maps Navigation</h3>
+                <p>Buka Google Maps untuk menemukan rute tercepat kembali ke mobil Anda.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-backup.jpg" alt="Backup & Restore" onerror="this.style.display='none'">
+                <h3>Backup & Restore</h3>
+                <p>Cadangkan data riwayat parkir Anda ke file CSV dan pulihkan kapan saja diperlukan.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-history.jpg" alt="Parking History" onerror="this.style.display='none'">
+                <h3>Parking History</h3>
+                <p>Jelajahi riwayat parkir yang tersimpan, navigasi kembali, atau hapus entri satu per satu.</p>
+            </div>
+            <div class="card">
+                <img src="placeholder-guide.jpg" alt="User Guide" onerror="this.style.display='none'">
+                <h3>User Guide</h3>
+                <p>Temukan petunjuk langkah demi langkah dan tips berguna untuk menggunakan aplikasi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Section -->
+    <div class="privacy-policy-container">
+        <h1>Privacy Policy</h1>
+        <p><strong>Find My Car</strong></p>
+        <p><strong>Last updated:</strong> 27 July 2026</p>
+
+        <div class="notice">
+            Thank you for using <strong>Find My Car</strong>. Your privacy is important to us. This Privacy Policy explains what information the app uses, how it is used, and how it is protected.
+        </div>
+
+        <h2>1. Information We Collect</h2>
+        <p>Depending on the features you use, Find My Car may access the following information:</p>
+        <ul>
+            <li><strong>Location</strong> – Used to save your parking location and navigate you back to your vehicle.</li>
+            <li><strong>Notifications</strong> – Used to remind you before your parking time expires and when the parking timer has ended.</li>
+            <li><strong>Alarms &amp; Reminders</strong> – Used to deliver accurate parking timer alerts even when the app is not open.</li>
+            <li><strong>Storage Access</strong> – Used only when you choose to export or import your parking history as a CSV backup file.</li>
+        </ul>
+        <p>The app does <strong>not</strong> collect your name, email address, phone number, contacts, messages, or any other personal information.</p>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>Your information is used only to:</p>
+        <ul>
+            <li>Save your parking location.</li>
+            <li>Store optional parking notes such as floor number, parking zone, or nearby landmarks.</li>
+            <li>Launch Google Maps navigation to your saved parking location.</li>
+            <li>Display parking countdown notifications.</li>
+            <li>Remind you before your parking time expires.</li>
+            <li>Export and import your parking history as CSV backup files.</li>
+        </ul>
+
+        <h2>3. Data Storage</h2>
+        <p>Your parking information is stored locally on your device. This includes:</p>
+        <ul>
+            <li>Parking coordinates</li>
+            <li>Parking notes</li>
+            <li>Parking time limit</li>
+            <li>Parking history</li>
+            <li>CSV backup files (only if you choose to export them)</li>
+        </ul>
+        <p>We do <strong>not</strong> upload or store your parking information on our servers.</p>
+
+        <h2>4. Export &amp; Import</h2>
+        <p>Find My Car allows you to export your parking history as a CSV file and import it later for backup or transferring data to another device. These files remain under your control and are stored only on your device or in the location you choose.</p>
+
+        <h2>5. Third-Party Services</h2>
+        <p>The application uses the following third-party services:</p>
+        <ul>
+            <li>Google Maps</li>
+            <li>Google Play Services</li>
+            <li>Google AdMob (Advertising)</li>
+        </ul>
+        <p>These services may collect information according to their own privacy policies.</p>
+
+        <h2>6. Advertising</h2>
+        <p>If ads are displayed, Google AdMob may collect limited information such as your advertising identifier to provide relevant advertisements. Find My Car does not receive or store this advertising information.</p>
+
+        <h2>7. Permissions</h2>
+        <p>Depending on the features you use, the app may request:</p>
+        <ul>
+            <li>Precise Location</li>
+            <li>Notifications</li>
+            <li>Alarms &amp; Reminders</li>
+            <li>Storage Access (for Export &amp; Import Backup)</li>
+        </ul>
+        <p>Each permission is used only for its intended purpose and is never used to collect personal information.</p>
+
+        <h2>8. Children's Privacy</h2>
+        <p>Find My Car is not intended for children under the age of 13. We do not knowingly collect personal information from children.</p>
+
+        <h2>9. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Any changes will be published within the application or on the Privacy Policy webpage.</p>
+
+        <h2>10. Contact Us</h2>
+        <div class="contact">
+            <p><strong>John Development Studio</strong></p>
+            <p>Email:<br><strong>john.irianto.susanto.dev@gmail.com</strong></p>
+        </div>
+
+        <div class="footer">
+            <p><strong>Find My Car</strong></p>
+            <p>© 2026 John Development Studio. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <p>&copy; 2026 Find My Car. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
