@@ -17,6 +17,12 @@
             --gray: #64748B;
             --card-bg: #FFFFFF;
             --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+            --purple: #7C3AED;
+            --purple-light: #A78BFA;
+            --orange: #F57F17;
+            --orange-light: #FFCC80;
+            --green: #16A34A;
+            --green-light: #4ADE80;
         }
 
         * {
@@ -216,16 +222,6 @@
             transform: translateY(-3px);
         }
 
-        .btn-dark {
-            background: var(--dark);
-            color: white;
-        }
-
-        .btn-dark:hover {
-            background: #1e293b;
-            transform: translateY(-3px);
-        }
-
         /* Section Styles */
         section {
             padding: 5rem 2rem;
@@ -324,6 +320,50 @@
             color: var(--gray);
             font-size: 0.95rem;
             line-height: 1.7;
+        }
+
+        /* New Badge */
+        .badge-new {
+            display: inline-block;
+            background: linear-gradient(135deg, #16A34A, #4ADE80);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Highlight Card (for new features) */
+        .feature-card.highlight {
+            border: 2px solid var(--purple);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F3E8FF 100%);
+        }
+
+        .feature-card.highlight::before {
+            background: linear-gradient(90deg, var(--purple), var(--purple-light));
+            transform: scaleX(1);
+        }
+
+        .feature-card.highlight .feature-icon {
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+        }
+
+        .feature-card.camera-highlight {
+            border: 2px solid var(--orange);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF7ED 100%);
+        }
+
+        .feature-card.camera-highlight::before {
+            background: linear-gradient(90deg, var(--orange), var(--orange-light));
+            transform: scaleX(1);
+        }
+
+        .feature-card.camera-highlight .feature-icon {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
         }
 
         /* Screenshots */
@@ -631,6 +671,7 @@
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
+                <a href="#camera">Remote Camera</a>
                 <a href="#screenshots">Screenshots</a>
                 <a href="#guide">User Guide</a>
                 <a href="#privacy">Privacy</a>
@@ -645,13 +686,13 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
-                <i class="fas fa-wifi"></i> Android Application
+                <i class="fas fa-wifi"></i> Android Application · v2.0
             </div>
 
             <img src="../images/AndroidFileServer.png" class="hero-app-icon" alt="Android File Server App Icon">
 
             <h1>Android File Server</h1>
-            <p>Transfer files wirelessly between Android, iPhone, iPad, Mac, Windows PC, and laptops over Wi-Fi. No cables, no cloud, no internet needed.</p>
+            <p>Transfer files wirelessly, convert audio, and control your phone's camera remotely — all over Wi-Fi. No cables, no cloud, no internet needed.</p>
             <div class="hero-buttons">
                 <a href="#download" class="btn btn-primary">
                     <i class="fas fa-download"></i> Download Now
@@ -659,6 +700,41 @@
                 <a href="#features" class="btn btn-secondary">
                     <i class="fas fa-info-circle"></i> Learn More
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's New Section -->
+    <section id="whats-new" style="background: linear-gradient(135deg, #FFF7ED 0%, #F3E8FF 100%);">
+        <div class="section-header">
+            <h2>🎉 What's New in v2.0</h2>
+            <div class="divider"></div>
+            <p>Three major new features to make your Android device more powerful</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card camera-highlight">
+                <div class="feature-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Remote Camera <span class="badge-new">NEW</span></h3>
+                <p>Turn your Android phone into a wireless webcam! Control the camera from any browser on your PC, Mac, or another phone. Includes real-time filters, flash/torch control, aspect ratio presets, and remote shutter — perfect for video calls, streaming, or selfies from a distance.</p>
+            </div>
+
+            <div class="feature-card highlight">
+                <div class="feature-icon">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h3>Audio Converter <span class="badge-new">NEW</span></h3>
+                <p>Convert audio files between popular formats directly on your phone. Support for MP3, AAC, WAV, OGG, and more. No need for a computer — perfect for podcasters, musicians, and anyone working with audio on the go.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, var(--green), var(--green-light));">
+                    <i class="fas fa-folder-tree"></i>
+                </div>
+                <h3>Built-in File Browser <span class="badge-new">NEW</span></h3>
+                <p>Browse your Download/AndroidFileServer folder directly in the app. Preview images, play videos, and manage received files without leaving the app. Clean, fast, and intuitive interface.</p>
             </div>
         </div>
     </section>
@@ -719,6 +795,148 @@
                 <h3>Lightning Fast Speed</h3>
                 <p>High-speed local network transfer that outperforms cloud uploads and Bluetooth. Transfer large files in seconds, not minutes.</p>
             </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #EA580C, #FB923C);">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3>Camera Filters</h3>
+                <p>Apply real-time filters to your remote camera feed. Choose from multiple color presets — Mono, Sepia, Cool, Warm, Vintage, and more. Changes apply instantly on both phone and browser.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #0891B2, #22D3EE);">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Flash & Torch Control</h3>
+                <p>Toggle LED flash and continuous torch directly from the app or remote browser. Auto-detect if your device has an LED, and switch between Off / On / Auto flash modes.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+                    <i class="fas fa-crop"></i>
+                </div>
+                <h3>Aspect Ratio Presets</h3>
+                <p>Choose from 3:4, 9:16, 1:1, or Full aspect ratio for your camera preview and captured photos. Your preference is saved automatically for the next session.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-broom"></i>
+                </div>
+                <h3>Cache Cleanup</h3>
+                <p>Built-in cache cleaner shows how much space the app is using and clears it with one tap. Keep your phone storage tidy without going to Settings.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #16A34A, #4ADE80);">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3>Keep Screen On</h3>
+                <p>Optional toggle keeps your screen awake while the server or camera is running. Prevents interruption during long transfers or streaming sessions.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #0891B2, #22D3EE);">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <h3>Sound Effects</h3>
+                <p>Audio feedback for key actions: server start/stop, camera start/stop, and shutter capture. Know what's happening without looking at the screen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Remote Camera Deep Dive -->
+    <section id="camera" style="background: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);">
+        <div class="section-header">
+            <h2>📷 Remote Camera</h2>
+            <div class="divider"></div>
+            <p>Use your Android phone as a wireless webcam — controlled from any browser</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F57F17, #FFCC80);">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Live Preview in Browser</h3>
+                <p>See the camera feed in real-time on your PC browser via MJPEG streaming. Low latency, smooth, and works on any modern browser — Chrome, Safari, Firefox, Edge.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F57F17, #FFCC80);">
+                    <i class="fas fa-hand-pointer"></i>
+                </div>
+                <h3>Remote Shutter</h3>
+                <p>Trigger the shutter from the browser. Photos save directly to your Android phone's Download folder. Perfect for selfies, group photos, and time-lapse shots.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F57F17, #FFCC80);">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h3>QR Code for Viewer</h3>
+                <p>Scan the QR code with another device to instantly open the camera viewer. No typing needed — great for setting up multi-device shoots in seconds.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F57F17, #FFCC80);">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3>Filter Picker</h3>
+                <p>Pick from a curated set of filters on the fly: Normal, Mono, Sepia, Cool, Warm, Vintage, Dramatic, and more. Filters apply to both preview and captured photos.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F57F17, #FFCC80);">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3>Gallery Thumbnail</h3>
+                <p>The gallery button shows a thumbnail of the last photo taken. Tap to open the full gallery and browse all captured photos in a clean grid view.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #F57F17, #FFCC80);">
+                    <i class="fas fa-redo"></i>
+                </div>
+                <h3>Rotation Support</h3>
+                <p>Rotate your phone and the preview adapts automatically. Camera re-binds seamlessly without dropping the stream or losing the URL.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio Converter Deep Dive -->
+    <section id="audio" style="background: linear-gradient(135deg, #F3E8FF 0%, #EDE9FE 100%);">
+        <div class="section-header">
+            <h2>🎵 Audio Converter</h2>
+            <div class="divider"></div>
+            <p>Convert audio files between formats directly on your phone</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+                    <i class="fas fa-file-audio"></i>
+                </div>
+                <h3>Multiple Formats</h3>
+                <p>Convert between MP3, AAC, WAV, OGG, FLAC, and more. Perfect for compatibility with different devices and apps.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Bitrate Control</h3>
+                <p>Choose your output quality — from small file sizes for voice notes to high bitrate for music production.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>On-Device Processing</h3>
+                <p>All conversion happens on your phone. No uploads, no waiting, no privacy concerns. Works completely offline.</p>
+            </div>
         </div>
     </section>
 
@@ -776,7 +994,7 @@
                     <i class="fas fa-code-branch"></i>
                 </div>
                 <h3>Open Source</h3>
-                <p>Developed by John Irianto Susanto. The app is available on GitHub for transparency and community contributions. Clean, reliable, and ad-free.</p>
+                <p>Developed by John Irianto Susanto. The app is available on GitHub for transparency and community contributions. Clean, reliable, and ad-supported.</p>
             </div>
         </div>
     </section>
@@ -885,6 +1103,7 @@
 
         <div class="privacy-text">
             <p><strong>Air Drop - Android File Server</strong> does <strong>not</strong> collect, store, or share any personal information. All file transfers happen <strong>locally</strong> on your Wi-Fi network. Files are never uploaded to any external server or cloud.</p>
+            <p style="margin-top: 1rem;">The <strong>Remote Camera</strong> feature streams live video only within your local Wi-Fi network. No frames, photos, or streams are sent to the internet. Captured photos are saved directly to your phone's storage.</p>
             <p style="margin-top: 1rem;">The app uses <strong>Google AdMob</strong> for advertisements and <strong>Firebase Analytics</strong> for anonymous usage data. These services are governed by Google's privacy policy.</p>
             <p style="margin-top: 1rem;">You can opt out of personalized ads via <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong> on your device.</p>
             <p style="margin-top: 1.5rem;">For full details, read the complete <a href="privacy_policy.html" target="_blank">Privacy Policy →</a></p>
@@ -896,7 +1115,7 @@
         <div class="section-header">
             <h2>User Guide</h2>
             <div class="divider"></div>
-            <p>Step-by-step instructions to start sharing files</p>
+            <p>Step-by-step instructions to start sharing files and more</p>
         </div>
 
         <div class="guide-container">
@@ -908,6 +1127,7 @@
                     <ul>
                         <li><strong>Wi-Fi / Network Access:</strong> Required to create and run the local file server.</li>
                         <li><strong>Storage Access:</strong> Needed to access files for sharing and saving received files.</li>
+                        <li><strong>Camera Access:</strong> Required only for the Remote Camera feature.</li>
                         <li><strong>Keep Screen On (optional):</strong> Prevents the server from stopping when your screen turns off.</li>
                     </ul>
                 </div>
@@ -929,13 +1149,13 @@
             <div class="guide-step">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Start the Server</h3>
+                    <h3>Start the File Server</h3>
                     <p>Open the Android File Server app and tap the "Start Server" button. The app will:</p>
                     <ul>
                         <li>Display your device's local IP address (e.g., http://192.168.1.100:8080).</li>
                         <li>Generate a QR code for quick connection.</li>
                         <li>Show server status as "Running" with a green indicator.</li>
-                        <li>Enable "Keep screen on" toggle if you want the server to stay active.</li>
+                        <li>Auto-enable "Keep screen on" toggle to prevent interruption.</li>
                     </ul>
                 </div>
             </div>
@@ -943,12 +1163,13 @@
             <div class="guide-step">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Connect from Another Device</h3>
+                    <h3>Connect & Transfer Files</h3>
                     <p>On the receiving device (PC, Mac, iPhone, iPad, or another Android), do one of the following:</p>
                     <ul>
                         <li><strong>Scan QR Code:</strong> Open the camera app and scan the QR code displayed on your Android device.</li>
-                        <li><strong>Enter IP Address:</strong> Open any web browser and type the IP address shown in the app (e.g., http://192.168.1.100:8080).</li>
-                        <li><strong>Copy & Share:</strong> Tap the copy button next to the IP address and share it via messaging apps.</li>
+                        <li><strong>Enter IP Address:</strong> Open any web browser and type the IP address shown in the app.</li>
+                        <li><strong>Upload to Android:</strong> Drag and drop files into the browser or click "Select Files".</li>
+                        <li><strong>Download from Android:</strong> Browse the shared folders and click on any file to download.</li>
                     </ul>
                 </div>
             </div>
@@ -956,13 +1177,16 @@
             <div class="guide-step">
                 <div class="step-number">5</div>
                 <div class="step-content">
-                    <h3>Transfer Files</h3>
-                    <p>Once connected via the browser, you can:</p>
+                    <h3>📷 Using the Remote Camera</h3>
+                    <p>Tap "Open Remote Camera" on the main screen to launch the camera module:</p>
                     <ul>
-                        <li><strong>Upload to Android:</strong> Drag and drop files into the browser window or click "Select Files" to choose from your computer.</li>
-                        <li><strong>Download from Android:</strong> Browse the shared folders and click on any file to download it to your device.</li>
-                        <li><strong>Multiple Files:</strong> Select multiple files at once for batch transfer.</li>
-                        <li><strong>All File Types:</strong> Images, videos, music, documents, APKs, and more are supported.</li>
+                        <li><strong>Start Camera:</strong> Tap "▶ Start Remote Camera" — a URL and QR code will appear.</li>
+                        <li><strong>Open on PC:</strong> Scan the QR code or open the URL on your PC browser.</li>
+                        <li><strong>Control Filters:</strong> Pick filters on the phone or from the browser — they sync instantly.</li>
+                        <li><strong>Flash / Torch:</strong> Use the ⚡ and 🔦 buttons to control the LED.</li>
+                        <li><strong>Aspect Ratio:</strong> Choose 3:4, 9:16, 1:1, or Full at the top of the preview.</li>
+                        <li><strong>Capture:</strong> Tap the shutter on the phone or click the button in the browser.</li>
+                        <li><strong>Gallery:</strong> Tap the gallery icon to view all captured photos.</li>
                     </ul>
                 </div>
             </div>
@@ -970,13 +1194,41 @@
             <div class="guide-step">
                 <div class="step-number">6</div>
                 <div class="step-content">
-                    <h3>Stop the Server & Troubleshooting</h3>
-                    <p>When done, tap "Stop Server" to close the connection. If you encounter issues:</p>
+                    <h3>🎵 Using the Audio Converter</h3>
+                    <p>Tap "Open Audio Converter" on the main screen:</p>
+                    <ul>
+                        <li><strong>Pick a File:</strong> Select an audio file from your device storage.</li>
+                        <li><strong>Choose Format:</strong> Pick the target output format (MP3, AAC, WAV, etc.).</li>
+                        <li><strong>Convert:</strong> Tap "Convert" — the process runs entirely on your phone.</li>
+                        <li><strong>Save:</strong> The converted file is saved to your Download folder.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">7</div>
+                <div class="step-content">
+                    <h3>📁 File Browser & Cache Cleanup</h3>
+                    <p>Manage your received files and free up space:</p>
+                    <ul>
+                        <li><strong>Open Download Folder:</strong> Browse all files in <code>Download/AndroidFileServer/</code>.</li>
+                        <li><strong>Preview Files:</strong> Tap images or videos to preview them inline.</li>
+                        <li><strong>Clear Cache:</strong> Use the 🧹 Clear Cache card to free up storage — shows current usage and clears with one tap.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">8</div>
+                <div class="step-content">
+                    <h3>Stop & Troubleshooting</h3>
+                    <p>When done, tap "Stop Server" or "Stop Camera" to close the connection. If you encounter issues:</p>
                     <ul>
                         <li><strong>Can't connect:</strong> Ensure both devices are on the exact same Wi-Fi network (same SSID).</li>
                         <li><strong>Firewall blocking:</strong> Disable firewall temporarily or allow port 8080 on your router.</li>
                         <li><strong>Server stops unexpectedly:</strong> Enable "Keep screen on" toggle or disable battery optimization for the app.</li>
-                        <li><strong>Slow transfer:</strong> Move closer to the Wi-Fi router for better signal strength.</li>
+                        <li><strong>Camera preview lag:</strong> Move closer to the Wi-Fi router for better signal strength.</li>
+                        <li><strong>VPN issues:</strong> Disable VPN on your PC — it may block access to the local server.</li>
                     </ul>
                 </div>
             </div>
@@ -1013,7 +1265,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 John Development Studio. Android File Server.</p>
+        <p>&copy; 2026 John Development Studio. Android File Server v2.0</p>
         <p style="margin-top: 0.5rem;">
             <a href="privacy_policy.html" target="_blank">Privacy Policy</a>
             &nbsp;·&nbsp;
