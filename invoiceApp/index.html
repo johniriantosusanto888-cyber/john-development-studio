@@ -325,7 +325,7 @@
         }
 
         /* =========================
-           ACCORDION (FAQ & GUIDE)
+           ACCORDION (FAQ)
         ========================= */
         .accordion {
             margin: 15px 0;
@@ -700,31 +700,36 @@
 
             <p style="color:#8b949e; font-size:12px; margin-bottom: 6px;">Contoh preview 58mm:</p>
             <div class="thermal-preview">================================
-            IPOK TALA
-        Jakarta, INDONESIA
-      ipoktala2018@gmail.com
+           TOKO MAJU JAYA
+        Bandung, INDONESIA
+      tokomajujaya@example.com
 ================================
-INVOICE: INV-0003
-Date   : 20 Sep 2026
-Status : Unpaid
+INVOICE: INV-0001
+Date   : 01 Jan 2026
+Status : Paid
 --------------------------------
 BILL TO:
-Hwang Wan Soo
-20, Gukchaebosang-ro 50-gil,
-Seo-gu, Daegu, 41827
-Seoul
-Tel: +821066591238
+Budi Santoso
+Jl. Merdeka No. 123,
+Bandung, 40111
+Jawa Barat
+Tel: +628123456789
 --------------------------------
-1. 58.65mm Ripple Tamper
-   1 x 38                   38
+1. Contoh Produk A
+   2 x 50,000          100,000
+2. Contoh Produk B
+   1 x 75,000           75,000
 --------------------------------
-Subtotal                   116
-TOTAL                      116
-BALANCE DUE                116
+Subtotal               175,000
+Discount               -5,000
+TOTAL                  170,000
+Paid                   170,000
+BALANCE DUE                  0
 --------------------------------
 PAYMENT INSTRUCTIONS
-  PayPal:
-  johniriantosusanto@gmail.com
+  Bank:
+  BCA 1234567890
+  a/n Toko Maju Jaya
 ================================
  Thank you for your business!
 ================================</div>
@@ -870,7 +875,7 @@ PAYMENT INSTRUCTIONS
                 const item = header.parentElement;
                 const isOpen = item.classList.contains('open');
 
-                // Close all others (optional - hapus block ini kalau mau multiple open)
+                // Close all others
                 document.querySelectorAll('.accordion-item').forEach(i => {
                     i.classList.remove('open');
                 });
@@ -882,7 +887,7 @@ PAYMENT INSTRUCTIONS
             });
         });
 
-        // Optional: smooth scroll untuk nav links
+        // Smooth scroll untuk nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
