@@ -3,310 +3,773 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find My Car - Remember where you parked</title>
+    <title>Find My Car - John Development Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary: #2563EB;
+            --primary-light: #60A5FA;
+            --accent: #10B981;
+            --accent-light: #6EE7B7;
+            --dark: #0F172A;
+            --light: #F0F9FF;
+            --gray: #64748B;
+            --card-bg: #FFFFFF;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f4f8;
-            color: #333;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 50%, #0F172A 100%);
             color: white;
+            padding: 5rem 2rem 4rem;
             text-align: center;
-            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero img.logo {
-            width: 150px;
-            margin-bottom: 20px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-app-icon {
+            max-width: 220px;
+            width: 55%;
+            height: auto;
+            display: block;
+            margin: 0 auto 1.5rem;
+            border-radius: 28px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.35);
+            border: 4px solid rgba(96, 165, 250, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-app-icon:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-app-icon {
+                max-width: 160px;
+                border-radius: 20px;
+                border-width: 3px;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
-            margin: 0 0 10px 0;
-            font-size: 3em;
-            letter-spacing: -1px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .hero p {
-            font-size: 1.2em;
-            margin-top: 0;
+            font-size: 1.25rem;
             opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-            background: white;
-            color: #1976D2;
-            padding: 15px 30px;
-            margin-top: 20px;
-            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent-light) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
         }
 
-        /* Features Section */
-        .features {
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
             max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+            margin: 0 auto;
         }
 
-        .features h2 {
+        .section-header {
             text-align: center;
-            color: #1976D2;
-            margin-bottom: 40px;
-            font-size: 2.5em;
+            margin-bottom: 3rem;
         }
 
-        .grid {
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Features Grid */
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
-        .card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            text-align: center;
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card img {
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 250px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            background-color: #e3f2fd;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
         }
 
-        .card h3 {
-            color: #1565C0;
-            margin-top: 0;
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .card p {
-            color: #555;
-            font-size: 0.95em;
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Screenshots */
+        .screenshots-section {
+            background: linear-gradient(to bottom, #EFF6FF, var(--light));
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .screenshot-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.2);
+            transition: all 0.4s;
+            background: #1a1a1a;
+            aspect-ratio: 9/19;
+            max-height: 600px;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
 
         /* Privacy Policy Section */
-        .privacy-policy-container {
-            background: #fff;
+        .privacy-section {
+            background: white;
+        }
+
+        .privacy-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
             max-width: 900px;
-            margin: 60px auto;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+            margin: 0 auto 2rem;
         }
 
-        .privacy-policy-container h1 {
-            color: #1976D2;
+        .privacy-summary .summary-item {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 16px;
             text-align: center;
-            margin-bottom: 5px;
         }
 
-        .privacy-policy-container h2 {
-            color: #1565C0;
-            margin-top: 35px;
-            border-bottom: 2px solid #E3F2FD;
-            padding-bottom: 8px;
+        .privacy-summary .summary-item .icon {
+            font-size: 2rem;
         }
 
-        .privacy-policy-container p {
-            margin: 12px 0;
+        .privacy-summary .summary-item h4 {
+            margin: 0.5rem 0 0.2rem;
+            color: var(--dark);
         }
 
-        .privacy-policy-container ul {
-            padding-left: 22px;
+        .privacy-summary .summary-item p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: var(--gray);
         }
 
-        .privacy-policy-container li {
-            margin-bottom: 8px;
+        .privacy-text {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
         }
 
-        .privacy-policy-container .footer {
-            margin-top: 40px;
+        .privacy-text a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* User Guide Section */
+        .guide-section {
+            background: linear-gradient(to bottom, #EFF6FF, var(--light));
+        }
+
+        .guide-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .guide-step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step-content p, .step-content ul {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .step-content ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .step-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
             text-align: center;
-            font-size: 14px;
-            color: #666;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
+            padding: 2rem;
+            font-size: 0.9rem;
         }
 
-        .privacy-policy-container .notice {
-            background: #E3F2FD;
-            border-left: 5px solid #1976D2;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 20px 0;
+        footer a {
+            color: var(--accent-light);
+            text-decoration: none;
         }
 
-        .privacy-policy-container .contact {
-            background: #F8F9FA;
-            border-radius: 8px;
-            padding: 15px;
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 3rem auto 0;
+            }
+            .guide-step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
         }
 
-        footer.main-footer {
-            text-align: center;
-            padding: 20px;
-            background: #333;
-            color: #fff;
-            font-size: 0.9em;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <!-- Ganti dengan logo Anda jika sudah punya file -->
-        <img src="placeholder-logo.png" alt="Find My Car Logo" class="logo" onerror="this.style.display='none'"> 
-        <h1>Find My Car</h1>
-        <p>Remember where you parked</p>
-        <a href="#" class="btn">Download Now</a>
-    </header>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="logo">
+                <i class="fas fa-code"></i>
+                John Dev Studio
+            </a>
+            <div class="nav-links">
+                <a href="#features">Fitur</a>
+                <a href="#screenshots">Screenshot</a>
+                <a href="#guide">Panduan</a>
+                <a href="#privacy">Privasi</a>
+                <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Features Section -->
-    <section class="features">
-        <h2>Fitur Utama</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="placeholder-save.jpg" alt="Save Location" onerror="this.style.display='none'">
-                <h3>Save Location</h3>
-                <p>Simpan lokasi parkir Anda dengan mudah dan tambahkan catatan lantai atau zona parkir.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-car"></i> Android Application
             </div>
-            <div class="card">
-                <img src="placeholder-timer.jpg" alt="Parking Timer" onerror="this.style.display='none'">
-                <h3>Parking Timer</h3>
-                <p>Atur batas waktu parkir dan dapatkan pengingat sebelum waktu habis untuk menghindari tilang.</p>
-            </div>
-            <div class="card">
-                <img src="placeholder-nav.jpg" alt="Navigation" onerror="this.style.display='none'">
-                <h3>Google Maps Navigation</h3>
-                <p>Buka Google Maps untuk menemukan rute tercepat kembali ke mobil Anda.</p>
-            </div>
-            <div class="card">
-                <img src="placeholder-backup.jpg" alt="Backup & Restore" onerror="this.style.display='none'">
-                <h3>Backup & Restore</h3>
-                <p>Cadangkan data riwayat parkir Anda ke file CSV dan pulihkan kapan saja diperlukan.</p>
-            </div>
-            <div class="card">
-                <img src="placeholder-history.jpg" alt="Parking History" onerror="this.style.display='none'">
-                <h3>Parking History</h3>
-                <p>Jelajahi riwayat parkir yang tersimpan, navigasi kembali, atau hapus entri satu per satu.</p>
-            </div>
-            <div class="card">
-                <img src="placeholder-guide.jpg" alt="User Guide" onerror="this.style.display='none'">
-                <h3>User Guide</h3>
-                <p>Temukan petunjuk langkah demi langkah dan tips berguna untuk menggunakan aplikasi.</p>
+
+            <img src="https://jdstudio.my.id/images/FindMyCar.png" class="hero-app-icon" alt="Find My Car App Icon">
+
+            <h1>Find My Car</h1>
+            <p>Simpan lokasi parkir Anda dan temukan kembali mobil dengan mudah. Dilengkapi navigasi kompas, pengingat waktu parkir, dan bekerja sepenuhnya offline.</p>
+            <div class="hero-buttons">
+                <a href="#download" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Unduh Sekarang
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i> Pelajari Lebih
+                </a>
             </div>
         </div>
     </section>
 
+    <!-- Features Section -->
+    <section id="features">
+        <div class="section-header">
+            <h2>Fitur Unggulan</h2>
+            <div class="divider"></div>
+            <p>Semua yang Anda butuhkan untuk menemukan mobil dengan cepat dan akurat</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-map-pin"></i>
+                </div>
+                <h3>Simpan Lokasi Parkir</h3>
+                <p>Simpan posisi parkir mobil Anda dengan sekali sentuh. Aplikasi akan mencatat koordinat GPS secara akurat.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <h3>Navigasi Kompas</h3>
+                <p>Ikuti panduan arah jarum kompas yang menunjukkan arah dan jarak ke mobil Anda secara real-time.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Pengingat Waktu Parkir</h3>
+                <p>Atur timer parkir dan dapatkan notifikasi sebelum waktu parkir Anda habis. Hindari denda parkir yang tidak perlu.</p>
+            </div>
+
+            <div class="feature-card animate delay-1">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi-slash"></i>
+                </div>
+                <h3>Bekerja Offline</h3>
+                <p>Tidak perlu koneksi internet. Semua data lokasi disimpan secara lokal di perangkat Anda dan dapat diakses kapan saja.</p>
+            </div>
+
+            <div class="feature-card animate delay-2">
+                <div class="feature-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3>Catatan Foto</h3>
+                <p>Ambil foto lokasi parkir atau nomor lantai untuk referensi visual tambahan saat mencari mobil.</p>
+            </div>
+
+            <div class="feature-card animate delay-3">
+                <div class="feature-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>Riwayat Parkir</h3>
+                <p>Lihat riwayat lokasi parkir sebelumnya. Berguna untuk parkir di tempat yang sering Anda kunjungi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section id="screenshots" class="screenshots-section">
+        <div class="section-header">
+            <h2>Screenshot Aplikasi</h2>
+            <div class="divider"></div>
+            <p>Lihat tampilan aplikasi — desain bersih dan mudah digunakan</p>
+        </div>
+
+        <div class="screenshots-grid">
+            <div class="screenshot-item">
+                <img src="screenshot1.jpg" alt="Find My Car - Halaman Utama">
+                <div class="screenshot-label">
+                    <i class="fas fa-home"></i> Halaman Utama
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot2.jpg" alt="Find My Car - Simpan Lokasi">
+                <div class="screenshot-label">
+                    <i class="fas fa-map-pin"></i> Simpan Lokasi
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot3.jpg" alt="Find My Car - Navigasi Kompas">
+                <div class="screenshot-label">
+                    <i class="fas fa-compass"></i> Navigasi Kompas
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot4.jpg" alt="Find My Car - Pengingat Parkir">
+                <div class="screenshot-label">
+                    <i class="fas fa-bell"></i> Pengingat Parkir
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot5.jpg" alt="Find My Car - Detail Lokasi">
+                <div class="screenshot-label">
+                    <i class="fas fa-info-circle"></i> Detail Lokasi
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot6.jpg" alt="Find My Car - Riwayat Parkir">
+                <div class="screenshot-label">
+                    <i class="fas fa-history"></i> Riwayat Parkir
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot7.jpg" alt="Find My Car - Pengaturan">
+                <div class="screenshot-label">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </div>
+            </div>
+
+            <div class="screenshot-item">
+                <img src="screenshot8.jpg" alt="Find My Car - Catatan Foto">
+                <div class="screenshot-label">
+                    <i class="fas fa-camera"></i> Catatan Foto
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 2rem; color: var(--gray); font-size: 0.9rem;">
+            <i class="fas fa-info-circle"></i> Screenshot diambil pada Samsung Galaxy S23 Ultra
+        </p>
+    </section>
+
     <!-- Privacy Policy Section -->
-    <div class="privacy-policy-container">
-        <h1>Privacy Policy</h1>
-        <p><strong>Find My Car</strong></p>
-        <p><strong>Last updated:</strong> 27 July 2026</p>
-
-        <div class="notice">
-            Thank you for using <strong>Find My Car</strong>. Your privacy is important to us. This Privacy Policy explains what information the app uses, how it is used, and how it is protected.
+    <section id="privacy" class="privacy-section">
+        <div class="section-header">
+            <h2>Kebijakan Privasi</h2>
+            <div class="divider"></div>
         </div>
 
-        <h2>1. Information We Collect</h2>
-        <p>Depending on the features you use, Find My Car may access the following information:</p>
-        <ul>
-            <li><strong>Location</strong> – Used to save your parking location and navigate you back to your vehicle.</li>
-            <li><strong>Notifications</strong> – Used to remind you before your parking time expires and when the parking timer has ended.</li>
-            <li><strong>Alarms &amp; Reminders</strong> – Used to deliver accurate parking timer alerts even when the app is not open.</li>
-            <li><strong>Storage Access</strong> – Used only when you choose to export or import your parking history as a CSV backup file.</li>
-        </ul>
-        <p>The app does <strong>not</strong> collect your name, email address, phone number, contacts, messages, or any other personal information.</p>
-
-        <h2>2. How We Use Your Information</h2>
-        <p>Your information is used only to:</p>
-        <ul>
-            <li>Save your parking location.</li>
-            <li>Store optional parking notes such as floor number, parking zone, or nearby landmarks.</li>
-            <li>Launch Google Maps navigation to your saved parking location.</li>
-            <li>Display parking countdown notifications.</li>
-            <li>Remind you before your parking time expires.</li>
-            <li>Export and import your parking history as CSV backup files.</li>
-        </ul>
-
-        <h2>3. Data Storage</h2>
-        <p>Your parking information is stored locally on your device. This includes:</p>
-        <ul>
-            <li>Parking coordinates</li>
-            <li>Parking notes</li>
-            <li>Parking time limit</li>
-            <li>Parking history</li>
-            <li>CSV backup files (only if you choose to export them)</li>
-        </ul>
-        <p>We do <strong>not</strong> upload or store your parking information on our servers.</p>
-
-        <h2>4. Export &amp; Import</h2>
-        <p>Find My Car allows you to export your parking history as a CSV file and import it later for backup or transferring data to another device. These files remain under your control and are stored only on your device or in the location you choose.</p>
-
-        <h2>5. Third-Party Services</h2>
-        <p>The application uses the following third-party services:</p>
-        <ul>
-            <li>Google Maps</li>
-            <li>Google Play Services</li>
-            <li>Google AdMob (Advertising)</li>
-        </ul>
-        <p>These services may collect information according to their own privacy policies.</p>
-
-        <h2>6. Advertising</h2>
-        <p>If ads are displayed, Google AdMob may collect limited information such as your advertising identifier to provide relevant advertisements. Find My Car does not receive or store this advertising information.</p>
-
-        <h2>7. Permissions</h2>
-        <p>Depending on the features you use, the app may request:</p>
-        <ul>
-            <li>Precise Location</li>
-            <li>Notifications</li>
-            <li>Alarms &amp; Reminders</li>
-            <li>Storage Access (for Export &amp; Import Backup)</li>
-        </ul>
-        <p>Each permission is used only for its intended purpose and is never used to collect personal information.</p>
-
-        <h2>8. Children's Privacy</h2>
-        <p>Find My Car is not intended for children under the age of 13. We do not knowingly collect personal information from children.</p>
-
-        <h2>9. Changes to This Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Any changes will be published within the application or on the Privacy Policy webpage.</p>
-
-        <h2>10. Contact Us</h2>
-        <div class="contact">
-            <p><strong>John Development Studio</strong></p>
-            <p>Email:<br><strong>john.irianto.susanto.dev@gmail.com</strong></p>
+        <div class="privacy-summary">
+            <div class="summary-item">
+                <div class="icon">🔒</div>
+                <h4>Pengumpulan Data</h4>
+                <p>Tidak ada data yang dikumpulkan oleh pengembang.</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon">📡</div>
+                <h4>Koneksi Internet</h4>
+                <p>Tidak diperlukan untuk fitur inti.</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon">👤</div>
+                <h4>Akun</h4>
+                <p>Tidak perlu akun atau login.</p>
+            </div>
+            <div class="summary-item">
+                <div class="icon">💾</div>
+                <h4>Penyimpanan Data</h4>
+                <p>Hanya di perangkat lokal Anda.</p>
+            </div>
         </div>
 
-        <div class="footer">
-            <p><strong>Find My Car</strong></p>
-            <p>© 2026 John Development Studio. All rights reserved.</p>
+        <div class="privacy-text">
+            <p><strong>Find My Car</strong> <strong>tidak</strong> mengumpulkan, menyimpan, atau membagikan informasi pribadi apa pun. Semua data lokasi parkir tetap <strong>lokal</strong> di perangkat Anda. Aplikasi hanya menggunakan izin lokasi untuk menyimpan dan menampilkan posisi parkir. Tidak ada server eksternal, tidak ada pelacakan. Untuk detail lengkap, baca <a href="privacy_policy.html" target="_blank">Kebijakan Privasi →</a></p>
         </div>
-    </div>
+    </section>
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <p>&copy; 2026 Find My Car. All rights reserved.</p>
+    <!-- User Guide Section -->
+    <section id="guide" class="guide-section">
+        <div class="section-header">
+            <h2>Panduan Pengguna</h2>
+            <div class="divider"></div>
+            <p>Langkah-langkah mudah untuk mulai menggunakan Find My Car</p>
+        </div>
+
+        <div class="guide-container">
+            <div class="guide-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Unduh & Buka Aplikasi</h3>
+                    <p>Unduh Find My Car dari Google Play Store. Buka aplikasi dan izinkan akses lokasi untuk fitur penyimpanan parkir.</p>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Simpan Lokasi Parkir</h3>
+                    <p>Setelah memarkir mobil, buka aplikasi dan tekan tombol <strong>SIMPAN LOKASI</strong>. Aplikasi akan mencatat koordinat GPS dan waktu parkir secara otomatis.</p>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Temukan Mobil Anda</h3>
+                    <p>Saat ingin kembali ke mobil, buka aplikasi dan tekan <strong>TEMUKAN MOBIL</strong>. Ikuti panduan kompas yang menunjukkan arah dan jarak ke lokasi parkir Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 John Irianto Susanto. All rights reserved.</p>
     </footer>
 
 </body>
