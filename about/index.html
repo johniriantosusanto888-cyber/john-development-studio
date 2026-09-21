@@ -1,0 +1,423 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>About John Irianto Susanto | JD Studio</title>
+
+  <meta
+    name="description"
+    content="Learn about John Irianto Susanto, Android developer and founder of JD Studio, creating practical mobile applications and digital tools."
+  />
+
+  <link
+    rel="canonical"
+    href="https://jdstudio.my.id/about.html"
+  />
+
+  <meta
+    property="og:title"
+    content="About John Irianto Susanto | JD Studio"
+  />
+
+  <meta
+    property="og:description"
+    content="Android developer and founder of JD Studio."
+  />
+
+  <meta
+    property="og:url"
+    content="https://jdstudio.my.id/about.html"
+  />
+
+  <meta property="og:type" content="profile" />
+
+  <!-- Person Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "John Irianto Susanto",
+    "url": "https://jdstudio.my.id/about.html",
+    "jobTitle": "Android Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "JD Studio",
+      "url": "https://jdstudio.my.id/"
+    },
+    "sameAs": [
+      "https://play.google.com/store/apps/details?id=com.johniriantosusanto.androidfileserverapp"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #64707d;
+      --cream: #f7f2e9;
+      --gold: #b58b4b;
+      --card: #fffdf8;
+      --line: #e5dccd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    .wrap {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .nav a {
+      color: var(--ink);
+      text-decoration: none;
+      margin-left: 22px;
+      font-size: 0.95rem;
+    }
+
+    .nav a:hover {
+      color: var(--gold);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 70px 0 80px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(2.6rem, 6vw, 5.3rem);
+      line-height: 1.02;
+      margin: 18px 0;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 12px 20px;
+      background: var(--ink);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 999px;
+      margin-right: 8px;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    .btn.alt {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--ink);
+    }
+
+    /* Founder Card */
+    .portrait {
+      min-height: 350px;
+      border: 1px solid var(--line);
+      background: linear-gradient(
+        145deg,
+        #e8ddca,
+        #fffdf8
+      );
+      border-radius: 28px;
+      display: flex;
+      align-items: end;
+      padding: 28px;
+      box-shadow: 0 20px 60px #34271512;
+    }
+
+    .portrait .card {
+      background: #ffffffd9;
+      padding: 22px;
+      border-radius: 18px;
+      width: 100%;
+    }
+
+    /* Sections */
+    .section {
+      padding: 65px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section h2 {
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      margin: 0 0 18px;
+    }
+
+    /* Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .box {
+      background: var(--card);
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+    }
+
+    .box h3 {
+      margin-top: 0;
+    }
+
+    .box p {
+      color: var(--muted);
+    }
+
+    .box a {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      padding: 35px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 40px 0 55px;
+      }
+
+      .portrait {
+        min-height: 240px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav a {
+        margin-left: 10px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="wrap nav">
+    <div class="brand">JD STUDIO</div>
+
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about.html" aria-current="page">About</a>
+      <a href="/#projects">Projects</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero Section -->
+    <section class="wrap hero">
+
+      <div>
+        <div class="eyebrow">About the founder</div>
+
+        <h1>John Irianto Susanto</h1>
+
+        <p>
+          Android developer and founder of JD Studio,
+          creating practical mobile applications and
+          digital tools designed to solve everyday problems.
+        </p>
+
+        <a class="btn" href="/#projects">
+          Explore projects
+        </a>
+
+        <a
+          class="btn alt"
+          href="mailto:hello@jdstudio.my.id"
+        >
+          Contact
+        </a>
+      </div>
+
+      <div class="portrait">
+        <div class="card">
+          <strong>JD Studio</strong>
+          <br />
+          Independent software development
+          <br />
+
+          <span style="color: var(--muted)">
+            Jakarta, Indonesia
+          </span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- About Me -->
+    <section class="section">
+      <div class="wrap">
+
+        <h2>About me</h2>
+
+        <p>
+          I am John Irianto Susanto, an Android developer
+          based in Jakarta, Indonesia. My work combines
+          technology, practical problem-solving, and
+          business experience to create useful applications
+          for individuals and small businesses.
+        </p>
+
+        <p>
+          Through JD Studio, I build and improve mobile
+          products with a focus on usability, straightforward
+          workflows, and features that provide real-world value.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- What I Build -->
+    <section class="section">
+      <div class="wrap">
+
+        <h2>What I build</h2>
+
+        <div class="grid">
+
+          <article class="box">
+            <h3>Android applications</h3>
+
+            <p>
+              Mobile tools built with a focus on useful
+              features, accessible interfaces, and reliable
+              everyday performance.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3>Business tools</h3>
+
+            <p>
+              Practical solutions for invoicing, printing,
+              customer management, and small-business workflows.
+            </p>
+          </article>
+
+          <article class="box">
+            <h3>Independent projects</h3>
+
+            <p>
+              Experimenting with new ideas, refining user
+              experiences, and turning concepts into
+              working applications.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Selected Projects -->
+    <section class="section" id="projects">
+      <div class="wrap">
+
+        <h2>Selected project</h2>
+
+        <div class="box">
+
+          <h3>Android File Server</h3>
+
+          <p>
+            An Android utility for transferring files over
+            a local network, with an offline video-to-audio
+            conversion feature.
+          </p>
+
+          <a
+            href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.androidfileserverapp"
+            target="_blank"
+            rel="noopener"
+          >
+            View on Google Play →
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span>
+      John Irianto Susanto · JD Studio
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
