@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Pet - Adopt, Care & Play!</title>
     <meta name="description" content="Adopt cute virtual pets, feed them, play mini-games, and watch them grow! Join the global leaderboard in Virtual Pet.">
+
+    <!-- Open Graph (untuk share di sosmed) -->
+    <meta property="og:title" content="Virtual Pet - Adopt, Care & Play!">
+    <meta property="og:description" content="Adopt cute pets, feed them, play 15+ mini-games, and compete globally!">
+    <meta property="og:image" content="virtual_pet.png">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="virtual_pet.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary: #6C5CE7;
@@ -28,6 +39,8 @@
             box-sizing: border-box;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Nunito', sans-serif;
             background: var(--bg-dark);
@@ -41,9 +54,10 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 16px 0;
+            padding: 12px 0;
             background: rgba(15, 15, 26, 0.9);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid var(--border);
         }
@@ -58,18 +72,20 @@
         }
 
         .logo {
-            font-size: 22px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--text);
+            text-decoration: none;
         }
 
-        .logo span { font-size: 26px; -webkit-text-fill-color: initial; }
+        .logo img {
+            height: 36px;
+            width: auto;
+            border-radius: 8px;
+        }
 
         .nav-links {
             display: flex;
@@ -94,11 +110,14 @@
             border-radius: 50px;
             font-weight: 700 !important;
             font-size: 13px !important;
+            transition: background 0.2s;
         }
+
+        .btn-nav:hover { background: var(--primary-dark); }
 
         /* --- HERO SECTION --- */
         .hero {
-            padding: 140px 24px 80px;
+            padding: 130px 24px 80px;
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
@@ -180,6 +199,18 @@
             justify-content: center;
         }
 
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.3), transparent 70%);
+            z-index: 0;
+        }
+
         .phone-frame {
             width: 280px;
             height: 560px;
@@ -189,18 +220,20 @@
             overflow: hidden;
             box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
             position: relative;
+            z-index: 1;
         }
 
         .phone-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         /* --- STATS BAR --- */
         .stats-bar {
             max-width: 1100px;
-            margin: 0 auto;
+            margin: 40px auto 0;
             padding: 0 24px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -213,12 +246,21 @@
             border-radius: 16px;
             padding: 20px;
             text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
         }
 
         .stat-item .value {
             font-size: 28px;
             font-weight: 900;
-            color: var(--secondary);
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-item .label {
@@ -229,7 +271,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- FEATURES --- */
+        /* --- SECTIONS --- */
         .section {
             max-width: 1100px;
             margin: 0 auto;
@@ -254,6 +296,7 @@
             margin: 0 auto;
         }
 
+        /* --- FEATURES --- */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -291,29 +334,35 @@
             line-height: 1.6;
         }
 
-        /* --- SCREENSHOTS --- */
+        /* --- SCREENSHOTS SCROLL --- */
         .screenshots-scroll {
             display: flex;
             gap: 20px;
             overflow-x: auto;
-            padding: 20px 0 40px;
+            padding: 20px 4px 40px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
         }
 
         .screenshots-scroll::-webkit-scrollbar { height: 6px; }
-        .screenshots-scroll::-webkit-scrollbar-track { background: var(--bg-card); border-radius: 3px; }
-        .screenshots-scroll::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+        .screenshots-scroll::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 3px;
+        }
+        .screenshots-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
 
         .screenshot-item {
             flex: 0 0 auto;
-            width: 240px;
+            width: 220px;
             scroll-snap-align: start;
         }
 
         .screenshot-item .phone-frame {
-            width: 240px;
-            height: 480px;
+            width: 220px;
+            height: 440px;
             border-radius: 28px;
             border-width: 5px;
         }
@@ -326,7 +375,7 @@
             font-weight: 600;
         }
 
-        /* --- HOW TO PLAY --- */
+        /* --- HOW TO PLAY STEPS --- */
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -337,8 +386,14 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 28px;
+            padding: 32px 28px 28px;
             position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--secondary);
         }
 
         .step-number {
@@ -354,13 +409,13 @@
             justify-content: center;
             font-weight: 900;
             font-size: 14px;
+            color: white;
         }
 
         .step-card h3 {
             font-size: 16px;
             font-weight: 800;
             margin-bottom: 8px;
-            margin-top: 8px;
         }
 
         .step-card p {
@@ -385,11 +440,27 @@
             padding: 14px 16px;
             border-radius: 12px;
             margin-bottom: 8px;
+            transition: transform 0.15s;
         }
 
-        .lb-row.rank-1 { background: linear-gradient(135deg, rgba(253, 121, 168, 0.2), rgba(253, 121, 168, 0.05)); border: 1px solid var(--secondary); }
-        .lb-row.rank-2 { background: rgba(108, 92, 231, 0.1); border: 1px solid var(--border); }
-        .lb-row.rank-3 { background: rgba(0, 206, 201, 0.05); border: 1px solid var(--border); }
+        .lb-row:hover { transform: translateX(4px); }
+
+        .lb-row.rank-1 {
+            background: linear-gradient(135deg, rgba(253, 121, 168, 0.2), rgba(253, 121, 168, 0.05));
+            border: 1px solid var(--secondary);
+        }
+        .lb-row.rank-2 {
+            background: rgba(108, 92, 231, 0.1);
+            border: 1px solid var(--border);
+        }
+        .lb-row.rank-3 {
+            background: rgba(0, 206, 201, 0.05);
+            border: 1px solid var(--border);
+        }
+        .lb-row:not(.rank-1):not(.rank-2):not(.rank-3) {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+        }
 
         .lb-rank {
             width: 32px;
@@ -441,7 +512,7 @@
         /* --- FOOTER --- */
         footer {
             border-top: 1px solid var(--border);
-            padding: 40px 24px;
+            padding: 48px 24px;
             text-align: center;
             margin-top: 80px;
         }
@@ -456,7 +527,10 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 700;
+            transition: color 0.2s;
         }
+
+        footer a:hover { color: var(--secondary); }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
@@ -464,18 +538,21 @@
                 grid-template-columns: 1fr;
                 padding-top: 110px;
                 text-align: center;
+                gap: 40px;
             }
             .hero-content p { margin-left: auto; margin-right: auto; }
             .hero-buttons { justify-content: center; }
             .hero-visual { order: -1; }
             .phone-frame { width: 220px; height: 440px; }
             .stats-bar { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { display: none; }
+            .nav-links a:not(.btn-nav) { display: none; }
         }
 
         @media (max-width: 480px) {
             .stats-bar { grid-template-columns: 1fr 1fr; gap: 12px; }
             .stat-item .value { font-size: 22px; }
+            .section { padding: 60px 20px; }
+            .hero { padding: 100px 20px 60px; }
         }
     </style>
 </head>
@@ -485,7 +562,8 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">
-                <span>🐾</span> Virtual Pet
+                <img src="virtual_pet.png" alt="Virtual Pet Logo">
+                <span>Virtual Pet</span>
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
@@ -512,7 +590,7 @@
         </div>
         <div class="hero-visual">
             <div class="phone-frame">
-                <img src="https://placehold.co/280x560/1A1A2E/FD79A8?text=Pet+Home+Screen" alt="Virtual Pet Home Screen">
+                <img src="device-shot.png" alt="Virtual Pet Home Screen">
             </div>
         </div>
     </section>
@@ -586,33 +664,57 @@
         <div class="screenshots-scroll">
             <div class="screenshot-item">
                 <div class="phone-frame">
-                    <img src="https://placehold.co/240x480/1A1A2E/FD79A8?text=Pet+Home" alt="Pet Home Screen">
+                    <img src="device-shot.png" alt="Pet Home Screen">
                 </div>
                 <p>Pet Home</p>
             </div>
             <div class="screenshot-item">
                 <div class="phone-frame">
-                    <img src="https://placehold.co/240x480/1A1A2E/6C5CE7?text=Mini-Games" alt="Mini-Games Screen">
+                    <img src="device-shot1.png" alt="Mini-Games">
                 </div>
                 <p>Mini-Games</p>
             </div>
             <div class="screenshot-item">
                 <div class="phone-frame">
-                    <img src="https://placehold.co/240x480/1A1A2E/00CEC9?text=Leaderboard" alt="Leaderboard Screen">
+                    <img src="device-shot2.png" alt="Game Variety">
                 </div>
-                <p>Leaderboard</p>
+                <p>Game Variety</p>
             </div>
             <div class="screenshot-item">
                 <div class="phone-frame">
-                    <img src="https://placehold.co/240x480/1A1A2E/FD79A8?text=Help+%26+FAQ" alt="Help & FAQ Screen">
+                    <img src="device-shot3.png" alt="Pet Selection">
+                </div>
+                <p>Choose Your Pet</p>
+            </div>
+            <div class="screenshot-item">
+                <div class="phone-frame">
+                    <img src="device-shot5.png" alt="Help & FAQ">
                 </div>
                 <p>Help & FAQ</p>
             </div>
             <div class="screenshot-item">
                 <div class="phone-frame">
-                    <img src="https://placehold.co/240x480/1A1A2E/6C5CE7?text=Pet+Selection" alt="Pet Selection Screen">
+                    <img src="device-shot6.png" alt="Leaderboard">
                 </div>
-                <p>Choose Your Pet</p>
+                <p>Leaderboard</p>
+            </div>
+            <div class="screenshot-item">
+                <div class="phone-frame">
+                    <img src="device-shot8.png" alt="Game Collection">
+                </div>
+                <p>More Games</p>
+            </div>
+            <div class="screenshot-item">
+                <div class="phone-frame">
+                    <img src="device-shot9.png" alt="Aquatic Games">
+                </div>
+                <p>Aquatic Fun</p>
+            </div>
+            <div class="screenshot-item">
+                <div class="phone-frame">
+                    <img src="device-shot10.png" alt="Memory Games">
+                </div>
+                <p>Memory & Logic</p>
             </div>
         </div>
     </section>
@@ -692,7 +794,8 @@
         <div class="cta-section">
             <h2>Ready to Meet Your New Best Friend?</h2>
             <p>Download Virtual Pet now and start your adventure. It's free to play!</p>
-            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.virtualpet" class="btn-primary" target="_blank" rel="noopener">
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.virtualpet"
+               class="btn-primary" target="_blank" rel="noopener">
                 <span>▶</span> Get it on Google Play
             </a>
         </div>
@@ -705,8 +808,9 @@
         <p><a href="privacy-policy.html">Privacy Policy</a></p>
     </footer>
 
-    <!-- SMOOTH SCROLL -->
+    <!-- SCRIPTS -->
     <script>
+        // Smooth scroll untuk anchor link
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
