@@ -39,6 +39,11 @@
             padding-bottom: 8px;
             border-bottom: 2px solid #E8EAF6;
         }
+        h3 {
+            font-size: 15px;
+            color: #3949AB;
+            margin: 16px 0 8px 0;
+        }
         p  { margin-bottom: 12px; font-size: 15px; }
         ul { margin: 8px 0 12px 20px; }
         li { margin-bottom: 6px; font-size: 15px; }
@@ -49,6 +54,10 @@
             border-radius: 0 8px 8px 0;
             margin: 12px 0;
             font-size: 15px;
+        }
+        .highlight.warn {
+            background: #FFF3E0;
+            border-left-color: #F57C00;
         }
         .badge {
             display: inline-block;
@@ -75,7 +84,7 @@
 <header>
     <h1>🔒 Privacy Policy</h1>
     <p>Air Drop - Android File Server</p>
-    <p>Effective date: September 2026</p>
+    <p>Effective date: October 2026</p>
 </header>
 
 <div class="container">
@@ -89,9 +98,10 @@
         </p>
         <div class="highlight">
             The Developer does <strong>not collect, store, or have access to your personal
-            files, camera preview, or photos captured through the Remote Camera feature</strong>.
-            File transfers, audio conversions, and Remote Camera operations are performed
-            by the App on the user's device and through the App's local web server.
+            files, camera preview, photos, videos, or audio recordings</strong> created
+            through the Remote Camera feature. File transfers, audio conversions, and
+            Remote Camera operations are performed by the App on the user's device and
+            through the App's local web server.
         </div>
     </div>
 
@@ -106,6 +116,9 @@
             <li>The actual contents of files transferred or converted</li>
             <li>Camera preview data from the Remote Camera feature</li>
             <li>Photos captured using the Remote Camera feature</li>
+            <li>Videos recorded using the Remote Camera feature</li>
+            <li>Audio recordings captured with video recordings</li>
+            <li>Microphone input at any time</li>
         </ul>
 
         <p>
@@ -174,10 +187,111 @@
             The Developer does not have access to the camera preview, captured photos,
             or Remote Camera sessions.
         </p>
+
+        <h3>3.1 Video Recording (with Optional Audio)</h3>
+
+        <p>
+            The Remote Camera feature includes an optional <strong>video recording</strong>
+            mode. When the user starts a video recording:
+        </p>
+
+        <ul>
+            <li>
+                Video is recorded from the device camera and saved to the local folder
+                <code>Download/AndroidFileServer/</code> on the user's device.
+            </li>
+            <li>
+                If the user has granted the microphone permission
+                (<code>RECORD_AUDIO</code>), audio from the device's microphone is
+                recorded together with the video.
+            </li>
+            <li>
+                If the user has <strong>not</strong> granted microphone permission, or
+                has revoked it, the video will be recorded <strong>silently</strong>
+                without audio — the App never blocks recording because of missing audio.
+            </li>
+            <li>
+                Audio capture begins <strong>only</strong> when the user explicitly
+                starts a video recording, and ends when the user stops it.
+            </li>
+            <li>
+                Audio is <strong>never</strong> captured in the background, never
+                transmitted over the internet, and never sent to any external server.
+            </li>
+        </ul>
+
+        <div class="highlight warn">
+            🎙️ Audio is captured <strong>only</strong> while the user is actively
+            recording video, and is stored <strong>only</strong> on the user's own
+            device. The Developer has no access to any audio recordings at any time.
+        </div>
     </div>
 
     <div class="card">
-        <h2>4. Audio Conversion</h2>
+        <h2>4. Microphone &amp; Audio Recording</h2>
+
+        <p>
+            The App requests permission to access the device microphone
+            (<code>android.permission.RECORD_AUDIO</code>) <strong>only</strong> to
+            enable audio recording synchronized with video in the Remote Camera's
+            video mode.
+        </p>
+
+        <p>The microphone permission is used for the following purposes:</p>
+
+        <ul>
+            <li>Recording audio together with video when the user activates video mode.</li>
+        </ul>
+
+        <p>The microphone is <strong>NOT</strong> used for any of the following:</p>
+
+        <ul>
+            <li>Background audio recording</li>
+            <li>Voice recognition or speech-to-text</li>
+            <li>Phone call recording</li>
+            <li>Audio fingerprinting</li>
+            <li>Advertising or user profiling</li>
+            <li>Any purpose other than the local video recording feature described above</li>
+        </ul>
+
+        <h3>4.1 Local Storage Only</h3>
+
+        <p>
+            All audio recordings are stored <strong>locally</strong> on your device in
+            the folder <code>Download/AndroidFileServer/</code> inside the recorded
+            <code>.mp4</code> video file. Audio is:
+        </p>
+
+        <ul>
+            <li><strong>Never</strong> uploaded to any external server</li>
+            <li><strong>Never</strong> shared with third parties</li>
+            <li><strong>Never</strong> transmitted over the internet by the Developer</li>
+            <li>Accessible and deletable by you at any time via your device's file manager</li>
+        </ul>
+
+        <h3>4.2 Optional — Not Required for the App</h3>
+
+        <p>
+            The microphone permission is <strong>optional</strong>. If you deny or
+            revoke the microphone permission:
+        </p>
+
+        <ul>
+            <li>The App will continue to work normally.</li>
+            <li>Video recording will still work, but without audio.</li>
+            <li>You can enable microphone access later through your device
+                Settings → Apps → Air Drop - Android File Server → Permissions.</li>
+        </ul>
+
+        <div class="highlight">
+            🔐 You have full control over the microphone permission. The App only uses
+            the microphone after you explicitly grant the permission and explicitly
+            start a video recording.
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>5. Audio Conversion</h2>
         <p>
             The App includes an Audio Converter (MP3 and OGG). This feature uses
             open-source libraries (LAME and AndroidX Media3) to convert files.
@@ -187,7 +301,7 @@
     </div>
 
     <div class="card">
-        <h2>5. Advertising & Analytics</h2>
+        <h2>6. Advertising &amp; Analytics</h2>
         <p>
             The App uses <strong>Google AdMob</strong> for advertising and
             <strong>Firebase Analytics</strong> for usage statistics and analytics.
@@ -208,10 +322,59 @@
             to the personal data collected by Google for advertising and analytics
             purposes beyond information made available through those services.
         </p>
+
+        <p>
+            <strong>Note:</strong> AdMob and Firebase Analytics do <strong>not</strong>
+            have access to the microphone, camera, or any audio/video recordings created
+            by the App.
+        </p>
     </div>
 
     <div class="card">
-        <h2>6. Children's Privacy</h2>
+        <h2>7. Permissions Used by the App</h2>
+        <p>The App requests the following Android permissions:</p>
+
+        <ul>
+            <li>
+                <strong>CAMERA</strong> — to provide the Remote Camera feature
+                (preview, photo capture, video recording).
+            </li>
+            <li>
+                <strong>RECORD_AUDIO</strong> — <em>optional</em>; to record audio
+                synchronized with video recordings in Remote Camera's video mode.
+            </li>
+            <li>
+                <strong>INTERNET / ACCESS_NETWORK_STATE / ACCESS_WIFI_STATE</strong> —
+                to run the local web server and serve the App's web interface on the
+                same network.
+            </li>
+            <li>
+                <strong>READ_EXTERNAL_STORAGE / WRITE_EXTERNAL_STORAGE /
+                MANAGE_EXTERNAL_STORAGE</strong> — to save files, photos, and videos
+                to the device's Downloads folder.
+            </li>
+            <li>
+                <strong>FOREGROUND_SERVICE / FOREGROUND_SERVICE_DATA_SYNC</strong> —
+                to keep the file server running while the App is in the background.
+            </li>
+            <li>
+                <strong>WAKE_LOCK</strong> — to prevent the device from sleeping
+                while the server or camera is running.
+            </li>
+            <li>
+                <strong>POST_NOTIFICATIONS</strong> — to display the foreground
+                service notification.
+            </li>
+        </ul>
+
+        <p>
+            You can review and revoke any permission at any time through your device
+            Settings → Apps → Air Drop - Android File Server → Permissions.
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>8. Children's Privacy</h2>
         <p>
             This App is not directed at children under the age of 13. We do not
             knowingly collect any personal information from children. If you believe
@@ -221,7 +384,7 @@
     </div>
 
     <div class="card">
-        <h2>7. Third-Party Services & Open Source Licenses</h2>
+        <h2>9. Third-Party Services &amp; Open Source Licenses</h2>
         <p>The App uses the following third-party services and libraries:</p>
 
         <ul>
@@ -236,13 +399,17 @@
             </li>
             <li>
                 <strong>AndroidX Media3</strong> — Licensed under Apache 2.0. Used for
-                OGG/Opus conversion.
+                OGG/Opus conversion and video recording.
+            </li>
+            <li>
+                <strong>AndroidX CameraX</strong> — Licensed under Apache 2.0. Used for
+                camera preview, photo capture, and video recording.
             </li>
         </ul>
     </div>
 
     <div class="card">
-        <h2>8. Changes to This Policy</h2>
+        <h2>10. Changes to This Policy</h2>
         <p>
             We may update this Privacy Policy from time to time. Any changes will be
             posted on this page with an updated effective date. We encourage you to
@@ -251,7 +418,7 @@
     </div>
 
     <div class="card">
-        <h2>9. Contact Us</h2>
+        <h2>11. Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, please contact:</p>
 
         <ul>
@@ -281,7 +448,7 @@
 
 <footer>
     <p>© 2026 John Irianto Susanto · Air Drop - Android File Server</p>
-    <p>Last updated: September 2026</p>
+    <p>Last updated: October 2026</p>
 </footer>
 
 </body>
