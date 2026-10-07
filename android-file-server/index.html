@@ -23,13 +23,11 @@
             --orange-light: #FFCC80;
             --green: #16A34A;
             --green-light: #4ADE80;
+            --red: #DC2626;
+            --red-light: #F87171;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -39,7 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
         nav {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             padding: 1rem 0;
@@ -83,10 +80,7 @@
             font-size: 0.95rem;
         }
 
-        .nav-links a:hover {
-            color: white;
-            transform: translateY(-2px);
-        }
+        .nav-links a:hover { color: white; transform: translateY(-2px); }
 
         .btn-back {
             background: rgba(255,255,255,0.2);
@@ -95,11 +89,8 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .btn-back:hover {
-            background: rgba(255,255,255,0.3);
-        }
+        .btn-back:hover { background: rgba(255,255,255,0.3); }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #0c1a3a 0%, #1e3a5f 50%, #0c1a3a 100%);
             color: white;
@@ -112,10 +103,8 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 50px 50px;
             opacity: 0.3;
@@ -140,16 +129,10 @@
             transition: transform 0.3s ease;
         }
 
-        .hero-app-icon:hover {
-            transform: scale(1.05);
-        }
+        .hero-app-icon:hover { transform: scale(1.05); }
 
         @media (max-width: 768px) {
-            .hero-app-icon {
-                max-width: 160px;
-                border-radius: 20px;
-                border-width: 3px;
-            }
+            .hero-app-icon { max-width: 160px; border-radius: 20px; border-width: 3px; }
         }
 
         .hero-badge {
@@ -178,12 +161,7 @@
             margin: 0 auto 2rem;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
         .btn {
             display: inline-flex;
@@ -205,10 +183,7 @@
             box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
-        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5); }
 
         .btn-secondary {
             background: rgba(255,255,255,0.1);
@@ -217,46 +192,22 @@
             backdrop-filter: blur(10px);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-3px);
-        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
 
-        /* Section Styles */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+        .section-header { text-align: center; margin-bottom: 3rem; }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark);
-            margin-bottom: 1rem;
-        }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark); margin-bottom: 1rem; }
 
-        .section-header p {
-            color: var(--gray);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .section-header p { color: var(--gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
 
         .divider {
-            width: 60px;
-            height: 4px;
+            width: 60px; height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
-            margin: 1rem auto;
-            border-radius: 2px;
+            margin: 1rem auto; border-radius: 2px;
         }
 
-        /* Features Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -277,29 +228,20 @@
 
         .feature-card::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             transform: scaleX(0);
             transition: transform 0.3s;
             transform-origin: left;
         }
 
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
+        .feature-card:hover::before { transform: scaleX(1); }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15);
-        }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.15); }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             border-radius: 16px;
             display: flex;
@@ -310,19 +252,10 @@
             margin-bottom: 1.5rem;
         }
 
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--dark);
-        }
+        .feature-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: var(--dark); }
 
-        .feature-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
+        .feature-card p { color: var(--gray); font-size: 0.95rem; line-height: 1.7; }
 
-        /* New Badge */
         .badge-new {
             display: inline-block;
             background: linear-gradient(135deg, #16A34A, #4ADE80);
@@ -337,39 +270,34 @@
             vertical-align: middle;
         }
 
-        /* Highlight Card (for new features) */
         .feature-card.highlight {
             border: 2px solid var(--purple);
             background: linear-gradient(135deg, #FFFFFF 0%, #F3E8FF 100%);
         }
 
-        .feature-card.highlight::before {
-            background: linear-gradient(90deg, var(--purple), var(--purple-light));
-            transform: scaleX(1);
-        }
+        .feature-card.highlight::before { background: linear-gradient(90deg, var(--purple), var(--purple-light)); transform: scaleX(1); }
 
-        .feature-card.highlight .feature-icon {
-            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
-        }
+        .feature-card.highlight .feature-icon { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%); }
 
         .feature-card.camera-highlight {
             border: 2px solid var(--orange);
             background: linear-gradient(135deg, #FFFFFF 0%, #FFF7ED 100%);
         }
 
-        .feature-card.camera-highlight::before {
-            background: linear-gradient(90deg, var(--orange), var(--orange-light));
-            transform: scaleX(1);
+        .feature-card.camera-highlight::before { background: linear-gradient(90deg, var(--orange), var(--orange-light)); transform: scaleX(1); }
+
+        .feature-card.camera-highlight .feature-icon { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); }
+
+        .feature-card.video-highlight {
+            border: 2px solid var(--red);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FEF2F2 100%);
         }
 
-        .feature-card.camera-highlight .feature-icon {
-            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
-        }
+        .feature-card.video-highlight::before { background: linear-gradient(90deg, var(--red), var(--red-light)); transform: scaleX(1); }
 
-        /* Screenshots */
-        .screenshots-section {
-            background: linear-gradient(to bottom, #eff6ff, var(--light));
-        }
+        .feature-card.video-highlight .feature-icon { background: linear-gradient(135deg, var(--red) 0%, var(--red-light) 100%); }
+
+        .screenshots-section { background: linear-gradient(to bottom, #eff6ff, var(--light)); }
 
         .screenshots-grid {
             display: grid;
@@ -389,23 +317,13 @@
             max-height: 600px;
         }
 
-        .screenshot-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3);
-        }
+        .screenshot-item:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 60px -10px rgba(0,0,0,0.3); }
 
-        .screenshot-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .screenshot-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         .screenshot-label {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white;
             padding: 2rem 1.5rem 1.5rem;
@@ -413,10 +331,7 @@
             font-size: 0.95rem;
         }
 
-        /* Privacy Policy Section */
-        .privacy-section {
-            background: white;
-        }
+        .privacy-section { background: white; }
 
         .privacy-summary {
             display: grid;
@@ -433,20 +348,11 @@
             text-align: center;
         }
 
-        .privacy-summary .summary-item .icon {
-            font-size: 2rem;
-        }
+        .privacy-summary .summary-item .icon { font-size: 2rem; }
 
-        .privacy-summary .summary-item h4 {
-            margin: 0.5rem 0 0.2rem;
-            color: var(--dark);
-        }
+        .privacy-summary .summary-item h4 { margin: 0.5rem 0 0.2rem; color: var(--dark); }
 
-        .privacy-summary .summary-item p {
-            font-size: 0.9rem;
-            margin: 0;
-            color: var(--gray);
-        }
+        .privacy-summary .summary-item p { font-size: 0.9rem; margin: 0; color: var(--gray); }
 
         .privacy-text {
             max-width: 900px;
@@ -456,20 +362,11 @@
             line-height: 1.8;
         }
 
-        .privacy-text a {
-            color: var(--primary);
-            font-weight: 600;
-        }
+        .privacy-text a { color: var(--primary); font-weight: 600; }
 
-        /* User Guide */
-        .guide-section {
-            background: white;
-        }
+        .guide-section { background: white; }
 
-        .guide-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .guide-container { max-width: 900px; margin: 0 auto; }
 
         .guide-step {
             display: flex;
@@ -479,8 +376,7 @@
         }
 
         .step-number {
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             border-radius: 50%;
@@ -493,28 +389,14 @@
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
 
-        .step-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
+        .step-content h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--dark); }
 
-        .step-content p {
-            color: var(--gray);
-            line-height: 1.8;
-        }
+        .step-content p { color: var(--gray); line-height: 1.8; }
 
-        .step-content ul {
-            margin-top: 0.5rem;
-            margin-left: 1.2rem;
-            color: var(--gray);
-        }
+        .step-content ul { margin-top: 0.5rem; margin-left: 1.2rem; color: var(--gray); }
 
-        .step-content li {
-            margin-bottom: 0.4rem;
-        }
+        .step-content li { margin-bottom: 0.4rem; }
 
-        /* Download Section */
         .download-section {
             background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
             color: white;
@@ -525,26 +407,11 @@
             max-width: 1000px;
         }
 
-        .download-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+        .download-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
 
-        .download-section p {
-            opacity: 0.8;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .download-section p { opacity: 0.8; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        .download-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
+        .download-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
 
         .download-btn {
             display: inline-flex;
@@ -558,103 +425,38 @@
             border: 2px solid transparent;
         }
 
-        .download-btn i {
-            font-size: 2rem;
-        }
+        .download-btn i { font-size: 2rem; }
 
-        .download-btn .small {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 400;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .download-btn .small { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.8; text-transform: uppercase; letter-spacing: 1px; }
 
-        .download-btn .big {
-            display: block;
-            font-size: 1.1rem;
-        }
+        .download-btn .big { display: block; font-size: 1.1rem; }
 
-        .btn-playstore {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
-        }
+        .btn-playstore { background: var(--primary); color: white; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4); }
 
-        .btn-playstore:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6);
-        }
+        .btn-playstore:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6); }
 
-        .btn-github {
-            background: transparent;
-            color: white;
-            border-color: rgba(255,255,255,0.3);
-        }
+        .btn-github { background: transparent; color: white; border-color: rgba(255,255,255,0.3); }
 
-        .btn-github:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: white;
-            transform: translateY(-3px);
-        }
+        .btn-github:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-3px); }
 
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            padding: 3rem 2rem;
-            font-size: 0.9rem;
-        }
+        footer { background: var(--dark); color: rgba(255,255,255,0.6); text-align: center; padding: 3rem 2rem; font-size: 0.9rem; }
 
-        footer a {
-            color: var(--accent-light);
-            text-decoration: none;
-        }
+        footer a { color: var(--accent-light); text-decoration: none; }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.8rem;
-            }
-
-            .guide-step {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .screenshots-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 3rem auto 0;
-            }
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { gap: 1rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .guide-step { flex-direction: column; gap: 1rem; }
+            .screenshots-grid { grid-template-columns: 1fr; max-width: 400px; margin: 3rem auto 0; }
         }
 
-        /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .animate {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
+        .animate { animation: fadeInUp 0.8s ease-out forwards; }
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
@@ -672,6 +474,7 @@
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#camera">Remote Camera</a>
+                <a href="#video">Video Recording</a> <!-- UPDATED -->
                 <a href="#screenshots">Screenshots</a>
                 <a href="#guide">User Guide</a>
                 <a href="#privacy">Privacy</a>
@@ -686,13 +489,13 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
-                <i class="fas fa-wifi"></i> Android Application · v2.0
+                <i class="fas fa-wifi"></i> Android Application · v3.0
             </div>
 
             <img src="../images/AndroidFileServer.png" class="hero-app-icon" alt="Android File Server App Icon">
 
             <h1>Android File Server</h1>
-            <p>Transfer files wirelessly, convert audio, and control your phone's camera remotely — all over Wi-Fi. No cables, no cloud, no internet needed.</p>
+            <p>Transfer files wirelessly, convert audio, and control your phone's camera — including video recording — all over Wi-Fi. No cables, no cloud, no internet needed.</p> <!-- UPDATED -->
             <div class="hero-buttons">
                 <a href="#download" class="btn btn-primary">
                     <i class="fas fa-download"></i> Download Now
@@ -707,18 +510,27 @@
     <!-- What's New Section -->
     <section id="whats-new" style="background: linear-gradient(135deg, #FFF7ED 0%, #F3E8FF 100%);">
         <div class="section-header">
-            <h2>🎉 What's New in v2.0</h2>
+            <h2>🎉 What's New in v3.0</h2> <!-- UPDATED -->
             <div class="divider"></div>
-            <p>Three major new features to make your Android device more powerful</p>
+            <p>Major new features including video recording, microphone support, and enhanced remote camera controls</p> <!-- UPDATED -->
         </div>
 
         <div class="features-grid">
+            <!-- UPDATED: Video Recording Card -->
+            <div class="feature-card video-highlight">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Video Recording <span class="badge-new">NEW</span></h3>
+                <p>Record video directly from the Remote Camera — from the phone or the browser viewer. Optional audio recording with microphone permission. Videos save to Download/AndroidFileServer/ with gallery playback, share, and delete support.</p>
+            </div>
+
             <div class="feature-card camera-highlight">
                 <div class="feature-icon">
                     <i class="fas fa-camera"></i>
                 </div>
                 <h3>Remote Camera <span class="badge-new">NEW</span></h3>
-                <p>Turn your Android phone into a wireless webcam! Control the camera from any browser on your PC, Mac, or another phone. Includes real-time filters, flash/torch control, aspect ratio presets, and remote shutter — perfect for video calls, streaming, or selfies from a distance.</p>
+                <p>Turn your Android phone into a wireless webcam! Control the camera from any browser on your PC, Mac, or another phone. Includes real-time filters, flash/torch control, aspect ratio presets, and remote shutter.</p>
             </div>
 
             <div class="feature-card highlight">
@@ -749,49 +561,37 @@
 
         <div class="features-grid">
             <div class="feature-card animate delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-wifi"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-wifi"></i></div>
                 <h3>Wireless File Transfer</h3>
                 <p>Share files instantly over your local Wi-Fi network. No USB cables, no Bluetooth pairing, and no internet connection required. Just start the server and connect from any device.</p>
             </div>
 
             <div class="feature-card animate delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-qrcode"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-qrcode"></i></div>
                 <h3>QR Code Connection</h3>
                 <p>Simply scan the QR code displayed in the app with any other device to instantly access the file server. No need to type long IP addresses manually.</p>
             </div>
 
             <div class="feature-card animate delay-3">
-                <div class="feature-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-globe"></i></div>
                 <h3>Cross-Platform Access</h3>
                 <p>Works with any device that has a web browser — Windows, Mac, Linux, iPhone, iPad, Android, and more. Access your files from anywhere on the same network.</p>
             </div>
 
             <div class="feature-card animate delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-folder-open"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-folder-open"></i></div>
                 <h3>Multiple File Types</h3>
                 <p>Transfer images, music, videos, documents, APK files, and many other formats. Drag and drop files directly in the browser or use the file picker.</p>
             </div>
 
             <div class="feature-card animate delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Private & Secure</h3>
                 <p>All transfers happen locally on your Wi-Fi network. No files are uploaded to the cloud or any external server. Your data stays completely private.</p>
             </div>
 
             <div class="feature-card animate delay-3">
-                <div class="feature-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
                 <h3>Lightning Fast Speed</h3>
                 <p>High-speed local network transfer that outperforms cloud uploads and Bluetooth. Transfer large files in seconds, not minutes.</p>
             </div>
@@ -843,6 +643,15 @@
                 <h3>Sound Effects</h3>
                 <p>Audio feedback for key actions: server start/stop, camera start/stop, and shutter capture. Know what's happening without looking at the screen.</p>
             </div>
+
+            <!-- UPDATED: New feature card for Video Recording -->
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-record-vinyl"></i>
+                </div>
+                <h3>Remote Video Recording <span class="badge-new">NEW</span></h3>
+                <p>Start and stop video recording remotely from the browser viewer. Redesigned recording indicator with timer overlay. Videos are saved with optional audio and appear in the in-app gallery.</p>
+            </div>
         </div>
     </section>
 
@@ -892,7 +701,7 @@
                     <i class="fas fa-images"></i>
                 </div>
                 <h3>Gallery Thumbnail</h3>
-                <p>The gallery button shows a thumbnail of the last photo taken. Tap to open the full gallery and browse all captured photos in a clean grid view.</p>
+                <p>The gallery button shows a thumbnail of the last photo or video. Tap to open the full gallery and browse all captured media in a clean grid view.</p>
             </div>
 
             <div class="feature-card">
@@ -901,6 +710,74 @@
                 </div>
                 <h3>Rotation Support</h3>
                 <p>Rotate your phone and the preview adapts automatically. Camera re-binds seamlessly without dropping the stream or losing the URL.</p>
+            </div>
+
+            <!-- UPDATED: New cards for Video Recording -->
+            <div class="feature-card video-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Video Recording Mode <span class="badge-new">NEW</span></h3>
+                <p>Switch between Photo and Video modes with a toggle. Record video from the phone or the browser viewer. Optional microphone audio recording. Videos are saved to Download/AndroidFileServer/.</p>
+            </div>
+
+            <div class="feature-card video-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>REC Indicator & Timer <span class="badge-new">NEW</span></h3>
+                <p>When recording, a red REC indicator with elapsed time appears on the preview. Both the phone and the browser viewer show the recording status in real time.</p>
+            </div>
+
+            <div class="feature-card video-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-microphone"></i>
+                </div>
+                <h3>Optional Audio Recording <span class="badge-new">NEW</span></h3>
+                <p>Grant microphone permission to record audio with video. If permission is denied, video still records silently — the app never blocks recording due to missing audio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPDATED: New Video Recording Section -->
+    <section id="video" style="background: linear-gradient(135deg, #FEF2F2 0%, #FFF7ED 100%);">
+        <div class="section-header">
+            <h2>🎥 Video Recording</h2>
+            <div class="divider"></div>
+            <p>Record video from the Remote Camera — with optional audio</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-toggle-on"></i>
+                </div>
+                <h3>Photo / Video Mode Toggle</h3>
+                <p>Switch between Photo and Video modes with a single tap. The mode toggle appears above the shutter button on the camera preview.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <h3>Recording Timer</h3>
+                <p>A recording duration indicator shows how long you've been recording. Both the phone and the browser viewer display the live REC timer.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-volume-up"></i>
+                </div>
+                <h3>Audio On/Off</h3>
+                <p>Choose whether to record audio with your video. Audio recording requires microphone permission and can be toggled on or off at any time.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon" style="background: linear-gradient(135deg, #DC2626, #F87171);">
+                    <i class="fas fa-file-video"></i>
+                </div>
+                <h3>Video Gallery Support</h3>
+                <p>Recorded videos appear in the gallery with a ▶ overlay badge. Play, share, and delete videos directly from the in-app gallery.</p>
             </div>
         </div>
     </section>
@@ -919,7 +796,7 @@
                     <i class="fas fa-file-audio"></i>
                 </div>
                 <h3>Multiple Formats</h3>
-                <p>Convert between MP3, AAC, WAV, OGG, FLAC, and more. Perfect for compatibility with different devices and apps.</p>
+                <p>Convert between MP3 and OGG. Perfect for compatibility with different devices and apps. Powered by LAME (MP3) and AndroidX Media3 (OGG/Opus).</p>
             </div>
 
             <div class="feature-card">
@@ -1010,58 +887,42 @@
         <div class="screenshots-grid">
             <div class="screenshot-item">
                 <img src="../images/androidFS.png" alt="Android File Server - Feature overview showing cross-platform file sharing">
-                <div class="screenshot-label">
-                    <i class="fas fa-star"></i> Feature Overview
-                </div>
+                <div class="screenshot-label"><i class="fas fa-star"></i> Feature Overview</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS1.png" alt="Main screen - Start and stop server with one tap">
-                <div class="screenshot-label">
-                    <i class="fas fa-power-off"></i> Server Control
-                </div>
+                <div class="screenshot-label"><i class="fas fa-power-off"></i> Server Control</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS2.png" alt="Server running with IP address and QR code">
-                <div class="screenshot-label">
-                    <i class="fas fa-qrcode"></i> QR Code & IP Address
-                </div>
+                <div class="screenshot-label"><i class="fas fa-qrcode"></i> QR Code & IP Address</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS3.png" alt="QR code scanning for quick connection">
-                <div class="screenshot-label">
-                    <i class="fas fa-mobile-alt"></i> Scan to Connect
-                </div>
+                <div class="screenshot-label"><i class="fas fa-mobile-alt"></i> Scan to Connect</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS5.png" alt="Built-in user guide with step-by-step instructions">
-                <div class="screenshot-label">
-                    <i class="fas fa-book"></i> User Guide
-                </div>
+                <div class="screenshot-label"><i class="fas fa-book"></i> User Guide</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS6.png" alt="QR code scanning with another phone">
-                <div class="screenshot-label">
-                    <i class="fas fa-camera"></i> Camera Scan
-                </div>
+                <div class="screenshot-label"><i class="fas fa-camera"></i> Camera Scan</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS7.png" alt="Web browser interface for file upload">
-                <div class="screenshot-label">
-                    <i class="fas fa-upload"></i> Web Upload Interface
-                </div>
+                <div class="screenshot-label"><i class="fas fa-upload"></i> Web Upload Interface</div>
             </div>
 
             <div class="screenshot-item">
                 <img src="../images/androidFS8.png" alt="Drag and drop file upload area">
-                <div class="screenshot-label">
-                    <i class="fas fa-hand-pointer"></i> Drag & Drop Upload
-                </div>
+                <div class="screenshot-label"><i class="fas fa-hand-pointer"></i> Drag & Drop Upload</div>
             </div>
         </div>
 
@@ -1103,10 +964,20 @@
 
         <div class="privacy-text">
             <p><strong>Air Drop - Android File Server</strong> does <strong>not</strong> collect, store, or share any personal information. All file transfers happen <strong>locally</strong> on your Wi-Fi network. Files are never uploaded to any external server or cloud.</p>
-            <p style="margin-top: 1rem;">The <strong>Remote Camera</strong> feature streams live video only within your local Wi-Fi network. No frames, photos, or streams are sent to the internet. Captured photos are saved directly to your phone's storage.</p>
-            <p style="margin-top: 1rem;">The app uses <strong>Google AdMob</strong> for advertisements and <strong>Firebase Analytics</strong> for anonymous usage data. These services are governed by Google's privacy policy.</p>
+
+            <!-- UPDATED: Remote Camera section with Video Recording -->
+            <p style="margin-top: 1rem;">The <strong>Remote Camera</strong> feature streams live video only within your local Wi-Fi network. No frames, photos, or streams are sent to the internet. Captured photos and <strong>recorded videos</strong> are saved directly to your phone's storage. The developer does not have access to the camera preview, captured photos, or video recordings.</p>
+
+            <!-- UPDATED: Video Recording & Microphone -->
+            <p style="margin-top: 1rem;"><strong>Video Recording with Optional Audio:</strong> When you start a video recording, video is saved to <code>Download/AndroidFileServer/</code> on your device. If you grant the microphone permission (<code>RECORD_AUDIO</code>), audio is recorded together with the video. If you deny or revoke microphone permission, video records silently — the app never blocks recording due to missing audio. Audio is captured only during active video recording, never in the background, and is never transmitted over the internet.</p>
+
+            <p style="margin-top: 1rem;"><strong>Microphone Permission:</strong> The microphone is used exclusively for recording audio synchronized with video in Remote Camera's video mode. It is never used for background audio recording, voice recognition, phone call recording, audio fingerprinting, or advertising. The permission is optional and can be revoked at any time.</p>
+
+            <p style="margin-top: 1rem;">The app uses <strong>Google AdMob</strong> for advertisements and <strong>Firebase Analytics</strong> for anonymous usage data. AdMob and Firebase Analytics do <strong>not</strong> have access to the microphone, camera, or any audio/video recordings created by the app.</p>
+
             <p style="margin-top: 1rem;">You can opt out of personalized ads via <strong>Settings → Google → Ads → Opt out of Ads Personalization</strong> on your device.</p>
-            <p style="margin-top: 1.5rem;">For full details, read the complete <a href="privacy_policy.html" target="_blank">Privacy Policy →</a></p>
+
+            <p style="margin-top: 1.5rem;">For full details, read the complete <a href="https://jdstudio.my.id/android-file-server/privacy_policy" target="_blank">Privacy Policy →</a></p>
         </div>
     </section>
 
@@ -1128,7 +999,8 @@
                         <li><strong>Wi-Fi / Network Access:</strong> Required to create and run the local file server.</li>
                         <li><strong>Storage Access:</strong> Needed to access files for sharing and saving received files.</li>
                         <li><strong>Camera Access:</strong> Required only for the Remote Camera feature.</li>
-                        <li><strong>Keep Screen On (optional):</strong> Prevents the server from stopping when your screen turns off.</li>
+                        <li><strong>Microphone Access (optional):</strong> Required only for audio recording in video mode.</li>
+                        <li><strong>Notifications:</strong> Required for the foreground service notification.</li>
                     </ul>
                 </div>
             </div>
@@ -1186,27 +1058,45 @@
                         <li><strong>Flash / Torch:</strong> Use the ⚡ and 🔦 buttons to control the LED.</li>
                         <li><strong>Aspect Ratio:</strong> Choose 3:4, 9:16, 1:1, or Full at the top of the preview.</li>
                         <li><strong>Capture:</strong> Tap the shutter on the phone or click the button in the browser.</li>
-                        <li><strong>Gallery:</strong> Tap the gallery icon to view all captured photos.</li>
+                        <li><strong>Gallery:</strong> Tap the gallery icon to view all captured photos and videos.</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- UPDATED: New Video Recording Guide -->
             <div class="guide-step">
                 <div class="step-number">6</div>
                 <div class="step-content">
-                    <h3>🎵 Using the Audio Converter</h3>
-                    <p>Tap "Open Audio Converter" on the main screen:</p>
+                    <h3>🎥 Recording Video (NEW)</h3>
+                    <p>Record video from the Remote Camera with optional audio:</p>
                     <ul>
-                        <li><strong>Pick a File:</strong> Select an audio file from your device storage.</li>
-                        <li><strong>Choose Format:</strong> Pick the target output format (MP3, AAC, WAV, etc.).</li>
-                        <li><strong>Convert:</strong> Tap "Convert" — the process runs entirely on your phone.</li>
-                        <li><strong>Save:</strong> The converted file is saved to your Download folder.</li>
+                        <li><strong>Switch to Video Mode:</strong> Tap the "VIDEO" toggle above the shutter button. The shutter button changes to a red record button.</li>
+                        <li><strong>Start Recording:</strong> Tap the red record button on the phone or click the record button in the browser viewer.</li>
+                        <li><strong>Recording Indicator:</strong> A red REC indicator with elapsed time appears on the preview. Both the phone and the browser show the recording status.</li>
+                        <li><strong>Audio:</strong> If you granted microphone permission, audio is recorded with the video. If not, video records silently.</li>
+                        <li><strong>Stop Recording:</strong> Tap the record button again to stop. The video is saved to Download/AndroidFileServer/.</li>
+                        <li><strong>Video Gallery:</strong> Recorded videos appear in the gallery with a ▶ overlay badge. Tap to play, share, or delete.</li>
                     </ul>
                 </div>
             </div>
 
             <div class="guide-step">
                 <div class="step-number">7</div>
+                <div class="step-content">
+                    <h3>🎵 Using the Audio Converter</h3>
+                    <p>Tap "Open Audio Converter" on the main screen:</p>
+                    <ul>
+                        <li><strong>Pick Files:</strong> Select one or multiple audio/video files from your device storage.</li>
+                        <li><strong>Choose Format:</strong> Pick the target output format (MP3 or OGG).</li>
+                        <li><strong>Select Bitrate:</strong> Choose your preferred output bitrate.</li>
+                        <li><strong>Convert:</strong> Tap "Convert All" — the process runs entirely on your phone.</li>
+                        <li><strong>Save:</strong> Converted files are saved to Download/AndroidFileServer/Audio/.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">8</div>
                 <div class="step-content">
                     <h3>📁 File Browser & Cache Cleanup</h3>
                     <p>Manage your received files and free up space:</p>
@@ -1219,7 +1109,7 @@
             </div>
 
             <div class="guide-step">
-                <div class="step-number">8</div>
+                <div class="step-number">9</div>
                 <div class="step-content">
                     <h3>Stop & Troubleshooting</h3>
                     <p>When done, tap "Stop Server" or "Stop Camera" to close the connection. If you encounter issues:</p>
@@ -1229,6 +1119,7 @@
                         <li><strong>Server stops unexpectedly:</strong> Enable "Keep screen on" toggle or disable battery optimization for the app.</li>
                         <li><strong>Camera preview lag:</strong> Move closer to the Wi-Fi router for better signal strength.</li>
                         <li><strong>VPN issues:</strong> Disable VPN on your PC — it may block access to the local server.</li>
+                        <li><strong>Video recording fails:</strong> Ensure the phone screen is ON and the app is in the foreground.</li>
                     </ul>
                 </div>
             </div>
@@ -1265,9 +1156,9 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 John Development Studio. Android File Server v2.0</p>
+        <p>&copy; 2026 John Development Studio. Android File Server v3.0</p>
         <p style="margin-top: 0.5rem;">
-            <a href="privacy_policy.html" target="_blank">Privacy Policy</a>
+            <a href="https://jdstudio.my.id/android-file-server/privacy_policy" target="_blank">Privacy Policy</a>
             &nbsp;·&nbsp;
             <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/">
                 <i class="fas fa-arrow-left"></i> Back to John Development Studio
@@ -1276,21 +1167,16 @@
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
