@@ -39,11 +39,15 @@
             border-bottom: 1px solid rgba(255, 215, 0, 0.15);
         }
 
+        /* ✅ LOGO IMAGE (menggantikan emoji 🐼) */
         .logo {
-            font-size: 64px;
+            width: 110px;
+            height: 110px;
             margin-bottom: 12px;
             display: inline-block;
+            object-fit: contain;
             animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 6px 16px rgba(255, 215, 0, 0.25));
         }
 
         @keyframes float {
@@ -208,7 +212,8 @@
                 font-size: 19px;
             }
             .logo {
-                font-size: 52px;
+                width: 88px;
+                height: 88px;
             }
             table {
                 font-size: 13px;
@@ -224,7 +229,10 @@
 
         <!-- ═══ HEADER ═══ -->
         <div class="header">
-            <div class="logo">🐼</div>
+            <!-- ✅ Logo image — taruh redpanda_win.png di folder yang sama -->
+            <img src="redpanda_win.png"
+                 alt="Red Panda Mahjong"
+                 class="logo">
             <h1>Privacy Policy</h1>
             <p class="subtitle">Red Panda Mahjong</p>
             <div class="last-updated">Last updated: October 12, 2026</div>
@@ -470,7 +478,7 @@
 
         <div class="contact-card">
             <p><strong>📧 Email</strong></p>
-            <a href="mailto:johniriantosusanto@gmail.com">johniriantosusanto@gmail.com</a>
+            <a href="mailto:john.irianto.susanto.dev@gmail.com">john.irianto.susanto.dev@gmail.com</a>
             <p style="margin-top: 16px; font-size: 13px; color: #b0b0b0;">
                 We typically respond within 30 days.
             </p>
