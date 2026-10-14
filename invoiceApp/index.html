@@ -92,7 +92,7 @@
             font-size: 12px;
             font-weight: bold;
         }
-        .badge.in-dev { background: #238636; color: #ffffff; }
+        .badge.production { background: #238636; color: #ffffff; }
         .badge.business { background: #d29922; color: #000000; }
         .badge.new { background: #1f6feb; color: #ffffff; }
 
@@ -106,30 +106,29 @@
         .description strong { color: #ffffff; }
 
         /* =========================
-           TESTER STEPS
+           DOWNLOAD CARD
         ========================= */
-        .tester-steps {
+        .download-card {
             background: #1c2128;
             border: 1px solid #30363d;
-            border-left: 4px solid #d29922;
+            border-left: 4px solid #238636;
             border-radius: 8px;
             padding: 16px 18px;
             margin: 20px 0;
         }
-        .tester-steps h3 {
+        .download-card h3 {
             margin: 0 0 10px;
-            color: #d29922;
+            color: #3fb950;
             font-size: 15px;
         }
-        .tester-steps ol {
+        .download-card p {
             margin: 0;
-            padding-left: 20px;
             color: #adbac7;
             font-size: 14px;
             line-height: 1.7;
         }
-        .tester-steps a { color: #58a6ff; text-decoration: none; }
-        .tester-steps a:hover { text-decoration: underline; }
+        .download-card a { color: #58a6ff; text-decoration: none; }
+        .download-card a:hover { text-decoration: underline; }
 
         /* =========================
            BUTTONS
@@ -151,8 +150,8 @@
             transition: opacity 0.2s ease, transform 0.2s ease;
         }
         .btn:hover { opacity: 0.85; transform: translateY(-1px); }
-        .btn-join { background: #d29922; color: #0d1117; }
         .btn-play { background: #238636; color: #ffffff; }
+        .btn-web { background: #1f6feb; color: #ffffff; }
 
         .already-tester {
             font-size: 13px;
@@ -238,6 +237,13 @@
             color: #adbac7;
             font-size: 13.5px;
             margin: 0;
+        }
+        .feature-card code {
+            background: #0d1117;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #7ee787;
         }
 
         /* =========================
@@ -490,7 +496,7 @@
                 <h1>Invoice App</h1>
                 <div class="package">com.johniriantosusanto.invoiceapp</div>
                 <div class="tags">
-                    <span class="badge in-dev">Closed Testing</span>
+                    <span class="badge production">✅ Live on Google Play</span>
                     <span class="badge business">Business / Productivity</span>
                     <span class="badge new">Thermal Print Ready</span>
                 </div>
@@ -511,40 +517,25 @@
             </p>
         </div>
 
-        <!-- TESTER STEPS -->
-        <div class="tester-steps">
-            <h3>📲 Cara Bergabung sebagai Tester</h3>
-            <ol>
-                <li>
-                    Gunakan akun Gmail yang akan dipakai untuk testing, lalu
-                    <a href="https://groups.google.com/g/john-development-studio" target="_blank" rel="noopener noreferrer">
-                    join Google Group ini</a> dan pilih <strong>Request to join</strong>.
-                </li>
-                <li>
-                    Setelah bergabung, buka
-                    <a href="https://play.google.com/apps/testing/com.johniriantosusanto.invoiceapp" target="_blank" rel="noopener noreferrer">
-                    link Join Testing di Google Play</a> menggunakan akun Google yang sama,
-                    lalu install aplikasinya.
-                </li>
-            </ol>
+        <!-- DOWNLOAD INFO -->
+        <div class="download-card">
+            <h3>🎉 Sekarang tersedia di Google Play!</h3>
+            <p>
+                Invoice App sudah <strong>rilis resmi</strong> dan bisa diunduh langsung
+                dari Google Play Store. Klik tombol <em>Download di Google Play</em> di bawah untuk
+                membuka halaman aplikasi.
+            </p>
         </div>
 
         <!-- BUTTONS -->
         <div class="buttons">
-            <a href="https://groups.google.com/g/john-development-studio"
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.invoiceapp"
                target="_blank" rel="noopener noreferrer"
-               class="btn btn-join">1️⃣ Join Google Group</a>
-            <a href="https://play.google.com/apps/testing/com.johniriantosusanto.invoiceapp"
+               class="btn btn-play">📲 Download di Google Play</a>
+            <a href="https://john-development-studio.pages.dev/"
                target="_blank" rel="noopener noreferrer"
-               class="btn btn-play">2️⃣ Join Testing di Google Play</a>
+               class="btn btn-web">🌐 Website Developer</a>
         </div>
-
-        <p class="already-tester">
-            Sudah terdaftar sebagai tester?
-            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.invoiceapp" target="_blank" rel="noopener noreferrer">
-                Buka langsung di Google Play →
-            </a>
-        </p>
 
         <!-- PRIVACY -->
         <div class="privacy-policy">
@@ -837,6 +828,16 @@ PAYMENT INSTRUCTIONS
                 </div>
                 <div class="accordion-content">
                     Aplikasi otomatis melakukan <strong>word-wrap</strong>. Alamat panjang akan turun ke baris berikutnya tanpa terpotong, tetap rapi di kertas 58mm (32 karakter) maupun 80mm (48 karakter).
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Apakah data saya aman?</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-content">
+                    Ya. Data disimpan di Firebase (Google Cloud) dengan autentikasi Firebase Auth. Kami tidak pernah mengakses data bisnis Anda. Lihat <a href="https://john-development-studio.pages.dev/invoiceApp/privacy_policy" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Privacy Policy</a> untuk detail.
                 </div>
             </div>
 
