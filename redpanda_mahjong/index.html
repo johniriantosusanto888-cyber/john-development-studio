@@ -43,7 +43,13 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+        .nav-brand__icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(217, 75, 43, 0.4));
         }
         .nav-links {
             display: flex;
@@ -90,10 +96,17 @@
             pointer-events: none;
         }
         .hero-panda {
-            font-size: 96px;
             margin-bottom: 20px;
             animation: float 3s ease-in-out infinite;
             display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-panda img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 24px rgba(217, 75, 43, 0.4));
         }
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -106,6 +119,8 @@
             margin-bottom: 16px;
             line-height: 1.15;
             letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
         }
         .hero h1 .accent { color: #ff8c42; }
         .hero p {
@@ -114,6 +129,8 @@
             max-width: 640px;
             margin: 0 auto 30px;
             line-height: 1.7;
+            position: relative;
+            z-index: 1;
         }
         .hero-cta {
             display: inline-flex;
@@ -121,6 +138,8 @@
             gap: 12px;
             justify-content: center;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
         .btn {
             display: inline-flex;
@@ -155,6 +174,8 @@
             max-width: 800px;
             margin: 50px auto 0;
             padding: 0 24px;
+            position: relative;
+            z-index: 1;
         }
         .stat {
             text-align: center;
@@ -253,7 +274,7 @@
         }
 
         /* =========================
-           SCREENSHOT CAROUSEL
+           SCREENSHOT CAROUSEL (LANDSCAPE)
         ========================= */
         .carousel {
             position: relative;
@@ -275,12 +296,12 @@
         .carousel-track::-webkit-scrollbar { display: none; }
         .screenshot {
             flex: 0 0 auto;
-            width: 260px;
+            width: 360px;
             scroll-snap-align: center;
         }
         .screenshot img {
             width: 100%;
-            aspect-ratio: 9 / 19;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
             border-radius: 16px;
             border: 2px solid #4a2e1e;
@@ -567,8 +588,10 @@
         @media (max-width: 768px) {
             .nav { padding: 12px 18px; }
             .nav-links { display: none; }
+            .nav-brand { font-size: 16px; gap: 8px; }
+            .nav-brand__icon { width: 30px; height: 30px; }
             .hero { padding: 100px 0 40px; }
-            .hero-panda { font-size: 72px; }
+            .hero-panda img { width: 120px; height: 120px; }
             .hero h1 { font-size: 32px; }
             .hero p { font-size: 16px; }
             .stats {
@@ -581,7 +604,7 @@
             .section-header h2 { font-size: 26px; }
             .section-header p { font-size: 15px; }
             section { padding: 50px 0; }
-            .screenshot { width: 220px; }
+            .screenshot { width: 300px; }
             .tester-section { padding: 30px 20px; }
             .tester-section h2 { font-size: 24px; }
             .final-cta h2 { font-size: 26px; }
@@ -590,7 +613,8 @@
 
         @media (max-width: 400px) {
             .hero h1 { font-size: 28px; }
-            .screenshot { width: 180px; }
+            .hero-panda img { width: 100px; height: 100px; }
+            .screenshot { width: 260px; }
         }
     </style>
 </head>
@@ -600,7 +624,10 @@
          NAV
     ========================= -->
     <nav class="nav">
-        <a href="#" class="nav-brand">🐼 Red Panda Mahjong</a>
+        <a href="#" class="nav-brand">
+            <img src="redpanda_win.png" alt="Red Panda Mahjong" class="nav-brand__icon">
+            Red Panda Mahjong
+        </a>
         <div class="nav-links">
             <a href="#features">Features</a>
             <a href="#how-to-play">How to Play</a>
@@ -614,7 +641,9 @@
     ========================= -->
     <section class="hero">
         <div class="container">
-            <div class="hero-panda">🐼</div>
+            <div class="hero-panda">
+                <img src="redpanda_win.png" alt="Red Panda Mahjong mascot">
+            </div>
             <h1>Cozy Mahjong with a <span class="accent">Cute Red Panda</span></h1>
             <p>
                 Play classic Mahjong on your phone or Android TV — against smart AI bots offline,
@@ -730,16 +759,16 @@
                 <div class="screenshot"><img src="Screenshot_Mahjong4.jpg" alt="Winner Screen" loading="lazy"><div class="screenshot-label">Winning Hand</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong5.jpg" alt="How to Play" loading="lazy"><div class="screenshot-label">How to Play</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong6.jpg" alt="Claiming Tiles" loading="lazy"><div class="screenshot-label">Claiming Tiles</div></div>
-                <div class="screenshot"><img src="Screenshot_Mahjong7.jpg" alt="Leaderboard" loading="lazy"><div class="screenshot-label">Leaderboard</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong7.jpg" alt="Leaderboard" loading="lazy"><div class="screenshot-label">Global Leaderboard</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong8.jpg" alt="Choose Avatar" loading="lazy"><div class="screenshot-label">Choose Avatar</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong9.jpg" alt="Online Play" loading="lazy"><div class="screenshot-label">Online Play</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong10.jpg" alt="Create Room" loading="lazy"><div class="screenshot-label">Create Room</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong11.jpg" alt="Join Room" loading="lazy"><div class="screenshot-label">Join Room</div></div>
                 <div class="screenshot"><img src="Screenshot_Mahjong12.jpg" alt="Room Lobby" loading="lazy"><div class="screenshot-label">Room Lobby</div></div>
-
-                <div class="screenshot"><img src="Screenshot_Mahjong14.jpg" alt="Languages 1" loading="lazy"><div class="screenshot-label">Global Rank</div></div>
-                <div class="screenshot"><img src="Screenshot_Mahjong15.jpg" alt="Languages 2" loading="lazy"><div class="screenshot-label">11 Languages</div></div>
-                <div class="screenshot"><img src="Screenshot_Mahjong16.jpg" alt="Settings" loading="lazy"><div class="screenshot-label">11 Languages</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong13.jpg" alt="Global Rank" loading="lazy"><div class="screenshot-label">Global Rank</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong14.jpg" alt="Language Settings" loading="lazy"><div class="screenshot-label">Language Settings</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong15.jpg" alt="Language Settings 2" loading="lazy"><div class="screenshot-label">More Languages</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong16.jpg" alt="Game Settings" loading="lazy"><div class="screenshot-label">Settings</div></div>
             </div>
         </div>
 
@@ -904,7 +933,7 @@
         <div class="footer-links">
             <a href="privacy_policy.html">🛡️ Privacy Policy</a>
             <a href="delete-account.html">🗑️ Delete Account &amp; Data</a>
-            <a href="https://john-development-studio.pages.dev/" target="_blank" rel="noopener noreferrer">🌐 Developer Website</a>
+            <a href="../">🌐 Developer Website</a>
             <a href="mailto:support@johndevelopmentstudio.com">📧 Contact</a>
         </div>
         <div class="footer-copy">
@@ -919,7 +948,7 @@
         const track = document.getElementById('carouselTrack');
 
         function scrollCarousel(direction) {
-            const scrollAmount = 280;
+            const scrollAmount = 380;
             track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
@@ -928,7 +957,7 @@
             if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
                 track.scrollTo({ left: 0, behavior: 'smooth' });
             } else {
-                track.scrollBy({ left: 280, behavior: 'smooth' });
+                track.scrollBy({ left: 380, behavior: 'smooth' });
             }
         }, 4000);
 
