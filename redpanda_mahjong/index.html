@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Red Panda Mahjong - Cozy Mahjong Adventure</title>
+    <meta name="description" content="Cozy Mahjong with a cute red panda 🐼 Play offline vs AI or online with friends. Available on Android Phone and Android TV. 11 languages!">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            background-color: #1a0e0a;
+            color: #e8d5c4;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 14, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #4a2e1e;
+            padding: 15px 30px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-brand {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffb84d;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #d4c0a8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover { color: #ff8c42; }
+
+        /* =========================
+           CONTAINER
+        ========================= */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+        .hero {
+            padding: 120px 0 60px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at top, rgba(217, 75, 43, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at bottom, rgba(124, 58, 237, 0.1) 0%, transparent 60%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255, 184, 77, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(217, 75, 43, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        .hero-panda {
+            font-size: 96px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .hero h1 {
+            font-size: 48px;
+            color: #ffb84d;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+        .hero h1 .accent { color: #ff8c42; }
+        .hero p {
+            font-size: 18px;
+            color: #d4c0a8;
+            max-width: 640px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+        }
+        .hero-cta {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .btn-primary { background: linear-gradient(135deg, #d94b2b 0%, #ff8c42 100%); color: #fff; }
+        .btn-secondary { background: #2d7a3e; color: #fff; }
+        .btn-outline {
+            background: transparent;
+            color: #ff8c42;
+            border: 2px solid #ff8c42;
+        }
+        .btn-outline:hover { background: #ff8c42; color: #fff; }
+
+        /* =========================
+           STATS
+        ========================= */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 50px auto 0;
+            padding: 0 24px;
+        }
+        .stat {
+            text-align: center;
+            padding: 20px 10px;
+            background: rgba(43, 26, 18, 0.6);
+            border: 1px solid #4a2e1e;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffb84d;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #b8956a;
+            font-weight: 500;
+        }
+
+        /* =========================
+           SECTION
+        ========================= */
+        section {
+            padding: 70px 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            font-size: 34px;
+            color: #ffb84d;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .section-header p {
+            font-size: 16px;
+            color: #b8956a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #2b1a12 0%, #1f1109 100%);
+            border: 1px solid #4a2e1e;
+            border-radius: 16px;
+            padding: 28px 24px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #d94b2b 0%, #ff8c42 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: #ff8c42;
+            box-shadow: 0 12px 30px rgba(217, 75, 43, 0.2);
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .feature-card h3 {
+            font-size: 18px;
+            color: #ffb84d;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 14.5px;
+            color: #d4c0a8;
+            line-height: 1.65;
+        }
+
+        /* =========================
+           SCREENSHOT CAROUSEL
+        ========================= */
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0 40px;
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+        .carousel-track {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 0 20px 20px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+        }
+        .carousel-track::-webkit-scrollbar { display: none; }
+        .screenshot {
+            flex: 0 0 auto;
+            width: 260px;
+            scroll-snap-align: center;
+        }
+        .screenshot img {
+            width: 100%;
+            aspect-ratio: 9 / 19;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid #4a2e1e;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            background: #0f0805;
+        }
+        .screenshot img:hover {
+            transform: scale(1.03);
+            border-color: #ff8c42;
+        }
+        .screenshot-label {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #b8956a;
+            font-weight: 600;
+        }
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .carousel-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #3a2418;
+            border: 1px solid #4a2e1e;
+            color: #ff8c42;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover {
+            background: #ff8c42;
+            color: #fff;
+            border-color: #ff8c42;
+        }
+
+        /* =========================
+           HOW TO PLAY STEPS
+        ========================= */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+        .step-card {
+            background: linear-gradient(135deg, #2b1a12 0%, #1f1109 100%);
+            border: 1px solid #4a2e1e;
+            border-radius: 16px;
+            padding: 28px 24px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            border-color: #ff8c42;
+            transform: translateY(-4px);
+        }
+        .step-number {
+            position: absolute;
+            top: -16px;
+            left: 24px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #d94b2b 0%, #ff8c42 100%);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(217, 75, 43, 0.4);
+        }
+        .step-card h3 {
+            font-size: 17px;
+            color: #ffb84d;
+            font-weight: 700;
+            margin: 15px 0 10px;
+        }
+        .step-card p {
+            font-size: 14.5px;
+            color: #d4c0a8;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           LEADERBOARD
+        ========================= */
+        .leaderboard {
+            background: linear-gradient(135deg, #2b1a12 0%, #1f1109 100%);
+            border: 1px solid #4a2e1e;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .lb-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            background: rgba(58, 36, 24, 0.4);
+            transition: all 0.2s ease;
+        }
+        .lb-row:hover {
+            background: rgba(58, 36, 24, 0.7);
+            transform: translateX(4px);
+        }
+        .lb-row.you {
+            background: linear-gradient(135deg, rgba(217, 75, 43, 0.3) 0%, rgba(255, 140, 66, 0.2) 100%);
+            border: 1px solid #ff8c42;
+        }
+        .lb-rank {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffb84d;
+            min-width: 32px;
+            text-align: center;
+        }
+        .lb-emoji { font-size: 26px; }
+        .lb-name {
+            flex: 1;
+            font-weight: 600;
+            color: #e8d5c4;
+            font-size: 15px;
+        }
+        .lb-row.you .lb-name { color: #ffb84d; }
+        .lb-score {
+            font-weight: 800;
+            color: #ff8c42;
+            font-size: 15px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* =========================
+           TESTER SECTION
+        ========================= */
+        .tester-section {
+            background:
+                radial-gradient(ellipse at center, rgba(217, 75, 43, 0.15) 0%, transparent 70%),
+                linear-gradient(135deg, #2b1a12 0%, #1f1109 100%);
+            border: 2px solid #d94b2b;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(217, 75, 43, 0.2);
+        }
+        .tester-section h2 {
+            font-size: 30px;
+            color: #ffb84d;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .tester-section > p {
+            font-size: 16px;
+            color: #d4c0a8;
+            max-width: 620px;
+            margin: 0 auto 30px;
+        }
+        .tester-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .tester-step {
+            background: rgba(15, 8, 5, 0.6);
+            border: 1px solid #4a2e1e;
+            border-radius: 14px;
+            padding: 22px;
+        }
+        .tester-step .badge-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #d94b2b 0%, #ff8c42 100%);
+            color: #fff;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        .tester-step h4 {
+            font-size: 16px;
+            color: #ffb84d;
+            margin-bottom: 8px;
+        }
+        .tester-step p {
+            font-size: 14px;
+            color: #d4c0a8;
+            margin-bottom: 14px;
+        }
+        .tester-step .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            width: 100%;
+            justify-content: center;
+        }
+        .tester-note {
+            background: rgba(15, 8, 5, 0.6);
+            border-left: 3px solid #ffb84d;
+            border-radius: 8px;
+            padding: 14px 18px;
+            text-align: left;
+            margin-top: 20px;
+            font-size: 13.5px;
+            color: #d4c0a8;
+        }
+        .tester-note a { color: #ff8c42; text-decoration: none; font-weight: 600; }
+        .tester-note a:hover { text-decoration: underline; }
+        .already-tester {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #b8956a;
+        }
+        .already-tester a { color: #ff8c42; font-weight: 600; text-decoration: none; }
+        .already-tester a:hover { text-decoration: underline; }
+
+        /* =========================
+           FINAL CTA
+        ========================= */
+        .final-cta {
+            text-align: center;
+            padding: 70px 24px 80px;
+        }
+        .final-cta h2 {
+            font-size: 32px;
+            color: #ffb84d;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .final-cta p {
+            font-size: 16px;
+            color: #d4c0a8;
+            margin-bottom: 30px;
+        }
+        .final-cta .btn { font-size: 16px; padding: 16px 32px; }
+
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            background: #0f0805;
+            border-top: 1px solid #4a2e1e;
+            padding: 40px 24px;
+            text-align: center;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #b8956a;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+        .footer-links a:hover { color: #ff8c42; }
+        .footer-copy {
+            color: #8b6a4d;
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+        @media (max-width: 768px) {
+            .nav { padding: 12px 18px; }
+            .nav-links { display: none; }
+            .hero { padding: 100px 0 40px; }
+            .hero-panda { font-size: 72px; }
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                margin-top: 30px;
+            }
+            .stat-value { font-size: 24px; }
+            .stat-label { font-size: 12px; }
+            .section-header h2 { font-size: 26px; }
+            .section-header p { font-size: 15px; }
+            section { padding: 50px 0; }
+            .screenshot { width: 220px; }
+            .tester-section { padding: 30px 20px; }
+            .tester-section h2 { font-size: 24px; }
+            .final-cta h2 { font-size: 26px; }
+            .btn { padding: 12px 22px; font-size: 14px; }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 28px; }
+            .screenshot { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================
+         NAV
+    ========================= -->
+    <nav class="nav">
+        <a href="#" class="nav-brand">🐼 Red Panda Mahjong</a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-to-play">How to Play</a>
+            <a href="#tester">Become Tester</a>
+            <a href="privacy_policy.html">Privacy</a>
+        </div>
+    </nav>
+
+    <!-- =========================
+         HERO
+    ========================= -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-panda">🐼</div>
+            <h1>Cozy Mahjong with a <span class="accent">Cute Red Panda</span></h1>
+            <p>
+                Play classic Mahjong on your phone or Android TV — against smart AI bots offline,
+                or with friends worldwide online. Available in 11 languages with a global leaderboard!
+            </p>
+            <div class="hero-cta">
+                <a href="#tester" class="btn btn-primary">🧪 Become a Tester</a>
+                <a href="#features" class="btn btn-outline">✨ See Features</a>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">11</div>
+                <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Players Online</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">📺</div>
+                <div class="stat-label">Android TV</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Free to Play</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         FEATURES
+    ========================= -->
+    <section id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>✨ Everything You Need</h2>
+                <p>Classic Mahjong with a cozy twist — offline, online, and on the big screen.</p>
+            </div>
+
+            <div class="features">
+
+                <div class="feature-card">
+                    <span class="feature-icon">🎮</span>
+                    <h3>Offline Mode</h3>
+                    <p>Play solo against 3 smart AI bots. No internet needed — perfect for travel, commutes, or cozy evenings.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🌍</span>
+                    <h3>Online Multiplayer</h3>
+                    <p>Create a private room, share a 6-letter code with friends, and play in real-time from anywhere in the world. Up to 4 players!</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">📺</span>
+                    <h3>Android TV Ready</h3>
+                    <p>Full support for Android TV with D-pad navigation. Enjoy Mahjong on the big screen with family and friends.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🏆</span>
+                    <h3>Global Leaderboard</h3>
+                    <p>Compete with players worldwide. Submit your high scores and climb the global ranks!</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3>11 Languages</h3>
+                    <p>Play in English, Indonesian, Chinese, Japanese, Korean, Thai, French, Italian, Portuguese, German, or Russian.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🀄</span>
+                    <h3>Classic Mahjong Rules</h3>
+                    <p>Pong (碰), Kong (杠), Chow (吃), Tsumo, Ron — with accurate Fan scoring and a beginner-friendly help guide.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">⏱️</span>
+                    <h3>Turn Timer</h3>
+                    <p>Host picks 10–60 seconds per turn. Timer turns red in the last 3 seconds and auto-discards when time is up.</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">📖</span>
+                    <h3>Help &amp; FAQ</h3>
+                    <p>New to Mahjong? Our comprehensive Help section covers everything from basic rules to advanced strategies.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         SCREENSHOTS CAROUSEL
+    ========================= -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>📸 See It in Action</h2>
+                <p>Swipe through to see the cozy red panda, gameplay, and beautiful UI.</p>
+            </div>
+        </div>
+
+        <div class="carousel">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="screenshot"><img src="Screenshot_Mahjong1.jpg" alt="Main Menu" loading="lazy"><div class="screenshot-label">Main Menu</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong2.jpg" alt="Offline Intro" loading="lazy"><div class="screenshot-label">Offline Intro</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong3.jpg" alt="In-Game Table" loading="lazy"><div class="screenshot-label">In-Game</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong4.jpg" alt="Winner Screen" loading="lazy"><div class="screenshot-label">Winning Hand</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong5.jpg" alt="How to Play" loading="lazy"><div class="screenshot-label">How to Play</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong6.jpg" alt="Claiming Tiles" loading="lazy"><div class="screenshot-label">Claiming Tiles</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong7.jpg" alt="Leaderboard" loading="lazy"><div class="screenshot-label">Leaderboard</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong8.jpg" alt="Choose Avatar" loading="lazy"><div class="screenshot-label">Choose Avatar</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong9.jpg" alt="Online Play" loading="lazy"><div class="screenshot-label">Online Play</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong10.jpg" alt="Create Room" loading="lazy"><div class="screenshot-label">Create Room</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong11.jpg" alt="Join Room" loading="lazy"><div class="screenshot-label">Join Room</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong12.jpg" alt="Room Lobby" loading="lazy"><div class="screenshot-label">Room Lobby</div></div>
+
+                <div class="screenshot"><img src="Screenshot_Mahjong14.jpg" alt="Languages 1" loading="lazy"><div class="screenshot-label">Global Rank</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong15.jpg" alt="Languages 2" loading="lazy"><div class="screenshot-label">11 Languages</div></div>
+                <div class="screenshot"><img src="Screenshot_Mahjong16.jpg" alt="Settings" loading="lazy"><div class="screenshot-label">11 Languages</div></div>
+            </div>
+        </div>
+
+        <div class="carousel-nav">
+            <button class="carousel-btn" onclick="scrollCarousel(-1)" aria-label="Previous">‹</button>
+            <button class="carousel-btn" onclick="scrollCarousel(1)" aria-label="Next">›</button>
+        </div>
+    </section>
+
+    <!-- =========================
+         HOW TO PLAY
+    ========================= -->
+    <section id="how-to-play">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎯 How to Play</h2>
+                <p>Get started in minutes — from install to your first win.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Install the Game</h3>
+                    <p>Download from Google Play, or join as a closed tester via Google Group.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Choose Your Mode</h3>
+                    <p>Play Offline vs 3 AI bots, or Online multiplayer with friends using a 6-letter room code.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Know the Goal</h3>
+                    <p>Build 4 sets + 1 pair from 14 tiles. Sets = Pong (3 identical) or Chow (3 consecutive).</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Win &amp; Climb</h3>
+                    <p>Win by Tsumo (self-draw) or Ron (discard). Score points, climb the global leaderboard!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         LEADERBOARD
+    ========================= -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>🏆 Global Leaderboard</h2>
+                <p>See how you compare with players around the world.</p>
+            </div>
+
+            <div class="leaderboard">
+                <div class="lb-row you">
+                    <div class="lb-rank">1</div>
+                    <div class="lb-emoji">🐼</div>
+                    <div class="lb-name">Panda (You)</div>
+                    <div class="lb-score">170</div>
+                </div>
+                <div class="lb-row">
+                    <div class="lb-rank">2</div>
+                    <div class="lb-emoji">🐯</div>
+                    <div class="lb-name">TigerBoss</div>
+                    <div class="lb-score">165</div>
+                </div>
+                <div class="lb-row">
+                    <div class="lb-rank">3</div>
+                    <div class="lb-emoji">🦊</div>
+                    <div class="lb-name">FoxMaster</div>
+                    <div class="lb-score">158</div>
+                </div>
+                <div class="lb-row">
+                    <div class="lb-rank">4</div>
+                    <div class="lb-emoji">🐨</div>
+                    <div class="lb-name">KoalaChill</div>
+                    <div class="lb-score">142</div>
+                </div>
+                <div class="lb-row">
+                    <div class="lb-rank">5</div>
+                    <div class="lb-emoji">🐧</div>
+                    <div class="lb-name">PenguinPro</div>
+                    <div class="lb-score">138</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         TESTER
+    ========================= -->
+    <section id="tester">
+        <div class="container">
+            <div class="tester-section">
+                <h2>🎮 Join as a Closed Tester</h2>
+                <p>
+                    Help us polish Red Panda Mahjong! Follow these 2 easy steps
+                    to join the testing program.
+                </p>
+
+                <div class="tester-steps">
+                    <div class="tester-step">
+                        <div class="badge-num">1</div>
+                        <h4>Join Google Group</h4>
+                        <p>
+                            Use the Gmail account you want to test with, then click below
+                            and select <strong>Request to join</strong>.
+                        </p>
+                        <a href="https://groups.google.com/g/redpanda-mahjong-testers"
+                           target="_blank" rel="noopener noreferrer"
+                           class="btn btn-primary">📨 Join Google Group →</a>
+                    </div>
+
+                    <div class="tester-step">
+                        <div class="badge-num">2</div>
+                        <h4>Join Testing on Google Play</h4>
+                        <p>
+                            After joining the Group, open the Testing link below with the
+                            same Google account, then install the app.
+                        </p>
+                        <a href="https://play.google.com/apps/testing/com.johniriantosusanto.redpandamahjong"
+                           target="_blank" rel="noopener noreferrer"
+                           class="btn btn-secondary">▶ Join Testing on Google Play</a>
+                    </div>
+                </div>
+
+                <div class="tester-note">
+                    ℹ️ <strong>Important:</strong> The Play Store testing link <em>only works</em>
+                    after you've joined the Google Group and waited 5–10 minutes.
+                    Make sure you use the <strong>same Google account</strong> on both the Group and Play Store.
+                    If you see <code>"App not available"</code>, clear Play Store cache:
+                    <code>Settings → Apps → Google Play Store → Storage → Clear Cache</code>.
+                </div>
+
+                <p class="already-tester">
+                    Already registered as a tester?
+                    <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.redpandamahjong"
+                       target="_blank" rel="noopener noreferrer">Open directly on Google Play →</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         FINAL CTA
+    ========================= -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Meet Your New Mahjong Buddy?</h2>
+            <p>Join the testing program and start your cozy Mahjong adventure today. It's free to play!</p>
+            <a href="https://play.google.com/apps/testing/com.johniriantosusanto.redpandamahjong"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary">▶ Join Testing on Google Play</a>
+        </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+    <footer>
+        <div class="footer-links">
+            <a href="privacy_policy.html">🛡️ Privacy Policy</a>
+            <a href="delete-account.html">🗑️ Delete Account &amp; Data</a>
+            <a href="https://john-development-studio.pages.dev/" target="_blank" rel="noopener noreferrer">🌐 Developer Website</a>
+            <a href="mailto:support@johndevelopmentstudio.com">📧 Contact</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 John Irianto Susanto — John Development Studio. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- =========================
+         CAROUSEL SCRIPT
+    ========================= -->
+    <script>
+        const track = document.getElementById('carouselTrack');
+
+        function scrollCarousel(direction) {
+            const scrollAmount = 280;
+            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // Auto-scroll pause on hover
+        let autoScroll = setInterval(() => {
+            if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+                track.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                track.scrollBy({ left: 280, behavior: 'smooth' });
+            }
+        }, 4000);
+
+        track.addEventListener('mouseenter', () => clearInterval(autoScroll));
+        track.addEventListener('touchstart', () => clearInterval(autoScroll));
+    </script>
+
+</body>
+</html>
