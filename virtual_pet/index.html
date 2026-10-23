@@ -484,6 +484,142 @@
         .lb-score { font-weight: 800; color: var(--accent); font-size: 14px; }
 
         /* =========================
+           MINI GAMES LIST
+        ========================= */
+        .mini-games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .mini-game-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .mini-game-item:hover {
+            border-color: var(--secondary);
+            transform: translateX(4px);
+        }
+
+        .mini-game-emoji {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .mini-game-info h4 {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .mini-game-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* =========================
+           SECRET CODES SECTION
+        ========================= */
+        .secret-codes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .secret-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .secret-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .secret-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .secret-card p.riddle {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-style: italic;
+            flex: 1;
+        }
+
+        .secret-card .reward-info {
+            font-size: 13px;
+            background: rgba(0, 206, 201, 0.1);
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            color: var(--text);
+            border-left: 3px solid var(--accent);
+        }
+
+        .reveal-btn {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .reveal-btn:hover {
+            background: var(--border);
+            border-color: var(--text-muted);
+        }
+
+        .reveal-code {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(253, 121, 168, 0.1);
+            border: 1px dashed var(--secondary);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+
+        .reveal-code.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* =========================
            CLOSED TESTER SECTION
         ========================= */
         .tester-wrapper {
@@ -725,8 +861,8 @@
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#screenshots">Screenshots</a>
-                <a href="#how-to-play">How to Play</a>
+                <a href="#mini-games">Mini-Games</a>
+                <a href="#secret-codes">Secret Codes</a>
                 <a href="#join-tester">Join Tester</a>
                 <a href="#download" class="btn-nav">Download</a>
             </div>
@@ -811,6 +947,186 @@
                 <h3>Help & FAQ</h3>
                 <p>New to the game? Our comprehensive Help section covers everything from pet care to advanced strategies.</p>
             </div>
+        </div>
+    </section>
+
+    <!-- MINI GAMES LIST SECTION -->
+    <section class="section" id="mini-games">
+        <div class="section-header">
+            <h2>🕹️ 15 Unique Mini-Games</h2>
+            <p>Every pet comes with its own special game. Master them all to earn coins, XP, and diamonds!</p>
+        </div>
+        <div class="mini-games-grid">
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐶</span>
+                <div class="mini-game-info">
+                    <h4>Dog Tap</h4>
+                    <p>Tap the bones before they vanish from the screen. Test your reflexes!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐱</span>
+                <div class="mini-game-info">
+                    <h4>Cat Catch</h4>
+                    <p>Catch the falling fish and fill your basket. Don't let them hit the ground!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐰</span>
+                <div class="mini-game-info">
+                    <h4>Rabbit Memory</h4>
+                    <p>Repeat the color sequence shown on the screen. How long can your memory last?</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🦔</span>
+                <div class="mini-game-info">
+                    <h4>Hedgehog Roll</h4>
+                    <p>Roll into the monsters and avoid obstacles. A fast-paced action game!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐔</span>
+                <div class="mini-game-info">
+                    <h4>Chicken Flap</h4>
+                    <p>Fly through the gaps and collect eggs. A classic flappy-style challenge.</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐟</span>
+                <div class="mini-game-info">
+                    <h4>Goldfish Pop</h4>
+                    <p>Pop the floating bubbles to score points. Simple, satisfying, and fun.</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐡</span>
+                <div class="mini-game-info">
+                    <h4>Puffer Fish</h4>
+                    <p>Tap the predators to puff up and defend yourself. Timing is everything.</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐠</span>
+                <div class="mini-game-info">
+                    <h4>Clownfish</h4>
+                    <p>Scare off intruders and protect your anemone. Fast taps required!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">👽</span>
+                <div class="mini-game-info">
+                    <h4>Alien Beam</h4>
+                    <p>Beam up the cows and blast the cars. Intergalactic chaos!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🦊</span>
+                <div class="mini-game-info">
+                    <h4>Fox Bubble</h4>
+                    <p>Match 3 or more bubbles to clear the board. A cute puzzle challenge.</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐼</span>
+                <div class="mini-game-info">
+                    <h4>Panda Sudoku</h4>
+                    <p>Solve number grids and challenge your logic. Brain training with a panda!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐨</span>
+                <div class="mini-game-info">
+                    <h4>Koala Hop</h4>
+                    <p>Climb as high as you can and collect leaves. How far can you go?</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐙</span>
+                <div class="mini-game-info">
+                    <h4>Octopus Camouflage</h4>
+                    <p>Match your color to the background to survive. Quick thinking is key.</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🐸</span>
+                <div class="mini-game-info">
+                    <h4>Frog Tongue</h4>
+                    <p>Catch flying bugs with your tongue. Precise timing required!</p>
+                </div>
+            </div>
+            <div class="mini-game-item">
+                <span class="mini-game-emoji">🦝</span>
+                <div class="mini-game-info">
+                    <h4>Red Panda Mahjong</h4>
+                    <p>Pair matching tiles and clear the board. Relaxing but challenging.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECRET CODES SECTION -->
+    <section class="section" id="secret-codes">
+        <div class="section-header">
+            <h2>🔐 Secret Codes</h2>
+            <p>Solve the riddles below to reveal hidden codes. Enter these codes in the <strong>⚙️ Settings > 🎁 Secret Code</strong> menu in the game!</p>
+        </div>
+        <div class="secret-codes-grid">
+            
+            <!-- Code 1: HATCHMYEGG -->
+            <div class="secret-card">
+                <h3>🥚 The Instant Hatch</h3>
+                <p class="riddle">"I am a command, not a spell. I start with what you want to do to an egg, followed by what the egg belongs to. Put them together in all caps without spaces."</p>
+                <div class="reward-info">🎁 Reward: Hatches your current pet's egg instantly.</div>
+                <button class="reveal-btn" onclick="revealCode(this)">Reveal Code</button>
+                <div class="reveal-code">HATCHMYEGG</div>
+            </div>
+
+            <!-- Code 2: COINRUSH -->
+            <div class="secret-card">
+                <h3>💰 The Golden Rush</h3>
+                <p class="riddle">"You need two words. The first is the currency you use to buy things. The second is what you do when you run very fast. Combine them, all caps."</p>
+                <div class="reward-info">🎁 Reward: +5,000 Coins</div>
+                <button class="reveal-btn" onclick="revealCode(this)">Reveal Code</button>
+                <div class="reveal-code">COINRUSH</div>
+            </div>
+
+            <!-- Code 3: DIAMONDFALL -->
+            <div class="secret-card">
+                <h3>💎 The Precious Rain</h3>
+                <p class="riddle">"The first word is the most precious gem in the game. The second word is what water does from the sky. Combine them, all caps."</p>
+                <div class="reward-info">🎁 Reward: +25 Diamonds</div>
+                <button class="reveal-btn" onclick="revealCode(this)">Reveal Code</button>
+                <div class="reveal-code">DIAMONDFALL</div>
+            </div>
+
+            <!-- Code 4: JDSTUDIO -->
+            <div class="secret-card">
+                <h3>🎮 The Creator's Gift</h3>
+                <p class="riddle">"Who made this game? It's the initials of the developer plus the word 'STUDIO'. Type it in all caps."</p>
+                <div class="reward-info">🎁 Reward: +10,000 Coins &amp; +50 Diamonds</div>
+                <button class="reveal-btn" onclick="revealCode(this)">Reveal Code</button>
+                <div class="reveal-code">JDSTUDIO</div>
+            </div>
+
+            <!-- Code 5: PLAYTIME -->
+            <div class="secret-card">
+                <h3>⚡ The Reset Button</h3>
+                <p class="riddle">"What is the phrase you say when you want to have fun? It's two words put together. This code can be used once every 24 hours!"</p>
+                <div class="reward-info">🎁 Reward: Resets all pet cooldowns! (Daily)</div>
+                <button class="reveal-btn" onclick="revealCode(this)">Reveal Code</button>
+                <div class="reveal-code">PLAYTIME</div>
+            </div>
+
+            <!-- Code 6: UNLOCKIMPORTJDSTUDIO (Toggle) -->
+            <div class="secret-card">
+                <h3>📂 The Hidden Tool</h3>
+                <p class="riddle">"This is a secret for developers and testers. Combine 'UNLOCK' + 'IMPORT' + the creator's initials + 'STUDIO'. Warning: This acts as a toggle (ON/OFF)."</p>
+                <div class="reward-info">🎁 Reward: Toggles the "Import From File" menu in Backup &amp; Restore.</div>
+                <button class="reveal-btn" onclick="revealCode(this)">Reveal Code</button>
+                <div class="reveal-code">UNLOCKIMPORTJDSTUDIO</div>
+            </div>
+
         </div>
     </section>
 
@@ -1040,12 +1356,26 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.feature-card, .step-card, .stat-item').forEach(el => {
+        document.querySelectorAll('.feature-card, .step-card, .stat-item, .mini-game-item, .secret-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(el);
         });
+
+        // Function to reveal secret code
+        function revealCode(btn) {
+            // Cari elemen .reveal-code di dalam card yang sama
+            const codeElement = btn.nextElementSibling;
+            
+            if (codeElement.classList.contains('show')) {
+                codeElement.classList.remove('show');
+                btn.textContent = 'Reveal Code';
+            } else {
+                codeElement.classList.add('show');
+                btn.textContent = 'Hide Code';
+            }
+        }
     </script>
 
 </body>
