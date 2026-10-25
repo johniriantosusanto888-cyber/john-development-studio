@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Red Panda Mahjong - Cozy Mahjong Adventure</title>
-    <meta name="description" content="Cozy Mahjong with a cute red panda 🐼 Play offline vs AI or online with friends. Available on Android Phone and Android TV. 11 languages!">
+    <title>Red Panda Mahjong - Cozy Mahjong Adventure + Calculator</title>
+    <meta name="description" content="Cozy Mahjong with a cute red panda 🐼 Play offline vs AI or online with friends. Now with a Mahjong fan calculator. Available on Android Phone and Android TV. 11 languages!">
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -583,6 +582,156 @@
         }
 
         /* =========================
+           CALCULATOR SECTION (NEW)
+        ========================= */
+        .calculator-card {
+            background: linear-gradient(135deg, #2b1a12 0%, #1f1109 100%);
+            border: 2px solid #d94b2b;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 880px;
+            margin: 0 auto;
+            box-shadow: 0 8px 40px rgba(217, 75, 43, 0.15);
+        }
+
+        .calc-input-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calc-input-area input {
+            flex: 1;
+            min-width: 240px;
+            padding: 14px 16px;
+            background: #0f0805;
+            border: 2px solid #4a2e1e;
+            border-radius: 10px;
+            color: #e8d5c4;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .calc-input-area input:focus {
+            border-color: #ff8c42;
+        }
+
+        .calc-hint {
+            font-size: 13px;
+            color: #b8956a;
+            margin-bottom: 16px;
+        }
+
+        .tile-chip-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 40px;
+            margin-bottom: 20px;
+            padding: 8px 0;
+        }
+
+        .tile-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #3a2418;
+            border: 1px solid #6b4a30;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffd9b0;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .tile-chip:hover {
+            background: #5a3420;
+            border-color: #ff8c42;
+        }
+        .tile-chip .remove {
+            color: #ff6b4a;
+            font-weight: 800;
+            font-size: 16px;
+            margin-left: 2px;
+        }
+        .tile-chip .remove:hover { color: #ff3b1a; }
+
+        .calc-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .calc-actions .btn {
+            padding: 12px 24px;
+            font-size: 15px;
+        }
+
+        .calc-result {
+            background: #0f0805;
+            border: 1px solid #4a2e1e;
+            border-radius: 14px;
+            padding: 24px;
+            display: none;
+        }
+        .calc-result.active { display: block; }
+
+        .calc-result h3 {
+            font-size: 20px;
+            color: #ffb84d;
+            margin-bottom: 12px;
+        }
+        .calc-result .hand-type {
+            font-size: 16px;
+            color: #ff8c42;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .calc-result .fan-score {
+            font-size: 36px;
+            font-weight: 800;
+            color: #ffb84d;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .calc-result .fan-label {
+            font-size: 13px;
+            color: #b8956a;
+            margin-bottom: 14px;
+        }
+        .calc-result .fan-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .fan-badge {
+            background: #2b1a12;
+            border: 1px solid #6b4a30;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: #ffd9b0;
+            font-weight: 600;
+        }
+        .fan-badge .fan-value {
+            color: #ffb84d;
+            margin-left: 4px;
+        }
+
+        .calc-error {
+            color: #ff6b4a;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+        .calc-error.active { display: block; }
+
+        /* =========================
            MOBILE
         ========================= */
         @media (max-width: 768px) {
@@ -609,6 +758,8 @@
             .tester-section h2 { font-size: 24px; }
             .final-cta h2 { font-size: 26px; }
             .btn { padding: 12px 22px; font-size: 14px; }
+            .calculator-card { padding: 20px; }
+            .calc-input-area input { min-width: 100%; }
         }
 
         @media (max-width: 400px) {
@@ -630,6 +781,7 @@
         </a>
         <div class="nav-links">
             <a href="#features">Features</a>
+            <a href="#calculator">Calculator</a>
             <a href="#how-to-play">How to Play</a>
             <a href="#tester">Become Tester</a>
             <a href="privacy_policy.html">Privacy</a>
@@ -648,10 +800,11 @@
             <p>
                 Play classic Mahjong on your phone or Android TV — against smart AI bots offline,
                 or with friends worldwide online. Available in 11 languages with a global leaderboard!
+                <br><strong>New: Fan Calculator for physical play!</strong>
             </p>
             <div class="hero-cta">
                 <a href="#tester" class="btn btn-primary">🧪 Become a Tester</a>
-                <a href="#features" class="btn btn-outline">✨ See Features</a>
+                <a href="#calculator" class="btn btn-outline">🀄 Try Fan Calculator</a>
             </div>
         </div>
 
@@ -736,6 +889,48 @@
                     <p>New to Mahjong? Our comprehensive Help section covers everything from basic rules to advanced strategies.</p>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         FAN CALCULATOR (NEW)
+    ========================= -->
+    <section id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2>🀄 Mahjong Fan Calculator</h2>
+                <p>Playing with physical tiles? Input the tiles in your hand to instantly see your winning hand's fan score.</p>
+            </div>
+
+            <div class="calculator-card">
+                <div class="calc-input-area">
+                    <input type="text" id="tileInput" placeholder="e.g. 1m 2m 3m 4p 5p 6p 7s 8s 9s E E E C" maxlength="80" autocomplete="off">
+                    <button class="btn btn-primary" onclick="addTilesFromInput()">➕ Add Tiles</button>
+                </div>
+                <div class="calc-hint">
+                    💡 Enter tiles separated by spaces. Use: <strong>1m–9m</strong> (man/characters), <strong>1p–9p</strong> (pin/circles), <strong>1s–9s</strong> (sou/bamboo), <strong>E S W N</strong> (winds), <strong>C F P</strong> (dragons: red/white/green), <strong>Z</strong> (any honor).<br>
+                    Example: <code>1m 2m 3m 4p 5p 6p 7s 8s 9s E E</code> → ready hand (13 tiles). Add one more tile to complete 14.
+                </div>
+
+                <div class="tile-chip-list" id="tileChipList">
+                    <!-- chips will appear here -->
+                </div>
+
+                <div class="calc-actions">
+                    <button class="btn btn-secondary" onclick="calculateFan()">🔍 Calculate Fan</button>
+                    <button class="btn btn-outline" onclick="clearTiles()">🗑️ Clear All</button>
+                </div>
+
+                <div class="calc-error" id="calcError"></div>
+
+                <div class="calc-result" id="calcResult">
+                    <h3>🏆 Winning Hand Result</h3>
+                    <div class="hand-type" id="resultHandType"></div>
+                    <div class="fan-score" id="resultFanScore"></div>
+                    <div class="fan-label">Total Fan</div>
+                    <div class="fan-list" id="resultFanList"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -963,6 +1158,440 @@
 
         track.addEventListener('mouseenter', () => clearInterval(autoScroll));
         track.addEventListener('touchstart', () => clearInterval(autoScroll));
+    </script>
+
+    <!-- =========================
+         MAHJONG FAN CALCULATOR SCRIPT
+    ========================= -->
+    <script>
+        // ---------- Tile parsing ----------
+        // Tiles are stored as strings: "1m".."9m", "1p".."9p", "1s".."9s", "E","S","W","N","C","F","P"
+        // Z = any honor (expanded when added? We'll just store Z and treat as honor)
+        let currentTiles = [];   // array of tile strings
+
+        const TILE_ORDER = {
+            // man 1-9
+            '1m':1,'2m':2,'3m':3,'4m':4,'5m':5,'6m':6,'7m':7,'8m':8,'9m':9,
+            // pin 1-9
+            '1p':1,'2p':2,'3p':3,'4p':4,'5p':5,'6p':6,'7p':7,'8p':8,'9p':9,
+            // sou 1-9
+            '1s':1,'2s':2,'3s':3,'4s':4,'5s':5,'6s':6,'7s':7,'8s':8,'9s':9,
+            // winds
+            'E':10,'S':11,'W':12,'N':13,
+            // dragons
+            'C':14,'F':15,'P':16,
+            // any honor
+            'Z':17
+        };
+
+        const TILE_NAMES = {
+            '1m':'1 Man','2m':'2 Man','3m':'3 Man','4m':'4 Man','5m':'5 Man','6m':'6 Man','7m':'7 Man','8m':'8 Man','9m':'9 Man',
+            '1p':'1 Pin','2p':'2 Pin','3p':'3 Pin','4p':'4 Pin','5p':'5 Pin','6p':'6 Pin','7p':'7 Pin','8p':'8 Pin','9p':'9 Pin',
+            '1s':'1 Sou','2s':'2 Sou','3s':'3 Sou','4s':'4 Sou','5s':'5 Sou','6s':'6 Sou','7s':'7 Sou','8s':'8 Sou','9s':'9 Sou',
+            'E':'East','S':'South','W':'West','N':'North',
+            'C':'Red Dragon','F':'White Dragon','P':'Green Dragon',
+            'Z':'Honor'
+        };
+
+        function normalizeTile(t) {
+            // Accept lowercase m/p/s and uppercase letters for honors
+            if (!t) return null;
+            t = t.trim();
+            if (t.length === 0) return null;
+            const lower = t.toLowerCase();
+
+            // number + suit
+            if (/^[1-9][mps]$/.test(lower)) return lower;
+
+            // honors: single uppercase letter
+            const upper = t.toUpperCase();
+            if (['E','S','W','N','C','F','P','Z'].includes(upper)) return upper;
+
+            return null; // invalid
+        }
+
+        function addTile(tile) {
+            const norm = normalizeTile(tile);
+            if (!norm) return false;
+            if (currentTiles.length >= 14) return false; // max 14 tiles
+            currentTiles.push(norm);
+            renderChips();
+            return true;
+        }
+
+        function addTilesFromInput() {
+            const input = document.getElementById('tileInput');
+            const raw = input.value.trim();
+            if (!raw) return;
+
+            const tokens = raw.split(/[\s,]+/).filter(s => s.length > 0);
+            let added = 0;
+            let invalid = [];
+
+            for (const tok of tokens) {
+                const norm = normalizeTile(tok);
+                if (norm) {
+                    if (currentTiles.length < 14) {
+                        currentTiles.push(norm);
+                        added++;
+                    } else {
+                        // full
+                        break;
+                    }
+                } else {
+                    invalid.push(tok);
+                }
+            }
+
+            renderChips();
+            input.value = '';
+
+            if (invalid.length > 0) {
+                showError('Invalid tiles ignored: ' + invalid.join(', '));
+            } else {
+                hideError();
+            }
+        }
+
+        function removeTile(index) {
+            currentTiles.splice(index, 1);
+            renderChips();
+            hideResult();
+            hideError();
+        }
+
+        function renderChips() {
+            const container = document.getElementById('tileChipList');
+            container.innerHTML = '';
+
+            currentTiles.forEach((tile, idx) => {
+                const chip = document.createElement('span');
+                chip.className = 'tile-chip';
+                chip.innerHTML = `${TILE_NAMES[tile] || tile} <span class="remove" title="Remove">×</span>`;
+                chip.querySelector('.remove').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    removeTile(idx);
+                });
+                container.appendChild(chip);
+            });
+
+            if (currentTiles.length === 0) {
+                const empty = document.createElement('span');
+                empty.style.color = '#b8956a';
+                empty.style.fontSize = '14px';
+                empty.textContent = 'No tiles yet — add some above.';
+                container.appendChild(empty);
+            }
+        }
+
+        function clearTiles() {
+            currentTiles = [];
+            renderChips();
+            hideResult();
+            hideError();
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('calcError');
+            el.textContent = '⚠️ ' + msg;
+            el.classList.add('active');
+        }
+
+        function hideError() {
+            document.getElementById('calcError').classList.remove('active');
+        }
+
+        function hideResult() {
+            document.getElementById('calcResult').classList.remove('active');
+        }
+
+        // ---------- Hand decomposition & fan calculation ----------
+        // We'll represent tiles as counts per type.
+        // For simplicity, we'll use a map from tile string -> count (0-4)
+
+        function buildCounts(tiles) {
+            const counts = {};
+            for (const t of tiles) {
+                counts[t] = (counts[t] || 0) + 1;
+            }
+            return counts;
+        }
+
+        // Check if counts form a standard hand (4 melds + 1 pair) and return possible decompositions (simplified)
+        // We'll just try to see if it's a valid winning hand (standard or seven pairs or thirteen orphans)
+        function isWinningHand(counts) {
+            const total = Object.values(counts).reduce((a,b) => a+b, 0);
+            if (total !== 14) return { valid: false, reason: 'Need exactly 14 tiles.' };
+
+            // Check seven pairs (7 pairs)
+            const pairs = Object.entries(counts).filter(([t,c]) => c === 2).length;
+            const hasQuad = Object.entries(counts).some(([t,c]) => c === 4);
+            // Seven pairs: all tiles in pairs, no quads counted as two pairs? Actually seven pairs requires 7 distinct pairs. If a quad exists, it's not seven pairs (unless we count quad as two pairs? No, standard seven pairs requires 7 different pairs).
+            if (pairs === 7 && !hasQuad) {
+                return { valid: true, type: 'Seven Pairs', fans: [ { name: 'Seven Pairs', value: 2 } ] };
+            }
+
+            // Thirteen orphans check
+            const orphans = ['1m','9m','1p','9p','1s','9s','E','S','W','N','C','F','P'];
+            let orphanCount = 0;
+            let hasPairOrphan = false;
+            for (const o of orphans) {
+                if (counts[o] === 1) orphanCount++;
+                else if (counts[o] === 2) { orphanCount++; hasPairOrphan = true; }
+                else if (counts[o] >= 3) { /* invalid */ }
+            }
+            // Must have all 13 orphans, one pair, and no other tiles
+            const otherTiles = Object.entries(counts).filter(([t,c]) => !orphans.includes(t) && c > 0);
+            if (orphanCount === 13 && hasPairOrphan && otherTiles.length === 0) {
+                return { valid: true, type: 'Thirteen Orphans', fans: [ { name: 'Thirteen Orphans', value: 13 } ] };
+            }
+
+            // Standard hand check: try all possible pairs, then check if remaining can form 4 melds
+            const tileTypes = Object.keys(counts).filter(t => counts[t] > 0);
+
+            for (const pairTile of tileTypes) {
+                if (counts[pairTile] >= 2) {
+                    const remaining = { ...counts };
+                    remaining[pairTile] -= 2;
+                    if (remaining[pairTile] === 0) delete remaining[pairTile];
+                    if (canFormMelds(remaining, 4)) {
+                        // Valid standard hand
+                        const fans = calculateStandardFans(counts, pairTile);
+                        return { valid: true, type: 'Standard Hand', fans: fans, pair: pairTile };
+                    }
+                }
+            }
+
+            return { valid: false, reason: 'Not a winning hand (need 4 melds + 1 pair, seven pairs, or thirteen orphans).' };
+        }
+
+        // Recursively check if counts can form exactly 'neededMelds' melds
+        function canFormMelds(counts, neededMelds) {
+            if (neededMelds === 0) {
+                // All tiles used?
+                return Object.values(counts).every(c => c === 0);
+            }
+
+            // Find first tile with count > 0
+            const tile = Object.keys(counts).find(t => counts[t] > 0);
+            if (!tile) return false;
+
+            // Try Pong (triplet)
+            if (counts[tile] >= 3) {
+                counts[tile] -= 3;
+                if (canFormMelds(counts, neededMelds - 1)) {
+                    counts[tile] += 3;
+                    return true;
+                }
+                counts[tile] += 3;
+            }
+
+            // Try Chow (only for suited tiles 1-7)
+            if (tile.length === 2 && ['m','p','s'].includes(tile[1])) {
+                const num = parseInt(tile[0]);
+                const suit = tile[1];
+                if (num >= 1 && num <= 7) {
+                    const t2 = (num+1) + suit;
+                    const t3 = (num+2) + suit;
+                    if (counts[t2] > 0 && counts[t3] > 0) {
+                        counts[tile]--; counts[t2]--; counts[t3]--;
+                        if (canFormMelds(counts, neededMelds - 1)) {
+                            counts[tile]++; counts[t2]++; counts[t3]++;
+                            return true;
+                        }
+                        counts[tile]++; counts[t2]++; counts[t3]++;
+                    }
+                }
+            }
+
+            // Also try Kong? A kong counts as a meld but uses 4 tiles. In standard hand, a kong is a meld but we need to handle it.
+            // For simplicity in this calculator, we treat kongs as triplets + extra tile? Actually a kong is a set of 4, but in a 14-tile hand, a kong would mean we have 15 tiles? No, in mahjong, a kong is declared and you draw a replacement tile, so the hand still has 14 tiles in hand (plus the kong meld which is 4 tiles but counts as one set). For hand decomposition, we can treat a kong as a triplet plus an extra tile that must be used elsewhere? That's messy. For simplicity, we'll ignore kongs in the calculator (since they are rare in a 14-tile winning hand without replacement draws). We'll just note that kongs are not fully supported in this simplified calculator. But we can check for quads and treat them as two pairs? No.
+            // For now, we'll skip kong handling. The calculator works for standard hands without kongs.
+
+            return false;
+        }
+
+        // Simplified fan calculation for standard hands
+        function calculateStandardFans(counts, pairTile) {
+            const fans = [];
+
+            // Base: 1 fan for winning
+            // fans.push({ name: 'Base Win', value: 1 }); // We'll add base later
+
+            // Check all triplets/kongs
+            let tripletCount = 0;
+            let kongCount = 0;
+            let chowCount = 0;
+
+            // We'll analyze the counts to find melds (this is approximate)
+            // Actually we need to know the melds. Let's do a full decomposition to identify melds.
+            // For simplicity, we'll just count pairs, triplets, quads from counts (ignoring chows for fan calculation except for specific patterns)
+            // This is a simplified fan calculator. We'll detect some common patterns.
+
+            const tileEntries = Object.entries(counts).filter(([t,c]) => c > 0);
+
+            // Count triplets and quads
+            for (const [t, c] of tileEntries) {
+                if (c >= 3) {
+                    tripletCount++;
+                    if (c === 4) kongCount++;
+                }
+            }
+
+            // Check for all triplets (no chows) - simplified: all tiles are in triplets/pairs
+            const isAllTriplets = (tripletCount === 4); // four triplets + pair
+            if (isAllTriplets) {
+                fans.push({ name: 'All Triplets', value: 2 });
+            }
+
+            // Check for half flush / full flush
+            const suits = new Set();
+            let hasHonor = false;
+            let hasSuit = false;
+            for (const [t, c] of tileEntries) {
+                if (t.length === 2) {
+                    suits.add(t[1]);
+                    hasSuit = true;
+                } else {
+                    hasHonor = true;
+                }
+            }
+
+            if (suits.size === 1 && !hasHonor) {
+                fans.push({ name: 'Full Flush', value: 6 });
+            } else if (suits.size === 1 && hasHonor) {
+                fans.push({ name: 'Half Flush', value: 3 });
+            }
+
+            // Check for all honors
+            if (!hasSuit && hasHonor) {
+                fans.push({ name: 'All Honors', value: 10 });
+            }
+
+            // Check for dragon triplets
+            const dragons = ['C','F','P'];
+            for (const d of dragons) {
+                if (counts[d] >= 3) {
+                    fans.push({ name: `Dragon ${d === 'C' ? 'Red' : d === 'F' ? 'White' : 'Green'}`, value: 1 });
+                }
+            }
+
+            // Check for wind triplets
+            const winds = ['E','S','W','N'];
+            for (const w of winds) {
+                if (counts[w] >= 3) {
+                    fans.push({ name: `Wind ${w}`, value: 1 });
+                }
+            }
+
+            // Check for three dragons (all three dragon triplets)
+            let dragonTriplets = 0;
+            for (const d of dragons) if (counts[d] >= 3) dragonTriplets++;
+            if (dragonTriplets === 3) {
+                fans.push({ name: 'Three Dragons', value: 6 });
+            }
+
+            // Check for four winds (all four wind triplets)
+            let windTriplets = 0;
+            for (const w of winds) if (counts[w] >= 3) windTriplets++;
+            if (windTriplets === 4) {
+                fans.push({ name: 'Four Winds', value: 8 });
+            }
+
+            // Check for all chows? Hard to detect with counts alone. Skip.
+
+            // Check for pure straight (1-9 in one suit) - simplified: if we have 1,2,3,4,5,6,7,8,9 of one suit (at least one each)
+            for (const suit of ['m','p','s']) {
+                let hasAll = true;
+                for (let i = 1; i <= 9; i++) {
+                    if (!counts[`${i}${suit}`]) hasAll = false;
+                }
+                if (hasAll) {
+                    fans.push({ name: 'Pure Straight', value: 2 });
+                }
+            }
+
+            // Check for all simples (no terminals or honors)
+            let hasTerminalOrHonor = false;
+            for (const [t, c] of tileEntries) {
+                if (t.length === 2) {
+                    const num = parseInt(t[0]);
+                    if (num === 1 || num === 9) hasTerminalOrHonor = true;
+                } else {
+                    hasTerminalOrHonor = true;
+                }
+            }
+            if (!hasTerminalOrHonor) {
+                fans.push({ name: 'All Simples', value: 1 });
+            }
+
+            // Check for seat wind / round wind? Not enough context, skip.
+
+            // Add base fan
+            if (fans.length === 0) {
+                fans.push({ name: 'Base Win', value: 1 });
+            }
+
+            // Ensure at least 1 fan for any valid hand
+            return fans;
+        }
+
+        // Main calculation
+        function calculateFan() {
+            hideError();
+            hideResult();
+
+            if (currentTiles.length !== 14) {
+                showError(`You have ${currentTiles.length} tile(s). Please enter exactly 14 tiles for a complete hand. (13 tiles + 1 winning tile = 14)`);
+                return;
+            }
+
+            const counts = buildCounts(currentTiles);
+            const result = isWinningHand(counts);
+
+            if (!result.valid) {
+                showError(result.reason || 'Not a valid winning hand.');
+                return;
+            }
+
+            // Display result
+            const resultDiv = document.getElementById('calcResult');
+            document.getElementById('resultHandType').textContent = result.type;
+
+            const totalFan = result.fans.reduce((sum, f) => sum + f.value, 0);
+            document.getElementById('resultFanScore').textContent = totalFan;
+
+            const fanListDiv = document.getElementById('resultFanList');
+            fanListDiv.innerHTML = '';
+            result.fans.forEach(f => {
+                const badge = document.createElement('span');
+                badge.className = 'fan-badge';
+                badge.innerHTML = `${f.name} <span class="fan-value">+${f.value}</span>`;
+                fanListDiv.appendChild(badge);
+            });
+
+            // Add base fan if total is 0? Already handled.
+            // Add note about simplified calculation
+            const note = document.createElement('span');
+            note.className = 'fan-badge';
+            note.style.background = '#2b1a12';
+            note.style.color = '#b8956a';
+            note.textContent = 'Simplified calculator';
+            fanListDiv.appendChild(note);
+
+            resultDiv.classList.add('active');
+        }
+
+        // Initialize
+        renderChips();
+
+        // Allow pressing Enter in input to add tiles
+        document.getElementById('tileInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addTilesFromInput();
+            }
+        });
     </script>
 
 </body>
