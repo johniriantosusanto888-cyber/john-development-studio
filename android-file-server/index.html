@@ -25,6 +25,8 @@
             --green-light: #4ADE80;
             --red: #DC2626;
             --red-light: #F87171;
+            --yellow: #EAB308; /* Tambahan untuk LED */
+            --yellow-light: #FDE047;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -297,6 +299,43 @@
 
         .feature-card.video-highlight .feature-icon { background: linear-gradient(135deg, var(--red) 0%, var(--red-light) 100%); }
 
+        /* --- TAMBAHAN CSS UNTUK LED BANNER --- */
+        .feature-card.led-highlight {
+            border: 2px solid var(--yellow);
+            background: linear-gradient(135deg, #FFFFFF 0%, #FEFCE8 100%);
+        }
+
+        .feature-card.led-highlight::before { background: linear-gradient(90deg, var(--yellow), var(--yellow-light)); transform: scaleX(1); }
+
+        .feature-card.led-highlight .feature-icon { background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-light) 100%); }
+
+        .led-preview-box {
+            background: #000;
+            color: #ffff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px 0;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            white-space: nowrap;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 10px rgba(255, 255, 0, 0.2);
+            position: relative;
+        }
+        
+        .led-text-scroll {
+            display: inline-block;
+            animation: scrollText 5s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        /* ----------------------------------- */
+
         .screenshots-section { background: linear-gradient(to bottom, #eff6ff, var(--light)); }
 
         .screenshots-grid {
@@ -474,7 +513,8 @@
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#camera">Remote Camera</a>
-                <a href="#video">Video Recording</a> <!-- UPDATED -->
+                <a href="#video">Video Recording</a>
+                <a href="#led-banner">LED Banner</a> <!-- TAMBAHAN NAVIGASI -->
                 <a href="#screenshots">Screenshots</a>
                 <a href="#guide">User Guide</a>
                 <a href="#privacy">Privacy</a>
@@ -489,13 +529,14 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
-                <i class="fas fa-wifi"></i> Android Application · v3.0
+                <i class="fas fa-wifi"></i> Android Application · v2.5.8
             </div>
 
             <img src="../images/AndroidFileServer.png" class="hero-app-icon" alt="Android File Server App Icon">
 
             <h1>Android File Server</h1>
-            <p>Transfer files wirelessly, convert audio, and control your phone's camera — including video recording — all over Wi-Fi. No cables, no cloud, no internet needed.</p> <!-- UPDATED -->
+            <!-- UPDATE TEKS: Menambahkan LED Banner -->
+            <p>Transfer files wirelessly, convert audio, control your phone's camera, and display scrolling LED text — all over Wi-Fi. No cables, no cloud, no internet needed.</p>
             <div class="hero-buttons">
                 <a href="#download" class="btn btn-primary">
                     <i class="fas fa-download"></i> Download Now
@@ -510,9 +551,9 @@
     <!-- What's New Section -->
     <section id="whats-new" style="background: linear-gradient(135deg, #FFF7ED 0%, #F3E8FF 100%);">
         <div class="section-header">
-            <h2>🎉 What's New in v3.0</h2> <!-- UPDATED -->
+            <h2>🎉 What's New in v3.0</h2>
             <div class="divider"></div>
-            <p>Major new features including video recording, microphone support, and enhanced remote camera controls</p> <!-- UPDATED -->
+            <p>Major new features including video recording, microphone support, and enhanced remote camera controls</p>
         </div>
 
         <div class="features-grid">
@@ -781,6 +822,61 @@
             </div>
         </div>
     </section>
+
+    <!-- ========================================== -->
+    <!-- TAMBAHAN BARU: LED Banner Section -->
+    <!-- ========================================== -->
+    <section id="led-banner" style="background: linear-gradient(135deg, #FEFCE8 0%, #FEF3C7 100%);">
+        <div class="section-header">
+            <h2>💡 LED Banner</h2>
+            <div class="divider" style="background: linear-gradient(90deg, var(--yellow), var(--yellow-light));"></div>
+            <p>Turn your phone or tablet into a bright, scrolling text display!</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card led-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, var(--yellow), var(--yellow-light));">
+                    <i class="fas fa-font"></i>
+                </div>
+                <h3>Custom Text & Colors</h3>
+                <p>Type any message you want and customize the text color and background color to match your event or mood. Bright and highly visible.</p>
+            </div>
+
+            <div class="feature-card led-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, var(--yellow), var(--yellow-light));">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3>Adjustable Scroll Speed</h3>
+                <p>Control how fast your message moves across the screen. Use the slider to set the perfect speed — slow for reading, fast for attention-grabbing.</p>
+            </div>
+
+            <div class="feature-card led-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, var(--yellow), var(--yellow-light));">
+                    <i class="fas fa-text-height"></i>
+                </div>
+                <h3>Text Size Adjustment</h3>
+                <p>Make your text as big or as small as you need. Perfect for reading from a distance in loud rooms, parties, or concerts.</p>
+            </div>
+
+            <div class="feature-card led-highlight">
+                <div class="feature-icon" style="background: linear-gradient(135deg, var(--yellow), var(--yellow-light));">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Blink & Marquee Effects</h3>
+                <p>Toggle the "Blink Effect" for flashing text, or enable "Scrolling Text (Marquee)" to make your message move continuously like a real LED sign.</p>
+            </div>
+            
+            <!-- Visual Preview Box for LED -->
+            <div class="feature-card" style="grid-column: 1 / -1; text-align: center; background: #1a1a1a; border: 2px solid var(--yellow);">
+                <h3 style="color: var(--yellow); margin-bottom: 1rem;"><i class="fas fa-eye"></i> Live Preview Simulation</h3>
+                <div class="led-preview-box">
+                    <div class="led-text-scroll">HAPPY BIRTHDAY!</div>
+                </div>
+                <p style="color: #aaa; margin-top: 1rem; font-size: 0.85rem;">*This is how it looks on your phone screen.</p>
+            </div>
+        </div>
+    </section>
+    <!-- ========================================== -->
 
     <!-- Audio Converter Deep Dive -->
     <section id="audio" style="background: linear-gradient(135deg, #F3E8FF 0%, #EDE9FE 100%);">
@@ -1080,8 +1176,25 @@
                 </div>
             </div>
 
+            <!-- TAMBAHAN BARU: Panduan LED Banner -->
             <div class="guide-step">
                 <div class="step-number">7</div>
+                <div class="step-content">
+                    <h3>💡 Using the LED Banner (NEW)</h3>
+                    <p>Turn your phone into a scrolling text display:</p>
+                    <ul>
+                        <li><strong>Open LED Banner:</strong> Tap "Open LED Banner" on the main screen.</li>
+                        <li><strong>Enter Text:</strong> Type your message in the input box (e.g., "HAPPY BIRTHDAY!").</li>
+                        <li><strong>Customize:</strong> Tap "Text Color" or "Background" to change the colors.</li>
+                        <li><strong>Adjust Settings:</strong> Use the sliders to change Scroll Speed and Text Size.</li>
+                        <li><strong>Effects:</strong> Toggle "Blink Effect" or "Scrolling Text (Marquee)" for different animations.</li>
+                        <li><strong>Start:</strong> Tap "▶ START LED" to display it in full screen.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-step">
+                <div class="step-number">8</div>
                 <div class="step-content">
                     <h3>🎵 Using the Audio Converter</h3>
                     <p>Tap "Open Audio Converter" on the main screen:</p>
@@ -1096,7 +1209,7 @@
             </div>
 
             <div class="guide-step">
-                <div class="step-number">8</div>
+                <div class="step-number">9</div>
                 <div class="step-content">
                     <h3>📁 File Browser & Cache Cleanup</h3>
                     <p>Manage your received files and free up space:</p>
@@ -1109,7 +1222,7 @@
             </div>
 
             <div class="guide-step">
-                <div class="step-number">9</div>
+                <div class="step-number">10</div>
                 <div class="step-content">
                     <h3>Stop & Troubleshooting</h3>
                     <p>When done, tap "Stop Server" or "Stop Camera" to close the connection. If you encounter issues:</p>
