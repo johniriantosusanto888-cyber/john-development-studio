@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrewMaster - John Development Studio</title>
+    <meta name="description" content="BrewMaster — Your personal coffee brewing companion. Craft the perfect cup with guided recipes, smart timers, and expert brewing tips.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
     <style>
         :root {
             --primary: #8B5E3C;
@@ -19,11 +21,9 @@
             --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* ===== NAVIGATION ===== */
         nav {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             padding: 1rem 0;
@@ -64,7 +64,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
         }
 
@@ -73,7 +73,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
         }
 
         .nav-links a:hover {
@@ -92,7 +92,16 @@
             background: rgba(255,255,255,0.3);
         }
 
-        /* Hero Section */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, #1a120b 0%, #3d2b1f 50%, #1a120b 100%);
             color: white;
@@ -133,17 +142,7 @@
             transition: transform 0.3s ease;
         }
 
-        .hero-app-icon:hover {
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 768px) {
-            .hero-app-icon {
-                max-width: 160px;
-                border-radius: 20px;
-                border-width: 3px;
-            }
-        }
+        .hero-app-icon:hover { transform: scale(1.05); }
 
         .hero-badge {
             display: inline-block;
@@ -215,17 +214,7 @@
             transform: translateY(-3px);
         }
 
-        .btn-dark {
-            background: var(--dark);
-            color: white;
-        }
-
-        .btn-dark:hover {
-            background: #2d1f14;
-            transform: translateY(-3px);
-        }
-
-        /* Section Styles */
+        /* ===== SECTIONS ===== */
         section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -259,7 +248,7 @@
             border-radius: 2px;
         }
 
-        /* Features Grid */
+        /* ===== FEATURES ===== */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -291,9 +280,7 @@
             transform-origin: left;
         }
 
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
+        .feature-card:hover::before { transform: scaleX(1); }
 
         .feature-card:hover {
             transform: translateY(-5px);
@@ -325,7 +312,7 @@
             line-height: 1.7;
         }
 
-        /* Screenshots */
+        /* ===== SCREENSHOTS ===== */
         .screenshots-section {
             background: linear-gradient(to bottom, #f5efe6, var(--light));
         }
@@ -372,10 +359,8 @@
             font-size: 0.95rem;
         }
 
-        /* User Guide */
-        .guide-section {
-            background: white;
-        }
+        /* ===== USER GUIDE ===== */
+        .guide-section { background: white; }
 
         .guide-container {
             max-width: 900px;
@@ -421,11 +406,184 @@
             color: var(--gray);
         }
 
-        .step-content li {
-            margin-bottom: 0.4rem;
+        .step-content li { margin-bottom: 0.4rem; }
+
+        /* ===== CLOSED TESTING ===== */
+        .closed-testing-section {
+            background: linear-gradient(135deg, #faf6f1 0%, #f0e6d8 100%);
+            border-radius: 30px;
+            padding: 4rem 2rem;
+            max-width: 1000px;
+            margin: 4rem auto;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Download Section */
+        .closed-testing-section::before {
+            content: '☕';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.04;
+            right: -3rem;
+            top: -3rem;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .closed-testing-section .section-header {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tester-steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tester-step {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            gap: 1.2rem;
+            box-shadow: 0 10px 30px -10px rgba(139, 94, 60, 0.15);
+            border: 1px solid rgba(139, 94, 60, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tester-step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(139, 94, 60, 0.25);
+        }
+
+        .tester-step-num {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(139, 94, 60, 0.35);
+        }
+
+        .tester-step-body h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .tester-step-body p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .tester-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .tester-btn i { font-size: 1.5rem; }
+
+        .tester-btn .small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tester-btn .big {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .tester-btn-group {
+            background: linear-gradient(135deg, #8B5E3C, #A0794F);
+            box-shadow: 0 4px 15px rgba(139, 94, 60, 0.3);
+        }
+
+        .tester-btn-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 94, 60, 0.5);
+        }
+
+        .tester-btn-play {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .tester-btn-play:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.5);
+        }
+
+        .tester-note {
+            background: #FFF8E1;
+            border-left: 4px solid #FFB300;
+            border-radius: 12px;
+            padding: 1.2rem 1.4rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            font-size: 0.88rem;
+            color: #5D4037;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tester-note i {
+            color: #FF9800;
+            font-size: 1.3rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .tester-note code {
+            background: rgba(0,0,0,0.07);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.82rem;
+        }
+
+        .tester-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px dashed rgba(139, 94, 60, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .tester-cta p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* ===== DOWNLOAD ===== */
         .download-section {
             background: linear-gradient(135deg, var(--dark) 0%, #2d1f14 100%);
             color: white;
@@ -469,9 +627,7 @@
             border: 2px solid transparent;
         }
 
-        .download-btn i {
-            font-size: 2rem;
-        }
+        .download-btn i { font-size: 2rem; }
 
         .download-btn .small {
             display: block;
@@ -510,7 +666,7 @@
             transform: translateY(-3px);
         }
 
-        /* Footer */
+        /* ===== FOOTER ===== */
         footer {
             background: var(--dark);
             color: rgba(255,255,255,0.6);
@@ -524,68 +680,74 @@
             text-decoration: none;
         }
 
-        /* Responsive */
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate { animation: fadeInUp 0.8s ease-out forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-app-icon { max-width: 160px; border-radius: 20px; border-width: 3px; }
 
             .nav-links {
-                gap: 1rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.8rem;
-            }
-
-            .guide-step {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary);
                 flex-direction: column;
-                gap: 1rem;
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             }
+            .nav-links.active { display: flex; }
+            .nav-toggle { display: block; }
+            .btn-back { width: 100%; text-align: center; }
 
+            .section-header h2 { font-size: 1.8rem; }
+            .guide-step { flex-direction: column; gap: 1rem; }
             .screenshots-grid {
                 grid-template-columns: 1fr;
                 max-width: 400px;
                 margin: 3rem auto 0;
             }
-        }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            .tester-steps { grid-template-columns: 1fr; }
+            .closed-testing-section {
+                padding: 3rem 1.2rem;
+                border-radius: 20px;
+                margin: 2rem 1rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            .tester-step { padding: 1.5rem; }
+            .download-section { border-radius: 20px; margin: 2rem 1rem; padding: 3rem 1.5rem; }
         }
-
-        .animate {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
     </style>
-
-<base target="_blank">
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- ===== NAVIGATION ===== -->
     <nav>
         <div class="nav-container">
             <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="logo">
                 <i class="fas fa-code"></i>
                 John Dev Studio
             </a>
-            <div class="nav-links">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
                 <a href="#features">Features</a>
                 <a href="#screenshots">Screenshots</a>
                 <a href="#guide">User Guide</a>
+                <a href="#closed-testing">🧪 Closed Testing</a>
                 <a href="privacy_policy.html">Privacy Policy</a>
                 <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/" class="btn-back">
                     <i class="fas fa-arrow-left"></i> Back to Home
@@ -594,11 +756,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
-                <i class="fas fa-mug-hot"></i> Android Application
+                <i class="fas fa-mug-hot"></i> Android Application · Closed Testing
             </div>
 
             <img src="../images/BrewMaster.png" class="hero-app-icon" alt="BrewMaster App Icon">
@@ -606,8 +768,8 @@
             <h1>BrewMaster</h1>
             <p>Your personal coffee brewing companion. Craft the perfect cup every time with guided recipes, smart timers, and expert brewing tips.</p>
             <div class="hero-buttons">
-                <a href="#download" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Download Now
+                <a href="#closed-testing" class="btn btn-primary">
+                    <i class="fas fa-flask"></i> Join Closed Testing
                 </a>
                 <a href="#features" class="btn btn-secondary">
                     <i class="fas fa-info-circle"></i> Learn More
@@ -616,7 +778,7 @@
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- ===== FEATURES ===== -->
     <section id="features">
         <div class="section-header">
             <h2>App Features & Functions</h2>
@@ -625,73 +787,57 @@
         </div>
 
         <div class="features-grid">
-            <div class="feature-card animate delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-mug-hot"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mug-hot"></i></div>
                 <h3>Multiple Brew Methods</h3>
                 <p>Choose from Espresso (Ristretto, Espresso, Lungo), Pour Over (V60 / Chemex), and French Press. Each method has dedicated parameters and step types tailored to the brewing style.</p>
             </div>
 
-            <div class="feature-card animate delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-list-check"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-list-check"></i></div>
                 <h3>Custom Recipe Builder</h3>
                 <p>Build your own step-by-step brew recipes with customizable steps: Preheat, Add Coffee, Pour Water, Bloom, Stir, Swirl, Wait, Pre-Infusion, and Pressure. Save and name your recipes for easy access.</p>
             </div>
 
-            <div class="feature-card animate delay-3">
-                <div class="feature-icon">
-                    <i class="fas fa-stopwatch"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-stopwatch"></i></div>
                 <h3>Guided Brew Timer</h3>
                 <p>Follow your recipe in real-time with a live countdown timer and voice-guided instructions for each step. Never miss a beat during your brew — the app tells you exactly what to do and when.</p>
             </div>
 
-            <div class="feature-card animate delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-cog"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-cog"></i></div>
                 <h3>Grinder Settings</h3>
                 <p>Save your grinder model and click settings for every brew method — Espresso, Ristretto, Lungo, Pour Over, and French Press. Replicate your perfect grind every time without guessing.</p>
             </div>
 
-            <div class="feature-card animate delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
                 <h3>Coffee Education</h3>
                 <p>Learn coffee fundamentals with articles covering grind size, extraction, water temperature, ratios, and brewing techniques. Track your progress with an XP system as you advance from Basic to Advanced topics.</p>
             </div>
 
-            <div class="feature-card animate delay-3">
-                <div class="feature-icon">
-                    <i class="fas fa-robot"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-robot"></i></div>
                 <h3>Smart Coffee Assistant</h3>
                 <p>Describe your taste problem — too bitter, too sour, too weak, or flat — and get instant actionable recommendations to improve your next cup. AI-powered troubleshooting for better coffee.</p>
             </div>
 
-            <div class="feature-card animate delay-1">
-                <div class="feature-icon">
-                    <i class="fas fa-cloud"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-cloud"></i></div>
                 <h3>Cloud Sync with Google</h3>
                 <p>Sign in with your Google account to sync all your recipes across multiple devices. Your recipes are always backed up and available everywhere. Enable auto-sync on launch for seamless backup.</p>
             </div>
 
-            <div class="feature-card animate delay-2">
-                <div class="feature-icon">
-                    <i class="fas fa-bookmark"></i>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bookmark"></i></div>
                 <h3>Pre-Installed Sample Recipes</h3>
                 <p>Get started immediately with sample recipes included as starter guides. Learn recommended espresso settings, ratios, and brewing steps without starting from scratch.</p>
             </div>
         </div>
     </section>
 
-    <!-- Advantages Section -->
+    <!-- ===== ADVANTAGES ===== -->
     <section style="background: linear-gradient(to bottom, var(--light), white);">
         <div class="section-header">
             <h2>Why Choose BrewMaster?</h2>
@@ -701,56 +847,44 @@
 
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #8B5E3C, #C4A77D);">
-                    <i class="fas fa-bullseye"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
                 <h3>Precision & Consistency</h3>
                 <p>Weigh your coffee, set exact water temperatures, and follow timed steps. BrewMaster removes the guesswork so you can replicate your perfect cup every single morning.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #D4A373, #E9C496);">
-                    <i class="fas fa-sliders-h"></i>
-                </div>
+                <div class="feature-icon" style="background: linear-gradient(135deg, #D4A373, #E9C496);"><i class="fas fa-sliders-h"></i></div>
                 <h3>Fully Customizable</h3>
                 <p>Every parameter is adjustable — coffee weight, water amount, grind size, pressure, temperature, and ratio. Create recipes that match your exact taste preferences and equipment.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #6B5B4F, #A0937D);">
-                    <i class="fas fa-volume-up"></i>
-                </div>
+                <div class="feature-icon" style="background: linear-gradient(135deg, #6B5B4F, #A0937D);"><i class="fas fa-volume-up"></i></div>
                 <h3>Voice-Guided Brewing</h3>
                 <p>Focus on your technique while the app speaks instructions aloud. Perfect for when your hands are busy with the portafilter or pour-over kettle. Voice guidance follows your timer settings.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #4A3728, #8B7355);">
-                    <i class="fas fa-sync-alt"></i>
-                </div>
+                <div class="feature-icon" style="background: linear-gradient(135deg, #4A3728, #8B7355);"><i class="fas fa-sync-alt"></i></div>
                 <h3>Cross-Device Sync</h3>
                 <p>Switch phones without losing your recipes. Sign in with Google and all your custom recipes, grinder settings, and progress transfer instantly to your new device.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #2D1F14, #5C4033);">
-                    <i class="fas fa-brain"></i>
-                </div>
+                <div class="feature-icon" style="background: linear-gradient(135deg, #2D1F14, #5C4033);"><i class="fas fa-brain"></i></div>
                 <h3>Learn While You Brew</h3>
                 <p>The Education section teaches you the science behind each parameter. Understand why grind size affects extraction, how temperature changes flavor, and what ratios mean for strength.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon" style="background: linear-gradient(135deg, #8B4513, #CD853F);">
-                    <i class="fas fa-code-branch"></i>
-                </div>
+                <div class="feature-icon" style="background: linear-gradient(135deg, #8B4513, #CD853F);"><i class="fas fa-code-branch"></i></div>
                 <h3>Open Source & Ad-Free</h3>
                 <p>Developed by John Irianto Susanto. The app is available on GitHub for transparency. Clean interface with no unnecessary bloatware — just pure coffee brewing focus.</p>
             </div>
         </div>
     </section>
 
-    <!-- Screenshots Section -->
+    <!-- ===== SCREENSHOTS ===== -->
     <section id="screenshots" class="screenshots-section">
         <div class="section-header">
             <h2>App Screenshots</h2>
@@ -760,59 +894,36 @@
 
         <div class="screenshots-grid">
             <div class="screenshot-item">
-                <img src="../images/Brewmaster1.png" alt="Home Screen - Choose your brew method: Espresso, Pour Over, French Press">
-                <div class="screenshot-label">
-                    <i class="fas fa-home"></i> Home - Brew Methods
-                </div>
+                <img src="../images/Brewmaster1.png" alt="Home Screen">
+                <div class="screenshot-label"><i class="fas fa-home"></i> Home - Brew Methods</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster2.png" alt="Espresso Brew - Smart ratio recommendations and customizable extraction settings">
-                <div class="screenshot-label">
-                    <i class="fas fa-mug-hot"></i> Espresso Brewing
-                </div>
+                <img src="../images/Brewmaster2.png" alt="Espresso Brew">
+                <div class="screenshot-label"><i class="fas fa-mug-hot"></i> Espresso Brewing</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster3.png" alt="Saved Recipes - Pre-installed sample recipes with load and brew options">
-                <div class="screenshot-label">
-                    <i class="fas fa-bookmark"></i> Saved Recipes
-                </div>
+                <img src="../images/Brewmaster3.png" alt="Saved Recipes">
+                <div class="screenshot-label"><i class="fas fa-bookmark"></i> Saved Recipes</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster5.png" alt="Espresso Mode - Customizable brewing steps with preheat, add coffee, pour water, pre-infusion, pressure, and wait">
-                <div class="screenshot-label">
-                    <i class="fas fa-list-check"></i> Custom Brew Steps
-                </div>
+                <img src="../images/Brewmaster5.png" alt="Custom Steps">
+                <div class="screenshot-label"><i class="fas fa-list-check"></i> Custom Brew Steps</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster6.png" alt="French Press Mode - Customizable steps including preheating, adding coffee, pouring water, stirring, waiting, placing plunger, and pressing">
-                <div class="screenshot-label">
-                    <i class="fas fa-filter"></i> French Press Brewing
-                </div>
+                <img src="../images/Brewmaster6.png" alt="French Press">
+                <div class="screenshot-label"><i class="fas fa-filter"></i> French Press Brewing</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster7.png" alt="Pour Over Mode - Customizable steps including preheating, adding coffee, pouring water, blooming, waiting, swirling, and stirring">
-                <div class="screenshot-label">
-                    <i class="fas fa-tint"></i> Pour Over Brewing
-                </div>
+                <img src="../images/Brewmaster7.png" alt="Pour Over">
+                <div class="screenshot-label"><i class="fas fa-tint"></i> Pour Over Brewing</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster8.png" alt="Online Sync - Google account sync to save brewing database across devices">
-                <div class="screenshot-label">
-                    <i class="fas fa-cloud"></i> Cloud Sync
-                </div>
+                <img src="../images/Brewmaster8.png" alt="Cloud Sync">
+                <div class="screenshot-label"><i class="fas fa-cloud"></i> Cloud Sync</div>
             </div>
-
             <div class="screenshot-item">
-                <img src="../images/Brewmaster9.png" alt="Brew Instructions - Step-by-step guided brewing with timer and voice guidance">
-                <div class="screenshot-label">
-                    <i class="fas fa-stopwatch"></i> Guided Brew Timer
-                </div>
+                <img src="../images/Brewmaster9.png" alt="Guided Brew Timer">
+                <div class="screenshot-label"><i class="fas fa-stopwatch"></i> Guided Brew Timer</div>
             </div>
         </div>
 
@@ -821,7 +932,7 @@
         </p>
     </section>
 
-    <!-- User Guide Section -->
+    <!-- ===== USER GUIDE ===== -->
     <section id="guide" class="guide-section">
         <div class="section-header">
             <h2>User Guide</h2>
@@ -834,13 +945,13 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                     <h3>Installation & First Launch</h3>
-                    <p>Download BrewMaster from Google Play Store or GitHub. Install and open the app. The app uses a bottom navigation bar with 5 tabs:</p>
+                    <p>Download BrewMaster from Google Play Store or join the Closed Testing program. Install and open the app. The app uses a bottom navigation bar with 5 tabs:</p>
                     <ul>
-                        <li><strong>Brew (🧮):</strong> Access Espresso, Pour Over, and French Press screens.</li>
-                        <li><strong>Learn (🎓):</strong> Coffee Education articles and XP system.</li>
-                        <li><strong>Assistant (🤖):</strong> Smart Coffee Assistant for taste troubleshooting.</li>
-                        <li><strong>Grinder (⚙️):</strong> Save grinder click settings per brew method.</li>
-                        <li><strong>Sync (🔄):</strong> Sync recipes to the cloud via Google account.</li>
+                        <li><strong>Brew:</strong> Access Espresso, Pour Over, and French Press screens.</li>
+                        <li><strong>Learn:</strong> Coffee Education articles and XP system.</li>
+                        <li><strong>Assistant:</strong> Smart Coffee Assistant for taste troubleshooting.</li>
+                        <li><strong>Grinder:</strong> Save grinder click settings per brew method.</li>
+                        <li><strong>Sync:</strong> Sync recipes to the cloud via Google account.</li>
                     </ul>
                 </div>
             </div>
@@ -855,7 +966,6 @@
                         <li><strong>Pour Over:</strong> Filter-based brewing (V60 / Chemex) with medium grind, ~3 minutes.</li>
                         <li><strong>French Press:</strong> Full immersion brewing with coarse grind, ~4 minutes.</li>
                     </ul>
-                    <p><em>Tip: Each brew method has its own recipe storage. Espresso recipes won't appear in Pour Over.</em></p>
                 </div>
             </div>
 
@@ -863,15 +973,7 @@
                 <div class="step-number">3</div>
                 <div class="step-content">
                     <h3>Set Parameters & Add Steps</h3>
-                    <p>Configure your brew parameters:</p>
-                    <ul>
-                        <li><strong>Coffee:</strong> Amount in grams.</li>
-                        <li><strong>Yield/Water:</strong> Target output in grams or ml.</li>
-                        <li><strong>Grind:</strong> Size from your Grinder Settings.</li>
-                        <li><strong>Pressure/Temp:</strong> Bar pressure or water temperature.</li>
-                        <li><strong>Type/Ratio:</strong> Ristretto/Espresso/Lungo or select ratio (1:15, 1:16, etc.).</li>
-                    </ul>
-                    <p>Tap <strong>+ ADD NEW STEP</strong> to build your process. Available steps include: Preheat, Add Coffee, Pour Water, Bloom, Stir, Swirl, Wait, Pre-Infusion, and Pressure.</p>
+                    <p>Configure your brew parameters: Coffee (grams), Yield/Water (grams or ml), Grind size, Pressure/Temperature, Type/Ratio. Tap <strong>+ ADD NEW STEP</strong> to build your process from: Preheat, Add Coffee, Pour Water, Bloom, Stir, Swirl, Wait, Pre-Infusion, and Pressure.</p>
                 </div>
             </div>
 
@@ -879,14 +981,7 @@
                 <div class="step-number">4</div>
                 <div class="step-content">
                     <h3>Save & Load Recipes</h3>
-                    <p>Save your perfect recipe for future use:</p>
-                    <ul>
-                        <li>Type a descriptive name (e.g., "Morning Espresso") in the Recipe name field.</li>
-                        <li>Tap <strong>SAVE</strong> to store it in the Saved Recipes section.</li>
-                        <li><strong>LOAD & BREW:</strong> Loads parameters and takes you to Brew Instructions.</li>
-                        <li><strong>DELETE:</strong> Permanently removes the recipe.</li>
-                        <li><strong>NEW RECIPE:</strong> Clears current settings to start fresh.</li>
-                    </ul>
+                    <p>Type a descriptive name (e.g., "Morning Espresso") in the Recipe name field, then tap <strong>SAVE</strong>. Use <strong>LOAD & BREW</strong> to resume, <strong>DELETE</strong> to remove, or <strong>NEW RECIPE</strong> to start fresh.</p>
                 </div>
             </div>
 
@@ -894,15 +989,7 @@
                 <div class="step-number">5</div>
                 <div class="step-content">
                     <h3>Use the Brew Timer</h3>
-                    <p>Tap <strong>GO TO BREW INSTRUCTIONS</strong> to start guided brewing:</p>
-                    <ul>
-                        <li>The current step displays in a large card with step name, water amount, and countdown timer.</li>
-                        <li>Tap <strong>START</strong> to begin the countdown for the current step.</li>
-                        <li>Tap <strong>SKIP</strong> to jump to the next step without waiting.</li>
-                        <li>Tap <strong>RESET</strong> to restart from Step 1 at any time.</li>
-                        <li>Voice guidance announces each step so you can focus on technique.</li>
-                    </ul>
-                    <p><em>Note: The first step shows "Get Ready..." to give you time to prepare equipment.</em></p>
+                    <p>Tap <strong>GO TO BREW INSTRUCTIONS</strong> to start guided brewing. <strong>START</strong> begins the countdown, <strong>SKIP</strong> jumps ahead, <strong>RESET</strong> restarts. Voice guidance announces each step so you can focus on technique.</p>
                 </div>
             </div>
 
@@ -910,25 +997,84 @@
                 <div class="step-number">6</div>
                 <div class="step-content">
                     <h3>Grinder Settings, Education & Sync</h3>
-                    <p>Complete your BrewMaster experience:</p>
-                    <ul>
-                        <li><strong>Grinder Settings:</strong> Enter your grinder model and save click settings for each brew method (Very Fine for Ristretto, Fine for Espresso, Medium for Pour Over, Coarse for French Press).</li>
-                        <li><strong>Coffee Education:</strong> Read articles to earn XP. Start with Basic topics (What is Coffee?, Ratios, Grind Size) before advancing to Pour Over Mastery and Troubleshooting.</li>
-                        <li><strong>Smart Assistant:</strong> Select your taste problem (Too Bitter, Too Sour, Too Weak, Flat) and get instant fix recommendations.</li>
-                        <li><strong>Cloud Sync:</strong> Go to the Sync tab, sign in with Google, and tap SYNC NOW to back up recipes. Enable "Sync on launch" for automatic backup.</li>
-                    </ul>
+                    <p>Enter your grinder model and save click settings per method. Read Coffee Education articles to earn XP. Use the Smart Assistant for taste troubleshooting. Sign in with Google in the Sync tab to back up all recipes to the cloud.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
+    <!-- ===== CLOSED TESTING ===== -->
+    <section id="closed-testing" class="closed-testing-section">
+        <div class="section-header">
+            <h2>🎮 Join as a Closed Tester</h2>
+            <div class="divider"></div>
+            <p>Help us polish BrewMaster! Follow these 2 easy steps to join the testing program.</p>
+        </div>
+
+        <div class="tester-steps">
+            <div class="tester-step">
+                <div class="tester-step-num">1</div>
+                <div class="tester-step-body">
+                    <h3>Join Google Group</h3>
+                    <p>Use the Gmail account you want to test with, then click below and select <strong>Request to join</strong>.</p>
+                    <a href="https://groups.google.com/g/brewmaster-testers"
+                       target="_blank" rel="noopener noreferrer"
+                       class="tester-btn tester-btn-group">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <span class="small">Step 1</span>
+                            <span class="big">Join Google Group →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="tester-step">
+                <div class="tester-step-num">2</div>
+                <div class="tester-step-body">
+                    <h3>Join Testing on Google Play</h3>
+                    <p>After joining the Group, open the Testing link below with the <strong>same Google account</strong>, then install the app.</p>
+                    <a href="https://play.google.com/apps/testing/com.johniriantosusanto.brewmaster"
+                       target="_blank" rel="noopener noreferrer"
+                       class="tester-btn tester-btn-play">
+                        <i class="fab fa-google-play"></i>
+                        <div>
+                            <span class="small">Step 2</span>
+                            <span class="big">Join Testing on Google Play →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tester-note">
+            <i class="fas fa-info-circle"></i>
+            <div>
+                <strong>Important:</strong> The Play Store testing link only works after you've joined the Google Group and waited 5–10 minutes.
+                Make sure you use the <strong>same Google account</strong> on both the Group and Play Store.
+                If you see <em>"App not available"</em>, clear Play Store cache:
+                <code>Settings → Apps → Google Play Store → Storage → Clear Cache</code>.
+            </div>
+        </div>
+
+        <div class="tester-cta">
+            <p>Already registered as a tester? Open directly on Google Play.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.brewmaster"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary">
+                <i class="fab fa-google-play"></i> Open on Google Play
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== DOWNLOAD ===== -->
     <section id="download" class="download-section">
         <h2>Get BrewMaster</h2>
         <p>Available for free on Google Play Store and GitHub. Start your journey to the perfect cup today.</p>
 
         <div class="download-buttons">
-            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.brewmaster" target="_blank" rel="noopener noreferrer" class="download-btn btn-playstore">
+            <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.brewmaster"
+               target="_blank" rel="noopener noreferrer" class="download-btn btn-playstore">
                 <i class="fab fa-google-play"></i>
                 <div>
                     <span class="small">Get it on</span>
@@ -936,7 +1082,8 @@
                 </div>
             </a>
 
-            <a href="https://github.com/johniriantosusanto888-cyber" target="_blank" rel="noopener noreferrer" class="download-btn btn-github">
+            <a href="https://github.com/johniriantosusanto888-cyber"
+               target="_blank" rel="noopener noreferrer" class="download-btn btn-github">
                 <i class="fab fa-github"></i>
                 <div>
                     <span class="small">View source on</span>
@@ -950,17 +1097,13 @@
         </p>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== FOOTER ===== -->
     <footer>
         <p>© 2026 John Development Studio. BrewMaster.</p>
         <p style="margin-top: 0.5rem;">
-            <a href="privacy_policy.html">
-                <i class="fas fa-shield-alt"></i> Privacy Policy
-            </a>
+            <a href="privacy_policy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
             &nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="delete_account.html">
-                <i class="fas fa-user-slash"></i> Delete Account
-            </a>
+            <a href="delete_account.html"><i class="fas fa-user-slash"></i> Delete Account</a>
         </p>
         <p style="margin-top: 0.5rem;">
             <a href="https://johniriantosusanto888-cyber.github.io/john-development-studio/">
@@ -973,18 +1116,22 @@
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
                 }
             });
         });
 
-        // Intersection Observer for animations
+        // Mobile nav toggle
+        document.getElementById('navToggle').addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Intersection Observer for animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -994,11 +1141,11 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+        document.querySelectorAll('.feature-card, .screenshot-item, .guide-step, .tester-step').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
