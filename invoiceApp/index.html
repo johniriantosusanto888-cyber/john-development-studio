@@ -34,6 +34,11 @@
         ========================= */
         .nav {
             margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .nav a {
             color: #8b949e;
@@ -42,6 +47,21 @@
             transition: color 0.2s ease;
         }
         .nav a:hover { color: #58a6ff; }
+
+        /* CSS Tambahan untuk Dropdown Bahasa */
+        .lang-selector {
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .lang-selector:hover { border-color: #58a6ff; }
 
         /* =========================
            HEADER
@@ -484,9 +504,14 @@
 
         <!-- NAV -->
         <div class="nav">
-            <a href="https://john-development-studio.pages.dev/">
-                ← Kembali ke Beranda
-            </a>
+            <a href="https://john-development-studio.pages.dev/" data-i18n="nav_back">← Kembali ke Beranda</a>
+            
+            <!-- LANGUAGE SELECTOR -->
+            <select id="languageSelector" class="lang-selector" onchange="changeLanguage(this.value)">
+                <option value="id">🇮🇩 Indonesia</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="zh">🇨🇳 中文</option>
+            </select>
         </div>
 
         <!-- HEADER -->
@@ -496,20 +521,20 @@
                 <h1>Invoice App</h1>
                 <div class="package">com.johniriantosusanto.invoiceapp</div>
                 <div class="tags">
-                    <span class="badge production">✅ Live on Google Play</span>
-                    <span class="badge business">Business / Productivity</span>
-                    <span class="badge new">Thermal Print Ready</span>
+                    <span class="badge production" data-i18n="badge_live">✅ Live on Google Play</span>
+                    <span class="badge business" data-i18n="badge_business">Business / Productivity</span>
+                    <span class="badge new" data-i18n="badge_thermal">Thermal Print Ready</span>
                 </div>
             </div>
         </div>
 
         <!-- DESCRIPTION -->
         <div class="description">
-            <strong>
+            <strong data-i18n="desc_title">
                 Professional invoicing with PDF export, thermal print,
                 client &amp; product management, and cloud sync via Firebase.
             </strong>
-            <p>
+            <p data-i18n="desc_text">
                 Buat invoice profesional dalam hitungan detik.
                 Kelola klien, produk, stok otomatis, supplier, dan laporan keuangan.
                 Cetak thermal 58mm/80mm langsung dari HP — tanpa internet.
@@ -519,8 +544,8 @@
 
         <!-- DOWNLOAD INFO -->
         <div class="download-card">
-            <h3>🎉 Sekarang tersedia di Google Play!</h3>
-            <p>
+            <h3 data-i18n="dl_info_title">🎉 Sekarang tersedia di Google Play!</h3>
+            <p data-i18n="dl_info_text">
                 Invoice App sudah <strong>rilis resmi</strong> dan bisa diunduh langsung
                 dari Google Play Store. Klik tombol <em>Download di Google Play</em> di bawah untuk
                 membuka halaman aplikasi.
@@ -531,10 +556,10 @@
         <div class="buttons">
             <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.invoiceapp"
                target="_blank" rel="noopener noreferrer"
-               class="btn btn-play">📲 Download di Google Play</a>
+               class="btn btn-play" data-i18n="btn_play">📲 Download di Google Play</a>
             <a href="https://john-development-studio.pages.dev/"
                target="_blank" rel="noopener noreferrer"
-               class="btn btn-web">🌐 Website Developer</a>
+               class="btn btn-web" data-i18n="btn_web">🌐 Website Developer</a>
         </div>
 
         <!-- PRIVACY -->
@@ -542,125 +567,125 @@
             <a href="https://john-development-studio.pages.dev/invoiceApp/privacy_policy"
                target="_blank" rel="noopener noreferrer">
                 <span class="privacy-policy-icon">🛡️</span>
-                Privacy Policy
+                <span data-i18n="link_privacy">Privacy Policy</span>
             </a>
         </div>
 
         <!-- =========================
              GETTING STARTED
         ========================= -->
-        <h2>🚀 Cara Menggunakan</h2>
-        <p class="section-subtitle">Mulai dari nol sampai cetak invoice pertama Anda.</p>
+        <h2 data-i18n="guide_title">🚀 Cara Menggunakan</h2>
+        <p class="section-subtitle" data-i18n="guide_desc">Mulai dari nol sampai cetak invoice pertama Anda.</p>
 
         <div class="steps">
             <div class="step-card">
                 <div class="step-number">1</div>
-                <h4>Login</h4>
-                <p>Masuk dengan email &amp; password, atau Google Sign-In.</p>
+                <h4 data-i18n="step_1_title">Login</h4>
+                <p data-i18n="step_1_desc">Masuk dengan email &amp; password, atau Google Sign-In.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">2</div>
-                <h4>Business Profile</h4>
-                <p>Isi nama perusahaan, alamat, kontak, logo, dan mata uang.</p>
+                <h4 data-i18n="step_2_title">Business Profile</h4>
+                <p data-i18n="step_2_desc">Isi nama perusahaan, alamat, kontak, logo, dan mata uang.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">3</div>
-                <h4>Add Clients &amp; Products</h4>
-                <p>Tambahkan klien, supplier, dan produk beserta stoknya.</p>
+                <h4 data-i18n="step_3_title">Add Clients &amp; Products</h4>
+                <p data-i18n="step_3_desc">Tambahkan klien, supplier, dan produk beserta stoknya.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">4</div>
-                <h4>Create Invoice</h4>
-                <p>Buat invoice, tambah item, atur diskon, pajak, dan ongkir.</p>
+                <h4 data-i18n="step_4_title">Create Invoice</h4>
+                <p data-i18n="step_4_desc">Buat invoice, tambah item, atur diskon, pajak, dan ongkir.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">5</div>
-                <h4>Share / Print</h4>
-                <p>Bagikan PDF, atau cetak thermal 58mm / 80mm.</p>
+                <h4 data-i18n="step_5_title">Share / Print</h4>
+                <p data-i18n="step_5_desc">Bagikan PDF, atau cetak thermal 58mm / 80mm.</p>
             </div>
             <div class="step-card">
                 <div class="step-number">6</div>
-                <h4>Mark as Paid</h4>
-                <p>Tandai lunas / partial, data otomatis masuk ke laporan.</p>
+                <h4 data-i18n="step_6_title">Mark as Paid</h4>
+                <p data-i18n="step_6_desc">Tandai lunas / partial, data otomatis masuk ke laporan.</p>
             </div>
         </div>
 
         <!-- =========================
              FEATURES
         ========================= -->
-        <h2>✨ Fitur Utama <span class="count">14</span></h2>
-        <p class="section-subtitle">Semua yang Anda butuhkan untuk mengelola bisnis.</p>
+        <h2 data-i18n="feat_title">✨ Fitur Utama <span class="count">14</span></h2>
+        <p class="section-subtitle" data-i18n="feat_desc">Semua yang Anda butuhkan untuk mengelola bisnis.</p>
 
         <div class="feature-list">
 
             <div class="feature-card">
-                <h3>📄 PDF Export</h3>
-                <p>Preview dan bagikan invoice sebagai PDF ke WhatsApp, Gmail, atau Drive secara instan. Nama file otomatis: <code>invoice_INV-001.pdf</code>.</p>
+                <h3 data-i18n="feat_1_title">📄 PDF Export</h3>
+                <p data-i18n="feat_1_desc">Preview dan bagikan invoice sebagai PDF ke WhatsApp, Gmail, atau Drive secara instan. Nama file otomatis: <code>invoice_INV-001.pdf</code>.</p>
             </div>
 
             <div class="feature-card highlight">
-                <h3>🖨️ Thermal Print</h3>
-                <p>Cetak struk ke printer thermal Bluetooth 58mm atau 80mm. Auto-wrap alamat &amp; email panjang. Tidak butuh internet.</p>
+                <h3 data-i18n="feat_2_title">🖨️ Thermal Print</h3>
+                <p data-i18n="feat_2_desc">Cetak struk ke printer thermal Bluetooth 58mm atau 80mm. Auto-wrap alamat &amp; email panjang. Tidak butuh internet.</p>
             </div>
 
             <div class="feature-card">
-                <h3>📦 Stock Sync</h3>
-                <p>Stok otomatis berkurang saat invoice dibuat, dan otomatis kembali saat invoice dibatalkan atau item dihapus.</p>
+                <h3 data-i18n="feat_3_title">📦 Stock Sync</h3>
+                <p data-i18n="feat_3_desc">Stok otomatis berkurang saat invoice dibuat, dan otomatis kembali saat invoice dibatalkan atau item dihapus.</p>
             </div>
 
             <div class="feature-card">
-                <h3>☁️ Cloud Sync</h3>
-                <p>Login dengan Google, data tersimpan aman di Firebase dan bisa diakses di semua perangkat Anda.</p>
+                <h3 data-i18n="feat_4_title">☁️ Cloud Sync</h3>
+                <p data-i18n="feat_4_desc">Login dengan Google, data tersimpan aman di Firebase dan bisa diakses di semua perangkat Anda.</p>
             </div>
 
             <div class="feature-card">
-                <h3>📊 Laporan &amp; Analitik</h3>
-                <p>Pantau Total Issued, Unpaid, Overdue, Paid, dan Partial Paid berdasarkan bulan/tahun. Export ke PDF.</p>
+                <h3 data-i18n="feat_5_title">📊 Laporan &amp; Analitik</h3>
+                <p data-i18n="feat_5_desc">Pantau Total Issued, Unpaid, Overdue, Paid, dan Partial Paid berdasarkan bulan/tahun. Export ke PDF.</p>
             </div>
 
             <div class="feature-card">
-                <h3>👥 Klien &amp; Supplier</h3>
-                <p>Kelola data klien dan supplier. Setiap klien bisa punya <em>special price</em> per produk yang otomatis diterapkan.</p>
+                <h3 data-i18n="feat_6_title">👥 Klien &amp; Supplier</h3>
+                <p data-i18n="feat_6_desc">Kelola data klien dan supplier. Setiap klien bisa punya <em>special price</em> per produk yang otomatis diterapkan.</p>
             </div>
 
             <div class="feature-card">
-                <h3>💰 Pembayaran Parsial</h3>
-                <p>Catat metode pembayaran, tanggal, dan status Lunas/Partial/Unpaid. Bisa cicil beberapa kali.</p>
+                <h3 data-i18n="feat_7_title">💰 Pembayaran Parsial</h3>
+                <p data-i18n="feat_7_desc">Catat metode pembayaran, tanggal, dan status Lunas/Partial/Unpaid. Bisa cicil beberapa kali.</p>
             </div>
 
             <div class="feature-card">
-                <h3>📮 Shipping Details</h3>
-                <p>Isi Ship Date, Via (kurir), Tracking Number, dan FOB. Otomatis muncul di PDF dan thermal print.</p>
+                <h3 data-i18n="feat_8_title">📮 Shipping Details</h3>
+                <p data-i18n="feat_8_desc">Isi Ship Date, Via (kurir), Tracking Number, dan FOB. Otomatis muncul di PDF dan thermal print.</p>
             </div>
 
             <div class="feature-card">
-                <h3>💳 Payment Instruction</h3>
-                <p>Set instruksi pembayaran default (bank, wallet, PayPal) yang otomatis muncul di setiap invoice.</p>
+                <h3 data-i18n="feat_9_title">💳 Payment Instruction</h3>
+                <p data-i18n="feat_9_desc">Set instruksi pembayaran default (bank, wallet, PayPal) yang otomatis muncul di setiap invoice.</p>
             </div>
 
             <div class="feature-card">
-                <h3>🏢 Business Profile</h3>
-                <p>Atur nama perusahaan, alamat, logo, kontak, mata uang (Rp, $, €), dan prefix invoice (INV, FACT, dll).</p>
+                <h3 data-i18n="feat_10_title">🏢 Business Profile</h3>
+                <p data-i18n="feat_10_desc">Atur nama perusahaan, alamat, logo, kontak, mata uang (Rp, $, €), dan prefix invoice (INV, FACT, dll).</p>
             </div>
 
             <div class="feature-card">
-                <h3>📝 Notes &amp; Custom Items</h3>
-                <p>Tambahkan catatan ke invoice. Custom item otomatis tersimpan sebagai produk untuk dipakai lagi.</p>
+                <h3 data-i18n="feat_11_title">📝 Notes &amp; Custom Items</h3>
+                <p data-i18n="feat_11_desc">Tambahkan catatan ke invoice. Custom item otomatis tersimpan sebagai produk untuk dipakai lagi.</p>
             </div>
 
             <div class="feature-card">
-                <h3>🔐 Account &amp; Sync</h3>
-                <p>Sync Now untuk paksa sinkronisasi. Data otomatis sync saat online. Logout dengan aman.</p>
+                <h3 data-i18n="feat_12_title">🔐 Account &amp; Sync</h3>
+                <p data-i18n="feat_12_desc">Sync Now untuk paksa sinkronisasi. Data otomatis sync saat online. Logout dengan aman.</p>
             </div>
 
             <div class="feature-card">
-                <h3>📶 Offline Mode</h3>
-                <p>Data tersimpan lokal di Room database. Tetap bisa akses &amp; cetak thermal tanpa koneksi internet.</p>
+                <h3 data-i18n="feat_13_title">📶 Offline Mode</h3>
+                <p data-i18n="feat_13_desc">Data tersimpan lokal di Room database. Tetap bisa akses &amp; cetak thermal tanpa koneksi internet.</p>
             </div>
 
             <div class="feature-card">
-                <h3>🔍 Filter &amp; Search</h3>
-                <p>Cari invoice berdasarkan status, klien, atau nomor invoice. Filter per bulan/tahun untuk laporan.</p>
+                <h3 data-i18n="feat_14_title">🔍 Filter &amp; Search</h3>
+                <p data-i18n="feat_14_desc">Cari invoice berdasarkan status, klien, atau nomor invoice. Filter per bulan/tahun untuk laporan.</p>
             </div>
 
         </div>
@@ -668,28 +693,28 @@
         <!-- =========================
              THERMAL PRINT SHOWCASE
         ========================= -->
-        <h2>🖨️ Thermal Print Showcase</h2>
-        <p class="section-subtitle">Cetak struk langsung dari HP ke printer Bluetooth.</p>
+        <h2 data-i18n="thermal_title">🖨️ Thermal Print Showcase</h2>
+        <p class="section-subtitle" data-i18n="thermal_desc">Cetak struk langsung dari HP ke printer Bluetooth.</p>
 
         <div class="thermal-showcase">
-            <h3>⚡ Support 2 Ukuran Kertas</h3>
+            <h3 data-i18n="thermal_sub_title">⚡ Support 2 Ukuran Kertas</h3>
             <div class="paper-options">
                 <div class="paper-badge"><strong>58 mm</strong> — 32 karakter (Font A)</div>
                 <div class="paper-badge"><strong>80 mm</strong> — 48 karakter (Font A)</div>
             </div>
 
-            <p style="color:#adbac7; font-size:13.5px; margin: 10px 0;">
+            <p style="color:#adbac7; font-size:13.5px; margin: 10px 0;" data-i18n="thermal_list_title">
                 <strong>Fitur thermal print:</strong>
             </p>
             <ul style="color:#adbac7; font-size:13.5px; padding-left:20px; margin: 0 0 12px;">
-                <li>Auto-wrap alamat panjang (tidak terpotong)</li>
-                <li>Email &amp; PayPal otomatis turun ke baris baru jika terlalu panjang</li>
-                <li>Header, Invoice info, Bill To, Shipping, Items, Totals, Payment Instructions, Notes — lengkap</li>
-                <li>Bekerja sepenuhnya offline (Bluetooth only)</li>
-                <li>Preview real-time sebelum cetak</li>
+                <li data-i18n="thermal_li_1">Auto-wrap alamat panjang (tidak terpotong)</li>
+                <li data-i18n="thermal_li_2">Email &amp; PayPal otomatis turun ke baris baru jika terlalu panjang</li>
+                <li data-i18n="thermal_li_3">Header, Invoice info, Bill To, Shipping, Items, Totals, Payment Instructions, Notes — lengkap</li>
+                <li data-i18n="thermal_li_4">Bekerja sepenuhnya offline (Bluetooth only)</li>
+                <li data-i18n="thermal_li_5">Preview real-time sebelum cetak</li>
             </ul>
 
-            <p style="color:#8b949e; font-size:12px; margin-bottom: 6px;">Contoh preview 58mm:</p>
+            <p style="color:#8b949e; font-size:12px; margin-bottom: 6px;" data-i18n="thermal_preview_title">Contoh preview 58mm:</p>
             <div class="thermal-preview">================================
            TOKO MAJU JAYA
         Bandung, INDONESIA
@@ -729,114 +754,114 @@ PAYMENT INSTRUCTIONS
         <!-- =========================
              TIPS & TRICKS
         ========================= -->
-        <h2>💡 Tips &amp; Tricks</h2>
-        <p class="section-subtitle">Trik untuk memaksimalkan Invoice App.</p>
+        <h2 data-i18n="tips_title">💡 Tips &amp; Tricks</h2>
+        <p class="section-subtitle" data-i18n="tips_desc">Trik untuk memaksimalkan Invoice App.</p>
 
         <div class="tips-grid">
-            <div class="tip"><span class="tip-icon">💡</span><span>Invoice prefix bisa di-custom (INV-, PO-, SJ-).</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Special price per klien otomatis diterapkan saat memilih produk.</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Stok otomatis menyesuaikan saat invoice dibuat / dihapus.</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Data offline tersedia via Room database.</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Gunakan Mark as Partial jika klien bayar DP.</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Pakai Notes untuk syarat pembayaran khusus.</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Tap &amp; hold item untuk edit cepat.</span></div>
-            <div class="tip"><span class="tip-icon">💡</span><span>Cloud backup otomatis — login di HP baru, data langsung muncul.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_1">Invoice prefix bisa di-custom (INV-, PO-, SJ-).</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_2">Special price per klien otomatis diterapkan saat memilih produk.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_3">Stok otomatis menyesuaikan saat invoice dibuat / dihapus.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_4">Data offline tersedia via Room database.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_5">Gunakan Mark as Partial jika klien bayar DP.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_6">Pakai Notes untuk syarat pembayaran khusus.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_7">Tap &amp; hold item untuk edit cepat.</span></div>
+            <div class="tip"><span class="tip-icon">💡</span><span data-i18n="tip_8">Cloud backup otomatis — login di HP baru, data langsung muncul.</span></div>
         </div>
 
         <!-- =========================
              FAQ ACCORDION
         ========================= -->
-        <h2>❓ FAQ</h2>
-        <p class="section-subtitle">Pertanyaan yang sering ditanyakan.</p>
+        <h2 data-i18n="faq_title">❓ FAQ</h2>
+        <p class="section-subtitle" data-i18n="faq_desc">Pertanyaan yang sering ditanyakan.</p>
 
         <div class="accordion">
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Invoice number tidak bertambah, kenapa?</span>
+                    <span data-i18n="faq_q1">Invoice number tidak bertambah, kenapa?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a1">
                     Cek <strong>Business Profile → Invoice Prefix</strong> dan pastikan sudah disimpan. Prefix yang kosong bisa menyebabkan penomoran tidak berjalan.
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>PDF tidak ada logo?</span>
+                    <span data-i18n="faq_q2">PDF tidak ada logo?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a2">
                     Upload logo di <strong>Business Profile → Save</strong>, lalu buat invoice baru. Invoice lama tidak otomatis ter-update.
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Printer Bluetooth tidak terdeteksi?</span>
+                    <span data-i18n="faq_q3">Printer Bluetooth tidak terdeteksi?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a3">
                     Pair dulu printer lewat <strong>Pengaturan HP → Bluetooth → Pair new device</strong>. Setelah paired, baru buka app dan tap <em>Connect Bluetooth Printer</em>.
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Bisa print tanpa internet?</span>
+                    <span data-i18n="faq_q4">Bisa print tanpa internet?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a4">
                     <strong>Bisa.</strong> Thermal print hanya butuh koneksi Bluetooth, tidak butuh internet sama sekali.
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Data hilang setelah reinstall?</span>
+                    <span data-i18n="faq_q5">Data hilang setelah reinstall?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a5">
                     Login dengan akun yang sama — data otomatis sync dari cloud (Firebase Firestore).
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Bisa multi-device?</span>
+                    <span data-i18n="faq_q6">Bisa multi-device?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a6">
                     Ya. Login dengan akun yang sama di HP berbeda, data akan otomatis tersinkron via cloud.
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Bisa export semua data?</span>
+                    <span data-i18n="faq_q7">Bisa export semua data?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a7">
                     Belum tersedia. Semua data tersimpan di cloud dan dapat diakses melalui aplikasi.
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Bagaimana kalau alamat klien panjang di 58mm?</span>
+                    <span data-i18n="faq_q8">Bagaimana kalau alamat klien panjang di 58mm?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a8">
                     Aplikasi otomatis melakukan <strong>word-wrap</strong>. Alamat panjang akan turun ke baris berikutnya tanpa terpotong, tetap rapi di kertas 58mm (32 karakter) maupun 80mm (48 karakter).
                 </div>
             </div>
 
             <div class="accordion-item">
                 <div class="accordion-header">
-                    <span>Apakah data saya aman?</span>
+                    <span data-i18n="faq_q9">Apakah data saya aman?</span>
                     <span class="arrow">▼</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" data-i18n="faq_a9">
                     Ya. Data disimpan di Firebase (Google Cloud) dengan autentikasi Firebase Auth. Kami tidak pernah mengakses data bisnis Anda. Lihat <a href="https://john-development-studio.pages.dev/invoiceApp/privacy_policy" target="_blank" rel="noopener noreferrer" style="color:#58a6ff;">Privacy Policy</a> untuk detail.
                 </div>
             </div>
@@ -846,8 +871,8 @@ PAYMENT INSTRUCTIONS
         <!-- =========================
              SCREENSHOTS
         ========================= -->
-        <h2>📱 Screenshot Aplikasi</h2>
-        <p class="section-subtitle">Lihat tampilan aplikasi secara sekilas.</p>
+        <h2 data-i18n="ss_title">📱 Screenshot Aplikasi</h2>
+        <p class="section-subtitle" data-i18n="ss_desc">Lihat tampilan aplikasi secara sekilas.</p>
 
         <div class="screenshots">
             <img src="screenshot1.jpg" alt="Invoice App Login Screenshot" loading="lazy">
@@ -858,39 +883,397 @@ PAYMENT INSTRUCTIONS
             <img src="screenshot6.png" alt="Invoice App Stock Sync Screenshot" loading="lazy">
             <img src="screenshot7.jpg" alt="Invoice App Invoice Overview Screenshot" loading="lazy">
             <img src="screenshot8.png" alt="Invoice App Client Invoices Screenshot" loading="lazy">
-
-<img src="screenshot9.png" alt="Invoice App Client Invoices Screenshot" loading="lazy">
+            <img src="screenshot9.png" alt="Invoice App Client Invoices Screenshot" loading="lazy">
         </div>
 
         <!-- FOOTER -->
         <div class="footer">
-            &copy; 2026 John Irianto Susanto. All rights reserved.
+            <span data-i18n="footer_text">&copy; 2026 John Irianto Susanto. All rights reserved.</span>
         </div>
 
     </div>
 
     <!-- =========================
-         ACCORDION SCRIPT
+         JAVASCRIPT LOGIC (Translations & UI)
     ========================= -->
     <script>
+        // 1. KAMUS TERJEMAHAN (TRANSLATIONS OBJECT)
+        const translations = {
+            "id": {
+                "nav_back": "← Kembali ke Beranda",
+                "badge_live": "✅ Live on Google Play",
+                "badge_business": "Bisnis / Produktivitas",
+                "badge_thermal": "Siap Cetak Thermal",
+                "desc_title": "Faktur profesional dengan ekspor PDF, cetak thermal, manajemen klien & produk, serta sinkronisasi cloud via Firebase.",
+                "desc_text": "Buat invoice profesional dalam hitungan detik. Kelola klien, produk, stok otomatis, supplier, dan laporan keuangan. Cetak thermal 58mm/80mm langsung dari HP — tanpa internet. Login dengan Google Account agar data Anda aman dan tersinkron di semua perangkat.",
+                "dl_info_title": "🎉 Sekarang tersedia di Google Play!",
+                "dl_info_text": "Invoice App sudah <strong>rilis resmi</strong> dan bisa diunduh langsung dari Google Play Store. Klik tombol <em>Download di Google Play</em> di bawah untuk membuka halaman aplikasi.",
+                "btn_play": "📲 Download di Google Play",
+                "btn_web": "🌐 Website Developer",
+                "link_privacy": "Kebijakan Privasi",
+                
+                "guide_title": "🚀 Cara Menggunakan",
+                "guide_desc": "Mulai dari nol sampai cetak invoice pertama Anda.",
+                "step_1_title": "Login",
+                "step_1_desc": "Masuk dengan email & password, atau Google Sign-In.",
+                "step_2_title": "Profil Bisnis",
+                "step_2_desc": "Isi nama perusahaan, alamat, kontak, logo, dan mata uang.",
+                "step_3_title": "Tambah Klien & Produk",
+                "step_3_desc": "Tambahkan klien, supplier, dan produk beserta stoknya.",
+                "step_4_title": "Buat Invoice",
+                "step_4_desc": "Buat invoice, tambah item, atur diskon, pajak, dan ongkir.",
+                "step_5_title": "Bagikan / Cetak",
+                "step_5_desc": "Bagikan PDF, atau cetak thermal 58mm / 80mm.",
+                "step_6_title": "Tandai Lunas",
+                "step_6_desc": "Tandai lunas / partial, data otomatis masuk ke laporan.",
+
+                "feat_title": "✨ Fitur Utama",
+                "feat_desc": "Semua yang Anda butuhkan untuk mengelola bisnis.",
+                "feat_1_title": "📄 Ekspor PDF",
+                "feat_1_desc": "Preview dan bagikan invoice sebagai PDF ke WhatsApp, Gmail, atau Drive secara instan. Nama file otomatis: <code>invoice_INV-001.pdf</code>.",
+                "feat_2_title": "🖨️ Cetak Thermal",
+                "feat_2_desc": "Cetak struk ke printer thermal Bluetooth 58mm atau 80mm. Auto-wrap alamat & email panjang. Tidak butuh internet.",
+                "feat_3_title": "📦 Sinkronisasi Stok",
+                "feat_3_desc": "Stok otomatis berkurang saat invoice dibuat, dan otomatis kembali saat invoice dibatalkan atau item dihapus.",
+                "feat_4_title": "☁️ Sinkronisasi Cloud",
+                "feat_4_desc": "Login dengan Google, data tersimpan aman di Firebase dan bisa diakses di semua perangkat Anda.",
+                "feat_5_title": "📊 Laporan & Analitik",
+                "feat_5_desc": "Pantau Total Issued, Unpaid, Overdue, Paid, dan Partial Paid berdasarkan bulan/tahun. Export ke PDF.",
+                "feat_6_title": "👥 Klien & Supplier",
+                "feat_6_desc": "Kelola data klien dan supplier. Setiap klien bisa punya <em>special price</em> per produk yang otomatis diterapkan.",
+                "feat_7_title": "💰 Pembayaran Parsial",
+                "feat_7_desc": "Catat metode pembayaran, tanggal, dan status Lunas/Partial/Unpaid. Bisa cicil beberapa kali.",
+                "feat_8_title": "📮 Detail Pengiriman",
+                "feat_8_desc": "Isi Ship Date, Via (kurir), Tracking Number, dan FOB. Otomatis muncul di PDF dan thermal print.",
+                "feat_9_title": "💳 Instruksi Pembayaran",
+                "feat_9_desc": "Set instruksi pembayaran default (bank, wallet, PayPal) yang otomatis muncul di setiap invoice.",
+                "feat_10_title": "🏢 Profil Bisnis",
+                "feat_10_desc": "Atur nama perusahaan, alamat, logo, kontak, mata uang (Rp, $, €), dan prefix invoice (INV, FACT, dll).",
+                "feat_11_title": "📝 Catatan & Item Kustom",
+                "feat_11_desc": "Tambahkan catatan ke invoice. Custom item otomatis tersimpan sebagai produk untuk dipakai lagi.",
+                "feat_12_title": "🔐 Akun & Sinkronisasi",
+                "feat_12_desc": "Sync Now untuk paksa sinkronisasi. Data otomatis sync saat online. Logout dengan aman.",
+                "feat_13_title": "📶 Mode Offline",
+                "feat_13_desc": "Data tersimpan lokal di Room database. Tetap bisa akses & cetak thermal tanpa koneksi internet.",
+                "feat_14_title": "🔍 Filter & Pencarian",
+                "feat_14_desc": "Cari invoice berdasarkan status, klien, atau nomor invoice. Filter per bulan/tahun untuk laporan.",
+
+                "thermal_title": "🖨️ Etalase Cetak Thermal",
+                "thermal_desc": "Cetak struk langsung dari HP ke printer Bluetooth.",
+                "thermal_sub_title": "⚡ Mendukung 2 Ukuran Kertas",
+                "thermal_list_title": "<strong>Fitur thermal print:</strong>",
+                "thermal_li_1": "Auto-wrap alamat panjang (tidak terpotong)",
+                "thermal_li_2": "Email & PayPal otomatis turun ke baris baru jika terlalu panjang",
+                "thermal_li_3": "Header, Invoice info, Bill To, Shipping, Items, Totals, Payment Instructions, Notes — lengkap",
+                "thermal_li_4": "Bekerja sepenuhnya offline (Bluetooth only)",
+                "thermal_li_5": "Preview real-time sebelum cetak",
+                "thermal_preview_title": "Contoh preview 58mm:",
+
+                "tips_title": "💡 Tips & Trik",
+                "tips_desc": "Trik untuk memaksimalkan Invoice App.",
+                "tip_1": "Invoice prefix bisa di-custom (INV-, PO-, SJ-).",
+                "tip_2": "Special price per klien otomatis diterapkan saat memilih produk.",
+                "tip_3": "Stok otomatis menyesuaikan saat invoice dibuat / dihapus.",
+                "tip_4": "Data offline tersedia via Room database.",
+                "tip_5": "Gunakan Mark as Partial jika klien bayar DP.",
+                "tip_6": "Pakai Notes untuk syarat pembayaran khusus.",
+                "tip_7": "Tap & hold item untuk edit cepat.",
+                "tip_8": "Cloud backup otomatis — login di HP baru, data langsung muncul.",
+
+                "faq_title": "❓ FAQ",
+                "faq_desc": "Pertanyaan yang sering ditanyakan.",
+                "faq_q1": "Nomor invoice tidak bertambah, kenapa?",
+                "faq_a1": "Cek <strong>Business Profile → Invoice Prefix</strong> dan pastikan sudah disimpan. Prefix yang kosong bisa menyebabkan penomoran tidak berjalan.",
+                "faq_q2": "PDF tidak ada logo?",
+                "faq_a2": "Upload logo di <strong>Business Profile → Save</strong>, lalu buat invoice baru. Invoice lama tidak otomatis ter-update.",
+                "faq_q3": "Printer Bluetooth tidak terdeteksi?",
+                "faq_a3": "Pair dulu printer lewat <strong>Pengaturan HP → Bluetooth → Pair new device</strong>. Setelah paired, baru buka app dan tap <em>Connect Bluetooth Printer</em>.",
+                "faq_q4": "Bisa print tanpa internet?",
+                "faq_a4": "<strong>Bisa.</strong> Thermal print hanya butuh koneksi Bluetooth, tidak butuh internet sama sekali.",
+                "faq_q5": "Data hilang setelah reinstall?",
+                "faq_a5": "Login dengan akun yang sama — data otomatis sync dari cloud (Firebase Firestore).",
+                "faq_q6": "Bisa multi-device?",
+                "faq_a6": "Ya. Login dengan akun yang sama di HP berbeda, data akan otomatis tersinkron via cloud.",
+                "faq_q7": "Bisa export semua data?",
+                "faq_a7": "Belum tersedia. Semua data tersimpan di cloud dan dapat diakses melalui aplikasi.",
+                "faq_q8": "Bagaimana kalau alamat klien panjang di 58mm?",
+                "faq_a8": "Aplikasi otomatis melakukan <strong>word-wrap</strong>. Alamat panjang akan turun ke baris berikutnya tanpa terpotong, tetap rapi di kertas 58mm (32 karakter) maupun 80mm (48 karakter).",
+                "faq_q9": "Apakah data saya aman?",
+                "faq_a9": "Ya. Data disimpan di Firebase (Google Cloud) dengan autentikasi Firebase Auth. Kami tidak pernah mengakses data bisnis Anda. Lihat <a href='https://john-development-studio.pages.dev/invoiceApp/privacy_policy' target='_blank' rel='noopener noreferrer' style='color:#58a6ff;'>Privacy Policy</a> untuk detail.",
+
+                "ss_title": "📱 Tangkapan Layar Aplikasi",
+                "ss_desc": "Lihat tampilan aplikasi secara sekilas.",
+                "footer_text": "© 2026 John Irianto Susanto. Hak cipta dilindungi undang-undang."
+            },
+            "en": {
+                "nav_back": "← Back to Home",
+                "badge_live": "✅ Live on Google Play",
+                "badge_business": "Business / Productivity",
+                "badge_thermal": "Thermal Print Ready",
+                "desc_title": "Professional invoicing with PDF export, thermal print, client & product management, and cloud sync via Firebase.",
+                "desc_text": "Create professional invoices in seconds. Manage clients, products, auto-stock, suppliers, and financial reports. Print 58mm/80mm thermal directly from your phone — no internet needed. Sign in with Google Account to keep your data safe and synced across devices.",
+                "dl_info_title": "🎉 Now available on Google Play!",
+                "dl_info_text": "Invoice App is <strong>officially released</strong> and available for download from the Google Play Store. Click the <em>Download on Google Play</em> button below to open the app page.",
+                "btn_play": "📲 Download on Google Play",
+                "btn_web": "🌐 Developer Website",
+                "link_privacy": "Privacy Policy",
+                
+                "guide_title": "🚀 Getting Started",
+                "guide_desc": "From scratch to printing your first invoice.",
+                "step_1_title": "Login",
+                "step_1_desc": "Sign in with email & password, or Google Sign-In.",
+                "step_2_title": "Business Profile",
+                "step_2_desc": "Fill in company name, address, contact, logo, and currency.",
+                "step_3_title": "Add Clients & Products",
+                "step_3_desc": "Add clients, suppliers, and products with stock details.",
+                "step_4_title": "Create Invoice",
+                "step_4_desc": "Create invoices, add items, set discounts, taxes, and shipping.",
+                "step_5_title": "Share / Print",
+                "step_5_desc": "Share as PDF, or print 58mm / 80mm thermal.",
+                "step_6_title": "Mark as Paid",
+                "step_6_desc": "Mark as paid/partial, data automatically goes to reports.",
+
+                "feat_title": "✨ Key Features",
+                "feat_desc": "Everything you need to manage your business.",
+                "feat_1_title": "📄 PDF Export",
+                "feat_1_desc": "Preview and share invoices as PDF to WhatsApp, Gmail, or Drive instantly. Auto file name: <code>invoice_INV-001.pdf</code>.",
+                "feat_2_title": "🖨️ Thermal Print",
+                "feat_2_desc": "Print receipts to Bluetooth thermal 58mm or 80mm. Auto-wrap long addresses & emails. No internet required.",
+                "feat_3_title": "📦 Stock Sync",
+                "feat_3_desc": "Stock auto-decreases when an invoice is created, and auto-restores when cancelled or items removed.",
+                "feat_4_title": "☁️ Cloud Sync",
+                "feat_4_desc": "Login with Google, data securely stored in Firebase and accessible across all your devices.",
+                "feat_5_title": "📊 Reports & Analytics",
+                "feat_5_desc": "Track Total Issued, Unpaid, Overdue, Paid, and Partial Paid by month/year. Export to PDF.",
+                "feat_6_title": "👥 Clients & Suppliers",
+                "feat_6_desc": "Manage client and supplier data. Each client can have <em>special price</em> per product applied automatically.",
+                "feat_7_title": "💰 Partial Payments",
+                "feat_7_desc": "Record payment methods, dates, and Paid/Partial/Unpaid status. Can be paid in installments.",
+                "feat_8_title": "📮 Shipping Details",
+                "feat_8_desc": "Fill in Ship Date, Via (courier), Tracking Number, and FOB. Auto-appears in PDF and thermal print.",
+                "feat_9_title": "💳 Payment Instruction",
+                "feat_9_desc": "Set default payment instructions (bank, wallet, PayPal) that auto-appear on every invoice.",
+                "feat_10_title": "🏢 Business Profile",
+                "feat_10_desc": "Set company name, address, logo, contact, currency (Rp, $, €), and invoice prefix (INV, FACT, etc).",
+                "feat_11_title": "📝 Notes & Custom Items",
+                "feat_11_desc": "Add notes to invoice. Custom items are automatically saved as products for future use.",
+                "feat_12_title": "🔐 Account & Sync",
+                "feat_12_desc": "Sync Now for force sync. Data auto-syncs when online. Logout securely.",
+                "feat_13_title": "📶 Offline Mode",
+                "feat_13_desc": "Data stored locally in Room database. Still accessible & can print thermal without internet connection.",
+                "feat_14_title": "🔍 Filter & Search",
+                "feat_14_desc": "Search invoices by status, client, or invoice number. Filter by month/year for reports.",
+
+                "thermal_title": "🖨️ Thermal Print Showcase",
+                "thermal_desc": "Print receipts directly from phone to Bluetooth printer.",
+                "thermal_sub_title": "⚡ Supports 2 Paper Sizes",
+                "thermal_list_title": "<strong>Thermal print features:</strong>",
+                "thermal_li_1": "Auto-wrap long addresses (not truncated)",
+                "thermal_li_2": "Email & PayPal auto-wrap if too long",
+                "thermal_li_3": "Header, Invoice info, Bill To, Shipping, Items, Totals, Payment Instructions, Notes — complete",
+                "thermal_li_4": "Works fully offline (Bluetooth only)",
+                "thermal_li_5": "Real-time preview before printing",
+                "thermal_preview_title": "58mm preview example:",
+
+                "tips_title": "💡 Tips & Tricks",
+                "tips_desc": "Tricks to maximize Invoice App.",
+                "tip_1": "Invoice prefix can be customized (INV-, PO-, SJ-).",
+                "tip_2": "Special price per client auto-applied when selecting products.",
+                "tip_3": "Stock auto-adjusts when invoice is created / deleted.",
+                "tip_4": "Offline data available via Room database.",
+                "tip_5": "Use Mark as Partial if client pays a down payment.",
+                "tip_6": "Use Notes for special payment terms.",
+                "tip_7": "Tap & hold item for quick edit.",
+                "tip_8": "Auto cloud backup — login on a new phone, data instantly appears.",
+
+                "faq_title": "❓ FAQ",
+                "faq_desc": "Frequently asked questions.",
+                "faq_q1": "Invoice number not increasing, why?",
+                "faq_a1": "Check <strong>Business Profile → Invoice Prefix</strong> and ensure it's saved. An empty prefix can cause numbering to fail.",
+                "faq_q2": "PDF has no logo?",
+                "faq_a2": "Upload logo in <strong>Business Profile → Save</strong>, then create a new invoice. Old invoices won't auto-update.",
+                "faq_q3": "Bluetooth printer not detected?",
+                "faq_a3": "Pair the printer first via <strong>Phone Settings → Bluetooth → Pair new device</strong>. Once paired, open the app and tap <em>Connect Bluetooth Printer</em>.",
+                "faq_q4": "Can I print without internet?",
+                "faq_a4": "<strong>Yes.</strong> Thermal print only requires Bluetooth connection, no internet needed at all.",
+                "faq_q5": "Data lost after reinstall?",
+                "faq_a5": "Login with the same account — data auto-syncs from cloud (Firebase Firestore).",
+                "faq_q6": "Can it be multi-device?",
+                "faq_a6": "Yes. Login with the same account on different phones, data will automatically sync via cloud.",
+                "faq_q7": "Can I export all data?",
+                "faq_a7": "Not yet available. All data is stored in the cloud and accessible through the app.",
+                "faq_q8": "What if client address is long on 58mm?",
+                "faq_a8": "The app automatically does <strong>word-wrap</strong>. Long addresses will wrap to the next line without truncation, remaining neat on 58mm (32 chars) or 80mm (48 chars) paper.",
+                "faq_q9": "Is my data safe?",
+                "faq_a9": "Yes. Data is stored in Firebase (Google Cloud) with Firebase Auth authentication. We never access your business data. See <a href='https://john-development-studio.pages.dev/invoiceApp/privacy_policy' target='_blank' rel='noopener noreferrer' style='color:#58a6ff;'>Privacy Policy</a> for details.",
+
+                "ss_title": "📱 App Screenshots",
+                "ss_desc": "Take a quick look at the app interface.",
+                "footer_text": "© 2026 John Irianto Susanto. All rights reserved."
+            },
+            "zh": {
+                "nav_back": "← 返回主页",
+                "badge_live": "✅ 已在 Google Play 上线",
+                "badge_business": "商业 / 生产力",
+                "badge_thermal": "支持热敏打印",
+                "desc_title": "专业的发票管理，支持 PDF 导出、热敏打印、客户与产品管理，以及通过 Firebase 进行云同步。",
+                "desc_text": "在几秒钟内创建专业的发票。管理客户、产品、自动库存、供应商和财务报告。直接从手机打印 58mm/80mm 热敏收据——无需互联网。使用 Google 账号登录，确保您的数据安全并在所有设备上同步。",
+                "dl_info_title": "🎉 现已在 Google Play 上架！",
+                "dl_info_text": "Invoice App 已<strong>正式发布</strong>，可直接从 Google Play 商店下载。点击下方的<em>在 Google Play 下载</em>按钮打开应用页面。",
+                "btn_play": "📲 在 Google Play 下载",
+                "btn_web": "🌐 开发者网站",
+                "link_privacy": "隐私政策",
+                
+                "guide_title": "🚀 开始使用",
+                "guide_desc": "从零开始，直到打印您的第一张发票。",
+                "step_1_title": "登录",
+                "step_1_desc": "使用电子邮件和密码，或 Google 登录。",
+                "step_2_title": "商业档案",
+                "step_2_desc": "填写公司名称、地址、联系方式、徽标和货币。",
+                "step_3_title": "添加客户与产品",
+                "step_3_desc": "添加客户、供应商以及带有库存详细信息的商品。",
+                "step_4_title": "创建发票",
+                "step_4_desc": "创建发票、添加项目、设置折扣、税费和运费。",
+                "step_5_title": "分享 / 打印",
+                "step_5_desc": "分享 PDF，或打印 58mm / 80mm 热敏收据。",
+                "step_6_title": "标记为已付款",
+                "step_6_desc": "标记为已付款/部分付款，数据自动进入报告。",
+
+                "feat_title": "✨ 主要功能",
+                "feat_desc": "管理业务所需的一切。",
+                "feat_1_title": "📄 PDF 导出",
+                "feat_1_desc": "预览发票并将其作为 PDF 即时分享到 WhatsApp、Gmail 或云端硬盘。自动文件名：<code>invoice_INV-001.pdf</code>。",
+                "feat_2_title": "🖨️ 热敏打印",
+                "feat_2_desc": "打印收据到 58mm 或 80mm 蓝牙热敏打印机。自动换行长地址和电子邮件。无需互联网。",
+                "feat_3_title": "📦 库存同步",
+                "feat_3_desc": "创建发票时库存自动减少，取消发票或移除商品时自动恢复。",
+                "feat_4_title": "☁️ 云同步",
+                "feat_4_desc": "使用 Google 登录，数据安全存储在 Firebase 中，并可在您的所有设备上访问。",
+                "feat_5_title": "📊 报告与分析",
+                "feat_5_desc": "按月份/年份跟踪总发出、未付、逾期、已付和部分付款。导出为 PDF。",
+                "feat_6_title": "👥 客户与供应商",
+                "feat_6_desc": "管理客户和供应商数据。每个客户可以为产品设置<em>特价</em>，系统会自动应用。",
+                "feat_7_title": "💰 部分付款",
+                "feat_7_desc": "记录付款方式、日期和状态（已付/部分/未付）。可以分期付款。",
+                "feat_8_title": "📮 运输详情",
+                "feat_8_desc": "填写发货日期、经由（快递）、追踪号和 FOB。自动显示在 PDF 和热敏打印中。",
+                "feat_9_title": "💳 付款指示",
+                "feat_9_desc": "设置默认付款指示（银行、钱包、PayPal），自动显示在每张发票上。",
+                "feat_10_title": "🏢 商业档案",
+                "feat_10_desc": "设置公司名称、地址、徽标、联系方式、货币（Rp, $, €）和发票前缀（INV, FACT 等）。",
+                "feat_11_title": "📝 备注与自定义项目",
+                "feat_11_desc": "向发票添加备注。自定义项目会自动保存为产品以供将来使用。",
+                "feat_12_title": "🔐 账户与同步",
+                "feat_12_desc": "点击 Sync Now 强制同步。在线时数据自动同步。安全注销。",
+                "feat_13_title": "📶 离线模式",
+                "feat_13_desc": "数据本地存储在 Room 数据库中。即使没有互联网连接，仍可访问并打印热敏收据。",
+                "feat_14_title": "🔍 筛选与搜索",
+                "feat_14_desc": "按状态、客户或发票号码搜索发票。按月份/年份筛选报告。",
+
+                "thermal_title": "🖨️ 热敏打印展示",
+                "thermal_desc": "直接从手机打印收据到蓝牙打印机。",
+                "thermal_sub_title": "⚡ 支持 2 种纸张尺寸",
+                "thermal_list_title": "<strong>热敏打印功能：</strong>",
+                "thermal_li_1": "自动换行长地址（不会被截断）",
+                "thermal_li_2": "电子邮件和 PayPal 如果太长会自动换行",
+                "thermal_li_3": "页眉、发票信息、账单寄送、运输、项目、总计、付款指示、备注——完整",
+                "thermal_li_4": "完全离线工作（仅限蓝牙）",
+                "thermal_li_5": "打印前实时预览",
+                "thermal_preview_title": "58mm 预览示例：",
+
+                "tips_title": "💡 提示与技巧",
+                "tips_desc": "最大化利用 Invoice App 的技巧。",
+                "tip_1": "发票前缀可以自定义（INV-、PO-、SJ-）。",
+                "tip_2": "选择产品时，每个客户的特殊价格会自动应用。",
+                "tip_3": "创建/删除发票时库存自动调整。",
+                "tip_4": "离线数据可通过 Room 数据库获得。",
+                "tip_5": "如果客户支付首付款，请使用“标记为部分”。",
+                "tip_6": "使用备注填写特殊的付款条件。",
+                "tip_7": "长按项目进行快速编辑。",
+                "tip_8": "自动云备份——在新手机上登录，数据立即显示。",
+
+                "faq_title": "❓ 常见问题",
+                "faq_desc": "经常被问到的问题。",
+                "faq_q1": "发票号码不增加，为什么？",
+                "faq_a1": "检查 <strong>商业档案 → 发票前缀</strong> 并确保已保存。空前缀可能导致编号无法运行。",
+                "faq_q2": "PDF 没有徽标？",
+                "faq_a2": "在 <strong>商业档案 → 保存</strong> 中上传徽标，然后创建新发票。旧发票不会自动更新。",
+                "faq_q3": "未检测到蓝牙打印机？",
+                "faq_a3": "先通过 <strong>手机设置 → 蓝牙 → 配对新设备</strong> 配对打印机。配对后，打开应用并点击 <em>连接蓝牙打印机</em>。",
+                "faq_q4": "没有互联网可以打印吗？",
+                "faq_a4": "<strong>可以。</strong> 热敏打印只需要蓝牙连接，完全不需要互联网。",
+                "faq_q5": "重装后数据丢失？",
+                "faq_a5": "使用同一个账号登录——数据会自动从云端 (Firebase Firestore) 同步。",
+                "faq_q6": "可以多设备使用吗？",
+                "faq_a6": "是的。在不同的手机上使用同一个账号登录，数据将通过云端自动同步。",
+                "faq_q7": "可以导出所有数据吗？",
+                "faq_a7": "暂不可用。所有数据都存储在云端，可通过应用访问。",
+                "faq_q8": "如果客户地址在 58mm 纸上太长怎么办？",
+                "faq_a8": "应用会自动进行<strong>自动换行</strong>。长地址会换到下一行而不会被截断，在 58mm（32 字符）或 80mm（48 字符）纸张上保持整洁。",
+                "faq_q9": "我的数据安全吗？",
+                "faq_a9": "是的。数据存储在 Firebase (Google Cloud) 中，并带有 Firebase Auth 身份验证。我们从不访问您的业务数据。有关详细信息，请参阅<a href='https://john-development-studio.pages.dev/invoiceApp/privacy_policy' target='_blank' rel='noopener noreferrer' style='color:#58a6ff;'>隐私政策</a>。",
+
+                "ss_title": "📱 应用截图",
+                "ss_desc": "快速了解应用界面。",
+                "footer_text": "© 2026 John Irianto Susanto. 保留所有权利。"
+            }
+        };
+
+        // 2. FUNGSI UNTUK MENGUBAH BAHASA
+        function changeLanguage(lang) {
+            // Simpan pilihan bahasa ke localStorage
+            localStorage.setItem('preferredLanguage', lang);
+
+            // Ganti atribut lang pada tag <html>
+            document.documentElement.lang = lang;
+
+            // Cari semua elemen yang memiliki atribut data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                
+                if (translations[lang] && translations[lang][key]) {
+                    // Cek apakah elemen tersebut menggunakan tag <input> atau <textarea>
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        // Gunakan innerHTML agar tag HTML (seperti <strong> atau <a>) berfungsi
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+
+            // Set nilai dropdown ke bahasa yang dipilih
+            document.getElementById('languageSelector').value = lang;
+        }
+
+        // 3. JALANKAN SAAT HALAMAN DIMUAT
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cek apakah pengguna pernah memilih bahasa sebelumnya (default: 'id')
+            const savedLang = localStorage.getItem('preferredLanguage') || 'id'; 
+            
+            // Terapkan bahasa
+            changeLanguage(savedLang);
+        });
+
+        // 4. ACCORDION SCRIPT (FAQ)
         document.querySelectorAll('.accordion-header').forEach(header => {
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 const isOpen = item.classList.contains('open');
 
-                // Close all others
+                // Tutup semua yang lain
                 document.querySelectorAll('.accordion-item').forEach(i => {
                     i.classList.remove('open');
                 });
 
-                // Toggle current
+                // Buka yang diklik (jika sebelumnya tertutup)
                 if (!isOpen) {
                     item.classList.add('open');
                 }
             });
         });
 
-        // Smooth scroll untuk nav links
+        // 5. Smooth scroll untuk nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
