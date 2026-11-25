@@ -13,7 +13,7 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://john-development-studio.pages.dev/">
 
-  <!-- Google Search Console Verification (tambahkan jika sudah ada Search Console code) -->
+  <!-- Google Search Console Verification -->
   <!-- <meta name="google-site-verification" content="YOUR_CODE_HERE"> -->
 
   <!-- Open Graph -->
@@ -85,7 +85,7 @@
   }
   </script>
 
-  <!-- WebSite Schema (membantu Google memahami struktur situs) -->
+  <!-- WebSite Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -103,6 +103,13 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- ═══════════════════════════════════════════
+       GOATCOUNTER TRACKING SCRIPT (Wajib ada)
+  ═══════════════════════════════════════════ -->
+  <script data-goatcounter="https://jdstudio.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
 </head>
 <body>
 
@@ -288,7 +295,7 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
 
 </article>
 
-<!-- ── NFC Card Manager — PRODUCTION (Dipindahkan ke sini) ── -->
+<!-- ── NFC Card Manager — PRODUCTION ── -->
         <article class="app-card" id="nfc-manager">
           <div class="app-card__icon-wrap">
             <img
@@ -310,7 +317,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
             <span class="status status--production">
               <i class="ti ti-circle-check-filled" aria-hidden="true"></i> Production
             </span>
-            <!-- UPDATE: Ganti href dengan link Google Play yang sebenarnya jika berbeda -->
             <a href="https://play.google.com/store/apps/details?id=com.johniriantosusanto.nfccardmanagerapp"
                target="_blank" rel="noopener noreferrer"
                class="btn btn--play">
@@ -327,7 +333,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
     </a>
           </div>
         </article>
-
 
 
 
@@ -359,7 +364,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
             <span class="status status--closed">
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
-            <!-- UPDATE: replace href with your actual closed testing opt-in link from Play Console -->
             <a href="https://play.google.com/apps/testing/com.johniriantosusanto.brewmasterapp"
                target="_blank" rel="noopener noreferrer"
                class="btn btn--test">
@@ -405,7 +409,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
             <span class="status status--closed">
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
-            <!-- UPDATE: replace href with your actual closed testing opt-in link -->
             <a href="https://play.google.com/apps/testing/com.johniriantosusanto.lanchatapp"
                target="_blank" rel="noopener noreferrer"
                class="btn btn--test">
@@ -425,16 +428,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
         </article>
 
         
-
-
-
-
-        
-
-
-<!-- NFC Card Manager Dihapus dari sini karena sudah dipindah ke atas -->
-
-
 
            <!-- ── Find My Car — CLOSED TESTING ── -->
         <article class="app-card" id="find-my-car">
@@ -460,7 +453,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
               <i class="ti ti-lock" aria-hidden="true"></i> Closed Testing
             </span>
             
-               <!-- UPDATE: replace href with your actual closed testing opt-in link -->
             <a href="https://play.google.com/apps/testing/com.johniriantosusanto.findmycar"
                target="_blank" rel="noopener noreferrer"
                class="btn btn--test">
@@ -478,12 +470,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
           </div>
 
         </article>
-
-        
-        
-    
-
-
 
                <!-- ── Virtual Pet Game — CLOSED TESTING ── -->
         <article class="app-card" id="virtual-pet">
@@ -620,7 +606,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
 
         
 
-
         <!-- ── Hidden Camera Detector — IN DEVELOPMENT ── -->
         <article class="app-card" id="camera-detector">
           <div class="app-card__icon-wrap">
@@ -645,14 +630,8 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
           </div>
         </article>
 
-     
-
       </div>
     </section>
-
-
-
-    
 
     <!-- ═══════════════════════════════════════════
          HOW TO JOIN CLOSED TESTING
@@ -677,7 +656,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
               <div class="step-card__text">
                 Go to our Google Group using your Gmail account and request to join:
                 <br><br>
-                <!-- UPDATE: Replace with your actual Google Group link -->
                 <a href="https://groups.google.com/g/john-development-studio"
                    target="_blank" rel="noopener noreferrer"
                    class="step-link">
@@ -736,7 +714,113 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
 
   </main>
 
+  <!-- ═══════════════════════════════════════════
+       VISITOR STATS (Data Asli GoatCounter)
+  ═══════════════════════════════════════════ -->
+  <section class="visitor-stats" aria-label="Visitor Statistics">
+    <div class="container">
+      <div class="stats-wrapper" id="stats-container">
+        <!-- Tampilan Loading -->
+        <div class="stat-item"><span class="stat-label">Memuat data statistik...</span></div>
+      </div>
+    </div>
+  </section>
 
+  <style>
+  .visitor-stats {
+    background: #1e1e1e;
+    padding: 30px 0;
+    border-top: 1px solid #333;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .stats-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+    margin: 0 auto; /* Center di mobile */
+  }
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .stat-icon { font-size: 18px; width: 24px; text-align: center; }
+  .stat-label { font-weight: 500; color: #ccc; }
+  .stat-value { font-weight: bold; color: #fff; margin-left: auto; letter-spacing: 1px; }
+  .error-text { color: #ff6b6b; font-size: 13px; }
+  </style>
+
+  <script>
+  (async function() {
+    // ⚠️ TOKEN ANDA SUDAH DIMASUKKAN DI SINI
+    const SITE_CODE = 'jdstudio'; 
+    const API_TOKEN = 'x8hl932xj6zwrrlpis1cvhd3162om7a98wqyx1ksu95x227d3a';
+    
+    const API_BASE = `https://${SITE_CODE}.goatcounter.com/api/v0`;
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_TOKEN}`
+    };
+
+    const today = new Date().toISOString().split('T')[0];
+    const firstOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+
+    try {
+      const [totalRes, todayRes, monthRes] = await Promise.all([
+        fetch(`${API_BASE}/stats/total`, { headers }),
+        fetch(`${API_BASE}/stats/total?start=${today}`, { headers }),
+        fetch(`${API_BASE}/stats/total?start=${firstOfMonth}`, { headers })
+      ]);
+
+      if (!totalRes.ok || !todayRes.ok || !monthRes.ok) {
+          throw new Error('Gagal mengambil data. Periksa Token/Site Code.');
+      }
+
+      const totalData = await totalRes.json();
+      const todayData = await todayRes.json();
+      const monthData = await monthRes.json();
+
+      const totalViews = totalData.total || 0;
+      const todayViews = todayData.total || 0;
+      const monthViews = monthData.total || 0;
+
+      const container = document.getElementById('stats-container');
+      container.innerHTML = `
+        <div class="stat-item">
+          <span class="stat-icon">👁️</span>
+          <span class="stat-label">Total Views:</span>
+          <span class="stat-value">${totalViews.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">📅</span>
+          <span class="stat-label">Views Today:</span>
+          <span class="stat-value">${todayViews.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-icon">📊</span>
+          <span class="stat-label">This Month:</span>
+          <span class="stat-value">${monthViews.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="stat-item" style="opacity: 0.6; font-size: 13px; margin-top: 5px;">
+          <span class="stat-icon">ℹ️</span>
+          <span class="stat-label">Data via GoatCounter</span>
+        </div>
+      `;
+
+    } catch (error) {
+      console.error(error);
+      document.getElementById('stats-container').innerHTML = `
+        <div class="stat-item">
+          <span class="stat-icon">⚠️</span>
+          <span class="stat-label error-text">${error.message}</span>
+        </div>
+      `;
+    }
+  })();
+  </script>
 
   <!-- ═══════════════════════════════════════════
        FOOTER
@@ -752,7 +836,6 @@ Transfer files over Wi-Fi, convert video and audio to MP3/OGG, and remotely view
            target="_blank" rel="noopener noreferrer">
           <i class="ti ti-brand-instagram" aria-hidden="true"></i> @ipoktala
         </a>
-        <!-- UPDATE: Replace with your actual email -->
         <a href="mailto:john.irianto.susanto.dev@gmail.com">
           <i class="ti ti-mail" aria-hidden="true"></i> Contact
         </a>
